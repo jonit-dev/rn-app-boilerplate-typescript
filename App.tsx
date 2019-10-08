@@ -6,8 +6,9 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import reducers from "./store/reducers/index.reducers";
 import { Main } from "./components/Main";
+import thunk from "redux-thunk";
 
-const store = createStore(reducers, applyMiddleware());
+const store = createStore(reducers, applyMiddleware(thunk));
 
 export default function App() {
   return (
