@@ -3,8 +3,8 @@
 *##############################################################*/
 
 import { combineReducers } from "redux";
-import testReducer from "./test.reducer";
+import productsReducer from "./products.reducer";
 
 export default combineReducers({
-  reducerVar: testReducer
+  productsReducer
 });

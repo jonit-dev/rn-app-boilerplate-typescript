@@ -1,18 +1,25 @@
-import React from "react";
-
-//Redux specific
+import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import reducers from "./store/reducers/index.reducers";
-import { Main } from "./components/Main";
 import thunk from "redux-thunk";
+import { useScreens } from "react-native-screens";
+import MainNavigator from "./navigation/Main.navigator";
+import { Provider as PaperProvider } from "react-native-paper";
+import Theme from "./constants/UI/Theme";
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
-export default function App() {
-  return (
-    <Provider store={store}>
-      <Main />
-    </Provider>
-  );
+useScreens(); //screen transition performance
+
+export default class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <PaperProvider theme={Theme}>
+          <MainNavigator />
+        </PaperProvider>
+      </Provider>
+    );
+  }
 }
