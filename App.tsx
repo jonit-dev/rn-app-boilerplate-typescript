@@ -6,7 +6,7 @@ import thunk from "redux-thunk";
 import { useScreens } from "react-native-screens";
 import MainNavigator from "./navigation/Main.navigator";
 import { Provider as PaperProvider } from "react-native-paper";
-import Theme from "./constants/UI/Theme";
+import Theme from "./constants/UI/Theme.constant";
 
 const store = createStore(reducers, applyMiddleware(thunk));
 

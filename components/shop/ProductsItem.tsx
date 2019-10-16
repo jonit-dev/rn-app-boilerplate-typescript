@@ -4,7 +4,7 @@ import { StyleSheet, View } from "react-native";
 import { Button, Card, Title, Paragraph } from "react-native-paper";
 import { IProduct } from "../../typescript/Product.types";
 import { ButtonContainer } from "../UI/ButtonContainer";
-import Colors from "../../constants/UI/Colors";
+import Colors from "../../constants/UI/Colors.constant";
 
 const ProductItem = props => {
   const { id, title, price, description, imageUrl } = props;

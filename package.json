@@ -7,7 +7,8 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "android-shake": "adb shell input keyevent 82",
-    "android-reload": "adb shell input text 'RR'"
+    "android-reload": "adb shell input text 'RR'",
+    "adb-sync": "sudo adb kill-server && sudo adb start-server"
   },
   "dependencies": {
     "expo": "^35.0.0",

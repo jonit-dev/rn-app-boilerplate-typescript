@@ -1,5 +1,5 @@
 import { DefaultTheme } from "react-native-paper";
-import Colors from "./Colors";
+import Colors from "./Colors.constant";
 
 export default {
   ...DefaultTheme,
