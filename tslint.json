@@ -3,7 +3,8 @@
     "extends": [
         "tslint:recommended",
         "tslint-react",
-        "tslint-config-prettier"
+        "tslint-config-prettier",
+        "tslint-react-native"
     ],
     "jsRules": {},
     "rules": {
@@ -11,7 +12,8 @@
         "object-literal-sort-keys": false,
         "member-ordering": false,
         "jsx-no-lambda": false,
-        "jsx-boolean-value": false
+        "jsx-boolean-value": false,
+        "no-unused-styles": true
     },
     "rulesDirectory": [],
     "linterOptions": {
