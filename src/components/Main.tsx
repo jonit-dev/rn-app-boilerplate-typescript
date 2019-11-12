@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 export class Main extends Component {
-  render() {
+  public render() {
     return (
       <View style={styles.mainContainer}>
         <Text>My Main Component</Text>

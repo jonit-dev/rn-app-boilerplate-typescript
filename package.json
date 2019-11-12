@@ -8,11 +8,18 @@
     "eject": "expo eject",
     "android-shake": "adb shell input keyevent 82",
     "android-reload": "adb shell input text 'RR'",
-    "adb-sync": "sudo adb kill-server && sudo adb start-server"
+    "adb-sync": "sudo adb kill-server && sudo adb start-server",
+    "lint": "tslint './src/**/*.{ts,tsx}' --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "tsc && yarn lint"
+    }
   },
   "dependencies": {
     "expo": "^35.0.0",
     "expo-font": "^7.0.0",
+    "husky": "^3.0.9",
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
@@ -31,6 +38,10 @@
     "@types/react": "^16.8.23",
     "@types/react-native": "^0.57.65",
     "babel-preset-expo": "^7.0.0",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-config-standard": "^9.0.0",
+    "tslint-react": "^4.1.0",
     "typescript": "^3.4.5"
   },
   "private": true
