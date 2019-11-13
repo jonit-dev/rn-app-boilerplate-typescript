@@ -8,6 +8,7 @@ interface IProps {
   iconColor: string;
   iconPackage: IconPackageTypes;
   inputStyle?: StyleSheet;
+  isPassword?: boolean;
   onChange: (text: any) => void;
 }
 
@@ -53,6 +54,7 @@ export class IconInput extends Component<IProps> {
         <TextInput
           style={styles.input}
           onChangeText={text => this.props.onChange(text)}
+          secureTextEntry={this.props.isPassword}
         />
       </View>
     );
@@ -65,7 +67,7 @@ const styles = StyleSheet.create({
     width: "100%",
     maxHeight: 55,
     borderRadius: 6,
-    backgroundColor: "rgba(33, 33, 33, 0.8)",
+    backgroundColor: "rgba(33, 33, 33, 0.6)",
     flex: 8,
     justifyContent: "flex-start",
     alignItems: "center",

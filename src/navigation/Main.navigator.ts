@@ -2,7 +2,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import { colors } from '../constants/UI/Colors.constant';
-import { Main } from '../screens/Main';
+import { Main } from '../screens/Main.screen';
 
 const ProductsNavigator = createStackNavigator(
   {

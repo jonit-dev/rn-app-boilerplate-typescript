@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 
-import productsReducer from './products.reducer';
+import uiReducer from './ui.reducer';
+import userReducer from './user.reducer';
 
 // tslint:disable-next-line: no-default-export
 export default combineReducers({
-  productsReducer
+  uiReducer,
+  userReducer
 });
