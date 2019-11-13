@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
+import { IconInput, IconPackageTypes } from '../../components/form/IconInput';
 import { images } from '../../constants/Images.constant';
 import { colors } from '../../constants/UI/Colors.constant';
 import { common } from '../../constants/UI/Common.constant';
@@ -22,6 +23,12 @@ class Login extends Component {
           style={styles.imageBackground}
         />
         <Text style={[common.whiteText]}>Login</Text>
+        <IconInput
+          iconName={"envelope-o"}
+          iconSize={24}
+          iconColor={"white"}
+          iconPackage={IconPackageTypes.FontAwesome}
+        />
       </View>
     );
   }

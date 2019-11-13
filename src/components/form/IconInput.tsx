@@ -1,9 +1,18 @@
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import React, { Component } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 
 interface IProps {
-  icon: string;
-  style: StyleSheet;
+  iconName: string;
+  iconSize: number;
+  iconColor: string;
+  iconPackage: IconPackageTypes;
+  inputStyle?: StyleSheet;
+}
+
+export enum IconPackageTypes {
+  FontAwesome,
+  Ionicons
 }
 
 export class IconInput extends Component<IProps> {
@@ -11,13 +20,37 @@ export class IconInput extends Component<IProps> {
     console.log(text);
   }
 
+  public renderIcon() {
+    const { iconName, iconSize, iconColor } = this.props;
+
+    switch (this.props.iconPackage) {
+      case IconPackageTypes.FontAwesome:
+        return (
+          <FontAwesome
+            style={styles.icon}
+            size={iconSize}
+            name={iconName}
+            color={iconColor}
+          />
+        );
+      case IconPackageTypes.Ionicons:
+        return (
+          <Ionicons
+            style={styles.icon}
+            size={iconSize}
+            name={iconName}
+            color={iconColor}
+          />
+        );
+    }
+  }
+
   public render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.icon}></View>
+      <View style={styles.container} {...this.props.inputStyle}>
+        <View style={styles.iconContainer}>{this.renderIcon()}</View>
         <TextInput
           style={styles.input}
-          {...this.props.style}
           onChange={text => this.onChangeText(text)}
         />
       </View>
@@ -28,23 +61,32 @@ export class IconInput extends Component<IProps> {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    maxHeight: 50,
+    maxHeight: 55,
     borderRadius: 6,
     backgroundColor: "rgba(33, 33, 33, 0.8)",
-    flex: 1,
-    justifyContent: "center",
+    flex: 8,
+    justifyContent: "flex-start",
+    alignItems: "center",
     flexWrap: "wrap",
     paddingLeft: 20,
-    paddingRight: 20
+    paddingRight: 20,
+
+    flexDirection: "row"
   },
-  icon: {
+  iconContainer: {
+    flex: 1,
     width: 32,
-    height: 32,
-    borderWidth: 1,
-    borderColor: "hotpink",
-    marginRight: 16
+    marginRight: 16,
+    justifyContent: "center",
+    alignItems: "center"
   },
+
+  icon: {},
   input: {
-    color: "white"
+    flex: 7,
+    color: "white",
+
+    width: "100%",
+    height: "100%"
   }
 });
