@@ -8,6 +8,7 @@ interface IProps {
   iconColor: string;
   iconPackage: IconPackageTypes;
   inputStyle?: StyleSheet;
+  onChange: (text: any) => void;
 }
 
 export enum IconPackageTypes {
@@ -51,7 +52,7 @@ export class IconInput extends Component<IProps> {
         <View style={styles.iconContainer}>{this.renderIcon()}</View>
         <TextInput
           style={styles.input}
-          onChange={text => this.onChangeText(text)}
+          onChangeText={text => this.props.onChange(text)}
         />
       </View>
     );
@@ -60,6 +61,7 @@ export class IconInput extends Component<IProps> {
 
 const styles = StyleSheet.create({
   container: {
+    marginBottom: 16,
     width: "100%",
     maxHeight: 55,
     borderRadius: 6,

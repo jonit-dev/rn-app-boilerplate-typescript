@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 
+import { BlockButton } from '../../components/form/BlockButton';
 import { IconInput, IconPackageTypes } from '../../components/form/IconInput';
 import { images } from '../../constants/Images.constant';
 import { colors } from '../../constants/UI/Colors.constant';
-import { common } from '../../constants/UI/Common.constant';
 import MainNavigator from '../../navigation/Main.navigator';
 
 class Login extends Component {
+  public state = {
+    email: "",
+    password: ""
+  };
+
   public isLoggedIn() {
     // check if user is logged in. If so, load navigation stack. If not, load login screen
 
@@ -22,12 +27,26 @@ class Login extends Component {
           source={images.loginBackground}
           style={styles.imageBackground}
         />
-        <Text style={[common.whiteText]}>Login</Text>
+
         <IconInput
           iconName={"envelope-o"}
           iconSize={24}
           iconColor={"white"}
           iconPackage={IconPackageTypes.FontAwesome}
+          onChange={text => this.setState({ email: text })}
+        />
+        <IconInput
+          iconName={"lock"}
+          iconSize={24}
+          iconColor={"white"}
+          iconPackage={IconPackageTypes.FontAwesome}
+          onChange={text => this.setState({ password: text })}
+        />
+        <BlockButton
+          text={"Login"}
+          onPress={() => {
+            console.log(this.state);
+          }}
         />
       </View>
     );

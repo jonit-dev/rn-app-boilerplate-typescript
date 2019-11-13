@@ -1,7 +1,9 @@
 {
   "files.associations": {
     "*.js": "javascriptreact",
-    "*.jsx": "javascriptreact"
+    "*.jsx": "javascriptreact",
+    "*.ts": "typescriptreact",
+    "*.tsx": "typescriptreact"
   },
   "workbench.colorTheme": "Activate UMBRA protocol"
 }
