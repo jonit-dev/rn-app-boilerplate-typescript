@@ -1,10 +1,9 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { Button, Card, Paragraph, Title } from 'react-native-paper';
 
-import { Button, Card, Title, Paragraph } from "react-native-paper";
-import { IProduct } from "../../typescript/Product.types";
-import { ButtonContainer } from "../UI/ButtonContainer";
-import Colors from "../../constants/UI/Colors.constant";
+import { colors } from '../../constants/UI/Colors.constant';
+import { ButtonContainer } from '../UI/ButtonContainer';
 
 const ProductItem = props => {
   const { id, title, price, description, imageUrl } = props;
@@ -32,14 +31,6 @@ const ProductItem = props => {
 };
 
 const styles = StyleSheet.create({
-  productItem: {
-    justifyContent: "center",
-    alignItems: "center",
-    flex: 1,
-    height: 40,
-    borderWidth: 1,
-    borderColor: "red"
-  },
   priceStyle: {
     fontWeight: "bold"
   },
@@ -47,7 +38,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: "hidden",
     margin: 8,
-    shadowColor: Colors.dark,
+    shadowColor: colors.dark,
     shadowOffset: {
       width: 0,
       height: 2

@@ -13,7 +13,30 @@
         "member-ordering": false,
         "jsx-no-lambda": false,
         "jsx-boolean-value": false,
-        "no-unused-styles": true
+        "no-unused-styles": true,
+        "no-default-export": true,
+        "no-console": false,
+        "no-trailing-whitespace": [
+            true,
+            "always"
+        ],
+        "only-arrow-functions": false,
+        "variable-name": false,
+        "prefer-const": [
+            true,
+            {
+                "destructuring": "any"
+            }
+        ],
+        "ban-types": false,
+        "semicolon": [
+            false
+        ],
+        "no-this-assignment": false,
+        "no-empty-interface": true,
+        "interface-name": true,
+        "radix": false,
+        "no-unused-variable": false
     },
     "rulesDirectory": [],
     "linterOptions": {

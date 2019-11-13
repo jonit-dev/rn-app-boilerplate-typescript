@@ -1,22 +1,24 @@
-import { createStackNavigator } from "react-navigation-stack";
-import { createAppContainer } from "react-navigation";
-import { ProductsOverView } from "../screens/shop/ProductsOverview.screen";
-import Colors from "../constants/UI/Colors.constant";
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+
+import { colors } from '../constants/UI/Colors.constant';
+import { Main } from '../screens/Main';
 
 const ProductsNavigator = createStackNavigator(
   {
     ProductsOverview: {
-      screen: ProductsOverView
+      screen: Main
     }
   },
   {
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: Colors.primary
+        backgroundColor: colors.primary
       },
       headerTintColor: "white"
     }
   }
 );
 
+// tslint:disable-next-line: no-default-export
 export default createAppContainer(ProductsNavigator);
