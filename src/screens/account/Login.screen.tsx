@@ -6,6 +6,7 @@ import BlockButton from '../../components/form/BlockButton';
 import { IconInput, IconPackageTypes } from '../../components/form/IconInput';
 import { images } from '../../constants/Images.constant';
 import { colors } from '../../constants/UI/Colors.constant';
+import { TS } from '../../helpers/LanguageHelper';
 import MainNavigator from '../../navigation/Main.navigator';
 import { setLoading } from '../../store/actions/ui.actions';
 import { ICredentials, userLogin } from '../../store/actions/user.actions';
@@ -61,7 +62,7 @@ class Login extends Component<IProps, IState> {
             onChange={text => this.setState({ password: text })}
           />
           <BlockButton
-            text={"Login"}
+            text={TS.string("account", "loginButtonText")}
             onPress={async () => {
               this.props.setLoading(true);
               await this.props.userLogin({

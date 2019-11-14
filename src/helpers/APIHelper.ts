@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Alert } from 'react-native';
 
 import { appEnv } from '../constants/Env.constant';
+import { TS } from './LanguageHelper';
 
 const AUTH_HEADERS = {
   Authorization: "Bearer TOKENHERE",
@@ -28,7 +29,10 @@ export class APIHelper {
 
       if (!netInfo.isConnected) {
         // Check if user has wifi / mobile connection turned on.
-        Alert.alert("Oops!", "Please turn on your mobile connection.");
+        Alert.alert(
+          TS.string("global", "networkErrorTitle"),
+          TS.string("global", "networkErrorMessage")
+        );
         return;
       } else {
         // prepare connection timeout callback
@@ -40,8 +44,8 @@ export class APIHelper {
             onTimeoutCallback();
           } else {
             Alert.alert(
-              "Request timeout",
-              "Server is probably offline. Please, try again later."
+              TS.string("global", "requestTimeoutTitle"),
+              TS.string("global", "requestTimeoutMessage")
             );
           }
         }, timeout);
