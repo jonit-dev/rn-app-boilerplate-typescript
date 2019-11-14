@@ -10,7 +10,7 @@
     "esModuleInterop": true,
     "target": "es2015",
     "forceConsistentCasingInFileNames": true,
-
+    "noImplicitAny": false,
     "strict": true,
     "noUnusedLocals": true
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 export class Main extends Component {
   public render() {
@@ -10,5 +10,3 @@ export class Main extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({});
