@@ -15,12 +15,12 @@ const GUEST_HEADERS = {
 
 export class APIHelper {
   public static request = async (
-    method,
-    url,
-    data,
-    customHeaders,
+    method: any,
+    url: string,
+    data: object,
     useAuth = true,
-    onTimeoutCallback = null,
+    customHeaders: object = {},
+    onTimeoutCallback = () => null,
     timeout = 5000
   ) => {
     try {

@@ -8,13 +8,14 @@ export interface ICredentials {
   password: string;
 }
 
-export const userLogin = (credentials: ICredentials) => async dispatch => {
+export const userLogin = (credentials: ICredentials) => async (
+  dispatch: any
+) => {
   try {
     const response = await APIHelper.request(
       "post",
       "/users/login",
       credentials,
-      null,
       false
     );
 
