@@ -12,7 +12,6 @@ export class TS {
     // load language strings for a specific file
     const { strings } = langPaths[file];
 
-    // add our global generic strings
     const languageStrings = {
       ...strings
     };
