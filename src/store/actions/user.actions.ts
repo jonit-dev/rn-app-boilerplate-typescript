@@ -1,7 +1,6 @@
-import axios from 'axios';
 import { Alert } from 'react-native';
 
-import { env } from '../../constants/Env.constant';
+import { APIHelper } from '../../helpers/APIHelper';
 import { USER_LOGIN } from '../reducers/user.reducer';
 
 export interface ICredentials {
@@ -10,29 +9,28 @@ export interface ICredentials {
 }
 
 export const userLogin = (credentials: ICredentials) => async dispatch => {
-  console.log("logging user...");
-  console.log(credentials);
-
   try {
-    const response = await axios({
-      method: "post",
-      url: `${env.serverUrl}/users/login`,
-      data: credentials,
-      validateStatus(status) {
-        return status <= 500;
-      },
-      headers: {
-        "Content-Type": "application/json"
+    const response = await APIHelper.request(
+      "post",
+      "/users/login",
+      credentials,
+      null,
+      false
+    );
+
+    if (response) {
+      if (response.data.error) {
+        Alert.alert("Failed!", response.data.error);
+        return;
       }
-    });
 
-    dispatch({ type: USER_LOGIN, payload: response.data });
+      if (response.data.token) {
+        Alert.alert("Success", "logged in");
+      }
 
-    return response;
-  } catch (err) {
-    const errorObject = JSON.parse(JSON.stringify(err));
-    console.log(errorObject);
-
-    Alert.alert("Oops!", err);
+      dispatch({ type: USER_LOGIN, payload: response });
+    }
+  } catch (error) {
+    console.error(error);
   }
 };

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, ImageBackground, StyleSheet, View } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import BlockButton from '../../components/form/BlockButton';
@@ -64,17 +64,10 @@ class Login extends Component<IProps, IState> {
             text={"Login"}
             onPress={async () => {
               this.props.setLoading(true);
-              const login = await this.props.userLogin({
+              await this.props.userLogin({
                 email: this.state.email,
                 password: this.state.password
               });
-              console.log(login);
-
-              if (login.data.token) {
-                Alert.alert("Success", "logged in");
-              } else {
-                Alert.alert("Failed!", login.data.error);
-              }
 
               this.props.setLoading(false);
             }}

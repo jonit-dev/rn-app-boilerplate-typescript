@@ -18,10 +18,6 @@ export enum IconPackageTypes {
 }
 
 export class IconInput extends Component<IProps> {
-  public onChangeText(text) {
-    console.log(text);
-  }
-
   public renderIcon() {
     const { iconName, iconSize, iconColor } = this.props;
 
