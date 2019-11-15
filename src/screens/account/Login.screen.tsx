@@ -3,6 +3,7 @@ import { ImageBackground, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import BlockButton from '../../components/form/BlockButton';
+import { Form } from '../../components/form/Form';
 import { IconInput, IconPackageTypes } from '../../components/form/IconInput';
 import { images } from '../../constants/Images.constant';
 import { colors } from '../../constants/UI/Colors.constant';
@@ -45,7 +46,7 @@ class Login extends Component<IProps, IState> {
           style={styles.imageBackground}
         />
 
-        <View style={styles.form}>
+        <Form>
           <IconInput
             iconName={"envelope-o"}
             iconSize={24}
@@ -73,7 +74,7 @@ class Login extends Component<IProps, IState> {
               this.props.setLoading(false);
             }}
           />
-        </View>
+        </Form>
       </View>
     );
   }
@@ -100,11 +101,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.dark,
     justifyContent: "center",
     alignItems: "center"
-  },
-  form: {
-    padding: 20,
-    flex: 1,
-    justifyContent: "center"
   },
   imageBackground: {
     position: "absolute",
