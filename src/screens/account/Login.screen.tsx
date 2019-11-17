@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
+import Logo from '../../assets/images/logo.svg';
 import { BlockButton } from '../../components/form/BlockButton';
 import { Form } from '../../components/form/Form';
 import { IconInput, IconPackageTypes } from '../../components/form/IconInput';
@@ -37,6 +38,8 @@ export const Login = () => {
       />
 
       <Form>
+        <Logo width={300} height={300} />
+
         <IconInput
           iconName={"envelope-o"}
           iconSize={24}
