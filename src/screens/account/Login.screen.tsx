@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 

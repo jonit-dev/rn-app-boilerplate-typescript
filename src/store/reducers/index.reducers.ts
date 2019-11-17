@@ -1,4 +1,3 @@
-import { Reducer } from 'react';
 import { combineReducers } from 'redux';
 
 import uiReducer from './ui.reducer';
