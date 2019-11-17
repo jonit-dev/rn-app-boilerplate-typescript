@@ -6,7 +6,7 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 
 import { theme } from './src/constants/UI/Theme.constant';
-import Login from './src/screens/account/Login.screen';
+import { Login } from './src/screens/account/Login.screen';
 import reducers from './src/store/reducers/index.reducers';
 
 // @ts-ignore

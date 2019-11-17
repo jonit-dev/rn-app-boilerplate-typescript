@@ -1,15 +1,17 @@
-import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
-export class Main extends Component {
-  public render() {
-    return (
-      <View style={styles.mainContainer}>
-        <Text>My Main Component</Text>
-      </View>
-    );
-  }
+interface IProps {
+  someProp: string;
 }
+
+export const Main = (props: IProps) => {
+  return (
+    <View style={styles.mainContainer}>
+      <Text>My Main Component</Text>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   mainContainer: {
