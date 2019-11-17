@@ -1,6 +1,8 @@
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
+
+import { colors } from '../../constants/UI/Colors.constant';
 
 interface IProps {
   iconName: string;
@@ -17,11 +19,19 @@ export enum IconPackageTypes {
   Ionicons
 }
 
-export class IconInput extends Component<IProps> {
-  public renderIcon() {
-    const { iconName, iconSize, iconColor } = this.props;
+export const IconInput = (props: IProps) => {
+  const {
+    iconName,
+    iconSize,
+    iconColor,
+    iconPackage,
+    isPassword,
+    onChange,
+    inputStyle
+  } = props;
 
-    switch (this.props.iconPackage) {
+  const renderIcon = () => {
+    switch (iconPackage) {
       case IconPackageTypes.FontAwesome:
         return (
           <FontAwesome
@@ -41,21 +51,19 @@ export class IconInput extends Component<IProps> {
           />
         );
     }
-  }
+  };
 
-  public render() {
-    return (
-      <View style={styles.container} {...this.props.inputStyle}>
-        <View style={styles.iconContainer}>{this.renderIcon()}</View>
-        <TextInput
-          style={styles.input}
-          onChangeText={text => this.props.onChange(text)}
-          secureTextEntry={this.props.isPassword}
-        />
-      </View>
-    );
-  }
-}
+  return (
+    <View style={styles.container} {...inputStyle}>
+      <View style={styles.iconContainer}>{renderIcon()}</View>
+      <TextInput
+        style={styles.input}
+        onChangeText={text => onChange(text)}
+        secureTextEntry={isPassword}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -63,7 +71,7 @@ const styles = StyleSheet.create({
     width: "100%",
     maxHeight: 55,
     borderRadius: 6,
-    backgroundColor: "rgba(33, 33, 33, 0.6)",
+    backgroundColor: "rgba(255, 255, 255, 0.6)",
     flex: 8,
     justifyContent: "flex-start",
     alignItems: "center",
@@ -84,7 +92,7 @@ const styles = StyleSheet.create({
   icon: {},
   input: {
     flex: 7,
-    color: "white",
+    color: colors.dark,
 
     width: "100%",
     height: "100%"

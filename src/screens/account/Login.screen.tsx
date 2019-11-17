@@ -40,14 +40,14 @@ export const Login = () => {
         <IconInput
           iconName={"envelope-o"}
           iconSize={24}
-          iconColor={"white"}
+          iconColor={colors.dark}
           iconPackage={IconPackageTypes.FontAwesome}
           onChange={text => setEmail(text)}
         />
         <IconInput
           iconName={"lock"}
           iconSize={24}
-          iconColor={"white"}
+          iconColor={colors.dark}
           isPassword={true}
           iconPackage={IconPackageTypes.FontAwesome}
           onChange={text => setPassword(text)}
@@ -74,7 +74,7 @@ export const Login = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.dark,
+    backgroundColor: colors.white,
     justifyContent: "center",
     alignItems: "center"
   },
