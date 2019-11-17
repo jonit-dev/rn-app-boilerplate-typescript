@@ -2,12 +2,19 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import { colors } from '../constants/UI/Colors.constant';
-import { Main } from '../screens/Main.screen';
+import { LoginScreen } from '../screens/account/Login.screen';
+import { RegisterScreen } from '../screens/account/Register.screen';
 
-const ProductsNavigator = createStackNavigator(
+const MainNavigator = createStackNavigator(
   {
-    ProductsOverview: {
-      screen: Main
+    LoginScreen: {
+      screen: LoginScreen,
+      navigationOptions: {
+        header: null // hide navigation bar on this screen only
+      }
+    },
+    RegisterScreen: {
+      screen: RegisterScreen
     }
   },
   {
@@ -21,4 +28,4 @@ const ProductsNavigator = createStackNavigator(
 );
 
 // tslint:disable-next-line: no-default-export
-export default createAppContainer(ProductsNavigator);
+export default createAppContainer(MainNavigator);

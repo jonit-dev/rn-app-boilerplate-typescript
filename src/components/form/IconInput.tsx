@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 16,
     width: "100%",
+    minHeight: 55,
     maxHeight: 55,
     borderRadius: 6,
     backgroundColor: "rgba(255, 255, 255, 0.6)",

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ImageBackground, StyleSheet, View } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import Logo from '../../assets/images/logo.svg';
@@ -8,8 +8,8 @@ import { Form } from '../../components/form/Form';
 import { IconInput, IconPackageTypes } from '../../components/form/IconInput';
 import { images } from '../../constants/Images.constant';
 import { colors } from '../../constants/UI/Colors.constant';
+import { common } from '../../constants/UI/Common.constant';
 import { TS } from '../../helpers/LanguageHelper';
-import MainNavigator from '../../navigation/Main.navigator';
 import { setLoading } from '../../store/actions/ui.actions';
 import { userLogin } from '../../store/actions/user.actions';
 
@@ -18,7 +18,7 @@ export interface IResponseLogin {
   user: IUser;
 }
 
-export const Login = () => {
+export const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,11 +26,7 @@ export const Login = () => {
 
   // check if user is logged in. If so, load navigation stack. If not, load login screen
 
-  const isLoggedIn = false; // TODO: plugin indo redux (check if user is logged in with localstorage)
-
-  return isLoggedIn ? (
-    <MainNavigator />
-  ) : (
+  return (
     <View style={styles.container}>
       <ImageBackground
         source={images.loginBackground}
@@ -38,7 +34,7 @@ export const Login = () => {
       />
 
       <Form>
-        <Logo width={300} height={300} />
+        <Logo width={200} height={200} style={styles.logo} />
 
         <IconInput
           iconName={"envelope-o"}
@@ -69,15 +65,23 @@ export const Login = () => {
             dispatch(setLoading(false));
           }}
         />
+
+        <View style={styles.registerText}>
+          <Text>
+            Don't have an account? <Text style={common.link}>Signup here</Text>
+          </Text>
+        </View>
       </Form>
     </View>
   );
 };
 
+LoginScreen.navigationOptions = {};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
+
     justifyContent: "center",
     alignItems: "center"
   },
@@ -88,5 +92,14 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     opacity: 0.1
+  },
+  logo: {
+    alignSelf: "center"
+  },
+  registerText: {
+    flexDirection: "row",
+    justifyContent: "center",
+
+    marginTop: 22
   }
 });

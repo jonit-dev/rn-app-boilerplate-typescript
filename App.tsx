@@ -6,7 +6,7 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 
 import { theme } from './src/constants/UI/Theme.constant';
-import { Login } from './src/screens/account/Login.screen';
+import MainNavigator from './src/navigation/Main.navigator';
 import reducers from './src/store/reducers/index.reducers';
 
 // @ts-ignore
@@ -26,7 +26,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <PaperProvider theme={theme}>
-          <Login />
+          <MainNavigator />
         </PaperProvider>
       </Provider>
     );

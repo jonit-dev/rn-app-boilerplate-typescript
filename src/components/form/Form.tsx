@@ -1,7 +1,6 @@
 import React from 'react';
 import { KeyboardAvoidingView, StyleSheet } from 'react-native';
 
-
 export const Form = props => {
   return (
     <KeyboardAvoidingView style={styles.form} behavior="padding" enabled>
