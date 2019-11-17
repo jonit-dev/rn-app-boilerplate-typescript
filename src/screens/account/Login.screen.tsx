@@ -9,6 +9,7 @@ import { IconInput, IconPackageTypes } from '../../components/form/IconInput';
 import { images } from '../../constants/Images.constant';
 import { colors } from '../../constants/UI/Colors.constant';
 import { common } from '../../constants/UI/Common.constant';
+import { typography } from '../../constants/UI/Typography.constant';
 import { TS } from '../../helpers/LanguageHelper';
 import { setLoading } from '../../store/actions/ui.actions';
 import { userLogin } from '../../store/actions/user.actions';
@@ -66,8 +67,8 @@ export const LoginScreen = () => {
           }}
         />
 
-        <View style={styles.registerText}>
-          <Text>
+        <View style={styles.registerTextContainer}>
+          <Text style={typography.text}>
             Don't have an account? <Text style={common.link}>Signup here</Text>
           </Text>
         </View>
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
   logo: {
     alignSelf: "center"
   },
-  registerText: {
+  registerTextContainer: {
     flexDirection: "row",
     justifyContent: "center",
 
