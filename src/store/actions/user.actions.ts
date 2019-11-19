@@ -3,6 +3,7 @@ import { Alert } from 'react-native';
 import { APIHelper } from '../../helpers/APIHelper';
 import { IRequestDefaultError, RequestTypes } from '../../typescript/Requests.types';
 import { USER_LOGIN } from '../reducers/user.reducer';
+import { showMessage } from './ui.actions';
 
 export interface ICredentials {
   email: string;
@@ -30,6 +31,13 @@ export const userLogin = (credentials: ICredentials) => async (
     if (response) {
       if (response.data.error) {
         Alert.alert("Failed!", response.data.error);
+
+        dispatch(
+          showMessage({
+            message: response.data.error
+          })
+        );
+
         return;
       }
 
@@ -48,16 +56,12 @@ export const userRegister = (
   registerCredentials: IRegisterCredentials
 ) => async (dispatch: any) => {
   try {
-    console.log(registerCredentials);
-
     const response: any = await APIHelper.request(
       RequestTypes.POST,
       "/users",
       registerCredentials,
       false
     );
-
-    console.log(response);
 
     if (response.status === 201) {
       // success

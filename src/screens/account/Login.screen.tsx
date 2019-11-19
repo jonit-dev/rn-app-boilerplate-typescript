@@ -3,6 +3,7 @@ import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import Logo from '../../assets/images/logo.svg';
+import { ShowSnackbar } from '../../components/alert/ShowSnackbar';
 import { BlockButton } from '../../components/form/BlockButton';
 import { Form } from '../../components/form/Form';
 import { IconInput, IconPackageTypes } from '../../components/form/IconInput';
@@ -79,6 +80,7 @@ export const LoginScreen = props => {
             </Text>
           </Text>
         </View>
+        <ShowSnackbar />
       </Form>
     </View>
   );

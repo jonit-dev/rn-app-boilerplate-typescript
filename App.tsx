@@ -31,10 +31,6 @@ export default class App extends Component {
     isDataLoaded: false
   };
 
-  public componentDidMount() {
-    GlobalStylesHelper.init(); // load global styles
-  }
-
   public fetchFonts() {
     return Font.loadAsync(fonts);
   }
@@ -43,7 +39,10 @@ export default class App extends Component {
     if (!this.state.isDataLoaded) {
       return (
         <AppLoading
-          startAsync={() => this.fetchFonts()}
+          startAsync={async () => {
+            await this.fetchFonts();
+            GlobalStylesHelper.init(); // load global styles
+          }}
           onFinish={() => this.setState({ isDataLoaded: true })}
           onError={err => console.log(err)}
         />

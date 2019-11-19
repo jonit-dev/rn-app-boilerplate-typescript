@@ -1,4 +1,4 @@
-import { SET_LOADING } from '../reducers/ui.reducer';
+import { SET_LOADING, SET_MESSAGE } from '../reducers/ui.reducer';
 
 export const setLoading = (status: boolean) => dispatch => {
   dispatch({
@@ -6,5 +6,18 @@ export const setLoading = (status: boolean) => dispatch => {
     payload: {
       status
     }
+  });
+};
+
+export interface IMessage {
+  message: string;
+  onDismiss?: () => any;
+  onPress?: () => any;
+}
+
+export const showMessage = (message: IMessage) => dispatch => {
+  dispatch({
+    type: SET_MESSAGE,
+    payload: message
   });
 };

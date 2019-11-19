@@ -9,7 +9,7 @@ import { Form } from '../../components/form/Form';
 import { H2 } from '../../components/form/H2';
 import { TS } from '../../helpers/LanguageHelper';
 import { setLoading } from '../../store/actions/ui.actions';
-import { IRegisterCredentials, userRegister } from '../../store/actions/user.actions';
+import { userRegister } from '../../store/actions/user.actions';
 
 export const RegisterScreen = () => {
   const [name, setName] = useState("");
@@ -62,14 +62,14 @@ export const RegisterScreen = () => {
 
           await dispatch(setLoading(true));
 
-          const registerCredentials: IRegisterCredentials = {
-            name: "Sarah",
-            email: "sarasdsadaah@live.com",
-            password: "abc3225ABC@@",
-            passwordConfirmation: "abc3225ABC@@"
-          };
-
-          await dispatch(userRegister(registerCredentials));
+          await dispatch(
+            userRegister({
+              name,
+              email,
+              password,
+              passwordConfirmation
+            })
+          );
 
           await dispatch(setLoading(false));
         }}

@@ -13,5 +13,11 @@ export const strings = {
   },
   registerButtonText: {
     eng: "Sign Up"
+  },
+  loginFailedTitle: {
+    eng: "Error"
+  },
+  loginSuccessTitle: {
+    eng: "Success!"
   }
 };
