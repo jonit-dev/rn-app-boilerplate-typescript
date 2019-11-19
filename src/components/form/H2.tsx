@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleProp, Text, View, ViewStyle } from 'react-native';
+import { Text, View } from 'react-native';
 
 import { typography } from '../../constants/UI/Typography.constant';
 
 interface IProps {
-  style?: StyleProp<ViewStyle>;
+  style?: any;
   children?: any;
 }
 

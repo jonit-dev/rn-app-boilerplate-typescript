@@ -8,6 +8,13 @@ export interface ICredentials {
   password: string;
 }
 
+export interface IRegisterCredentials {
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirmation: string;
+}
+
 export const userLogin = (credentials: ICredentials) => async (
   dispatch: any
 ) => {
@@ -29,8 +36,32 @@ export const userLogin = (credentials: ICredentials) => async (
         Alert.alert("Success", "logged in");
       }
 
-      dispatch({ type: USER_LOGIN, payload: response });
+      dispatch({ type: USER_LOGIN, payload: response.data });
     }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const userRegister = (
+  registerCredentials: IRegisterCredentials
+) => async dispatch => {
+  try {
+    console.log(registerCredentials);
+
+    const response: any = await APIHelper.request(
+      "post",
+      "/users",
+      registerCredentials,
+      false
+    );
+
+    if (response.status === 201) {
+      // user registered successfully
+      dispatch({ type: USER_LOGIN, payload: response.data });
+    }
+
+    return response;
   } catch (error) {
     console.error(error);
   }

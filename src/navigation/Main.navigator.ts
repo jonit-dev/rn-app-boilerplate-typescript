@@ -7,15 +7,14 @@ import { RegisterScreen } from '../screens/account/Register.screen';
 
 const MainNavigator = createStackNavigator(
   {
-    RegisterScreen: {
-      screen: RegisterScreen
-    },
-
     LoginScreen: {
       screen: LoginScreen,
       navigationOptions: {
         header: null // hide navigation bar on this screen only
       }
+    },
+    RegisterScreen: {
+      screen: RegisterScreen
     }
   },
   {
