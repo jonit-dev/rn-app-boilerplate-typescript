@@ -8,7 +8,7 @@ export class GlobalStylesHelper {
       style: {
         fontSize: 16,
         color: colors.dark,
-        fontFamily: "robotoRegular"
+        fontFamily: "muliRegular"
       }
     };
     setCustomText(customTextProps);

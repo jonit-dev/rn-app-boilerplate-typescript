@@ -1,8 +1,6 @@
 export const fonts = {
-  robotoBlack: require("../../assets/fonts/Roboto/Roboto-Black.ttf"),
-  robotoBold: require("../../assets/fonts/Roboto/Roboto-Bold.ttf"),
-  robotoLight: require("../../assets/fonts/Roboto/Roboto-Light.ttf"),
-  robotoMedium: require("../../assets/fonts/Roboto/Roboto-Medium.ttf"),
-  robotoRegular: require("../../assets/fonts/Roboto/Roboto-Regular.ttf"),
-  robotoThin: require("../../assets/fonts/Roboto/Roboto-Thin.ttf")
+  muliBold: require("../../assets/fonts/Muli/Muli-Bold.ttf"),
+  muliLight: require("../../assets/fonts/Muli/Muli-Light.ttf"),
+  muliMedium: require("../../assets/fonts/Muli/Muli-Medium.ttf"),
+  muliRegular: require("../../assets/fonts/Muli/Muli-Regular.ttf")
 };

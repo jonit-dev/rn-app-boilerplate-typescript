@@ -2,6 +2,10 @@
 
 **Description**: This open source project was created to avoid waste of time with common functionalities that most of the apps should have. That way, you can focus on what really matters: your business logic. It's ideally for startups or projects that aim to scale after some development time.
 
+**UI Kit**
+
+This boilerplate theme is inspired on Waplants Plants UI theme (Free for commercial use)
+
 **Server-side**
 
 - This React native boilerplate is meant to be used together with our [NodeJS boilerplate server](https://github.com/jonit-dev/node-express-boilerplate-app)
