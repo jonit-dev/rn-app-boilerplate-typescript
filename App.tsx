@@ -32,11 +32,10 @@ export default class App extends Component {
   };
 
   public componentDidMount() {
-    GlobalStylesHelper.init();
+    GlobalStylesHelper.init(); // load global styles
   }
 
   public fetchFonts() {
-    console.log("fetching fonts...");
     return Font.loadAsync(fonts);
   }
 

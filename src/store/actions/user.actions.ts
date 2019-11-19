@@ -1,6 +1,7 @@
 import { Alert } from 'react-native';
 
 import { APIHelper } from '../../helpers/APIHelper';
+import { IRequestDefaultError, RequestTypes } from '../../typescript/Requests.types';
 import { USER_LOGIN } from '../reducers/user.reducer';
 
 export interface ICredentials {
@@ -20,7 +21,7 @@ export const userLogin = (credentials: ICredentials) => async (
 ) => {
   try {
     const response = await APIHelper.request(
-      "post",
+      RequestTypes.POST,
       "/users/login",
       credentials,
       false
@@ -45,23 +46,28 @@ export const userLogin = (credentials: ICredentials) => async (
 
 export const userRegister = (
   registerCredentials: IRegisterCredentials
-) => async dispatch => {
+) => async (dispatch: any) => {
   try {
     console.log(registerCredentials);
 
     const response: any = await APIHelper.request(
-      "post",
+      RequestTypes.POST,
       "/users",
       registerCredentials,
       false
     );
 
-    if (response.status === 201) {
-      // user registered successfully
-      dispatch({ type: USER_LOGIN, payload: response.data });
-    }
+    console.log(response);
 
-    return response;
+    if (response.status === 201) {
+      // success
+      dispatch({ type: USER_LOGIN, payload: response.data });
+      Alert.alert("Success", "registered!");
+    } else {
+      const error: IRequestDefaultError = response.data;
+
+      Alert.alert(error.status, error.message);
+    }
   } catch (error) {
     console.error(error);
   }

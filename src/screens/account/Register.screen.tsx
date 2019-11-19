@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 
@@ -69,18 +69,9 @@ export const RegisterScreen = () => {
             passwordConfirmation: "abc3225ABC@@"
           };
 
-          const register: any = await dispatch(
-            userRegister(registerCredentials)
-          );
+          await dispatch(userRegister(registerCredentials));
 
           await dispatch(setLoading(false));
-
-          if (register.status === 201) {
-            // success
-            Alert.alert("Success", "registered!");
-          } else {
-            Alert.alert("Error", register.data.message);
-          }
         }}
       />
     </Form>

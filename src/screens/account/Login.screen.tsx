@@ -13,6 +13,7 @@ import { typography } from '../../constants/UI/Typography.constant';
 import { TS } from '../../helpers/LanguageHelper';
 import { setLoading } from '../../store/actions/ui.actions';
 import { userLogin } from '../../store/actions/user.actions';
+import { IUser } from '../../typescript/User.types';
 
 export interface IResponseLogin {
   token: string;
