@@ -30,8 +30,6 @@ export const userLogin = (credentials: ICredentials) => async (
 
     if (response) {
       if (response.data.error) {
-        Alert.alert("Failed!", response.data.error);
-
         dispatch(
           showMessage({
             message: response.data.error
