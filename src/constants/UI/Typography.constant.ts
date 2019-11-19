@@ -8,5 +8,16 @@ export const typography = {
   textBold: {
     color: colors.dark,
     fontFamily: "robotoBold"
+  },
+  p: {
+    fontSize: 16
+  },
+  h1: {
+    fontSize: 41.89,
+    fontFamily: "robotoBold"
+  },
+  h2: {
+    fontSize: 25.89,
+    fontFamily: "robotoBold"
   }
 };

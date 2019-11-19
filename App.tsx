@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 
+import { GlobalStylesHelper } from './src/constants/GlobalStylesHelper';
 import { fonts } from './src/constants/UI/Fonts.constant';
 import { theme } from './src/constants/UI/Theme.constant';
 import MainNavigator from './src/navigation/Main.navigator';
@@ -29,6 +30,10 @@ export default class App extends Component {
   public state = {
     isDataLoaded: false
   };
+
+  public componentDidMount() {
+    GlobalStylesHelper.init();
+  }
 
   public fetchFonts() {
     console.log("fetching fonts...");

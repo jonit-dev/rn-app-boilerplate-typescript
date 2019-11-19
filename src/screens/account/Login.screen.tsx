@@ -19,7 +19,7 @@ export interface IResponseLogin {
   user: IUser;
 }
 
-export const LoginScreen = () => {
+export const LoginScreen = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -69,7 +69,13 @@ export const LoginScreen = () => {
 
         <View style={styles.registerTextContainer}>
           <Text style={typography.text}>
-            Don't have an account? <Text style={common.link}>Signup here</Text>
+            Don't have an account?{" "}
+            <Text
+              style={common.link}
+              onPress={() => props.navigation.navigate("RegisterScreen")}
+            >
+              Signup here
+            </Text>
           </Text>
         </View>
       </Form>
