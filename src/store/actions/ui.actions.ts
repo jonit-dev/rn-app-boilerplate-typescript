@@ -15,9 +15,11 @@ export interface IMessage {
   onPress?: () => any;
 }
 
-export const showMessage = (message: IMessage) => dispatch => {
+export const showMessage = (messageObject: IMessage) => dispatch => {
+  console.log("showing message...");
+
   dispatch({
     type: SET_MESSAGE,
-    payload: message
+    payload: messageObject
   });
 };

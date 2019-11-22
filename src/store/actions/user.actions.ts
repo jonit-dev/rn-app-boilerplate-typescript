@@ -28,6 +28,8 @@ export const userLogin = (credentials: ICredentials) => async (
       false
     );
 
+    console.log(response);
+
     if (response) {
       if (response.data.error) {
         dispatch(

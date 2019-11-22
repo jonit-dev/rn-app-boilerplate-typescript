@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { Alert, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import Logo from '../../assets/images/logo.svg';
@@ -12,7 +12,7 @@ import { colors } from '../../constants/UI/Colors.constant';
 import { common } from '../../constants/UI/Common.constant';
 import { typography } from '../../constants/UI/Typography.constant';
 import { TS } from '../../helpers/LanguageHelper';
-import { setLoading } from '../../store/actions/ui.actions';
+import { setLoading, showMessage } from '../../store/actions/ui.actions';
 import { userLogin } from '../../store/actions/user.actions';
 import { IUser } from '../../typescript/User.types';
 
@@ -57,15 +57,34 @@ export const LoginScreen = props => {
         <BlockButton
           text={TS.string("account", "loginButtonText")}
           onPress={async () => {
-            dispatch(setLoading(true));
-            await dispatch(
-              userLogin({
-                email,
-                password
-              })
-            );
+            if (!email) {
+              dispatch(
+                showMessage({
+                  message: TS.string("account", "loginNoEmail")
+                })
+              );
+              return false;
+            }
 
-            dispatch(setLoading(false));
+            if (!password) {
+              Alert.alert(
+                TS.string("global", "genericErrorTitle"),
+                TS.string("account", "loginNoPassword")
+              );
+              return false;
+            }
+
+            if (email && password) {
+              dispatch(setLoading(true));
+              await dispatch(
+                userLogin({
+                  email,
+                  password
+                })
+              );
+
+              dispatch(setLoading(false));
+            }
           }}
         />
 

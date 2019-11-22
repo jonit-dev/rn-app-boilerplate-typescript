@@ -23,6 +23,12 @@ export default (state = INITIAL_STATE, action) => {
         alert: action.payload
       };
 
+    case CLEAR_MESSAGE:
+      return {
+        ...state,
+        alert: INITIAL_STATE.alert
+      };
+
     default:
       return state;
   }
@@ -32,3 +38,4 @@ export default (state = INITIAL_STATE, action) => {
 
 export const SET_LOADING = "SET_LOADING";
 export const SET_MESSAGE = "SET_ERROR";
+export const CLEAR_MESSAGE = "CLEAR_MESSAGE";

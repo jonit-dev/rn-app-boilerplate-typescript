@@ -19,5 +19,11 @@ export const strings = {
   },
   loginSuccessTitle: {
     eng: "Success!"
+  },
+  loginNoEmail: {
+    eng: "Please, insert an e-mail address"
+  },
+  loginNoPassword: {
+    eng: "Please, insert a password"
   }
 };

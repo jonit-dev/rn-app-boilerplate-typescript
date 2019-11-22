@@ -1,25 +1,47 @@
 import React, { useState } from 'react';
 import { Snackbar } from 'react-native-paper';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { CLEAR_MESSAGE } from '../../store/reducers/ui.reducer';
 
 export const ShowSnackbar = () => {
   const [visible, setVisible] = useState(true);
 
   const showMessage = useSelector<any, any>(state => state.uiReducer.alert);
 
-  console.log(showMessage);
+  const dispatch = useDispatch();
 
-  return showMessage ? (
-    <Snackbar
-      visible={visible}
-      onDismiss={() => setVisible(false)}
-      action={{
-        label: "Ok",
-        onPress: () =>
-          !showMessage.onPress() ? setVisible(false) : showMessage.onPress()
-      }}
-    >
-      {showMessage.message}
-    </Snackbar>
-  ) : null;
+  const clearMessage = () => {
+    dispatch({
+      type: CLEAR_MESSAGE
+    });
+
+    setVisible(true);
+  };
+
+  const executeCallback = () => {
+    if (showMessage.onPress !== undefined) {
+      showMessage.onPress();
+    }
+
+    clearMessage();
+  };
+
+  if (showMessage) {
+    if (showMessage.message) {
+      return (
+        <Snackbar
+          visible={visible}
+          onDismiss={() => clearMessage()}
+          action={{
+            label: "Ok",
+            onPress: () => executeCallback()
+          }}
+        >
+          {showMessage.message}
+        </Snackbar>
+      );
+    }
+  }
+  return null;
 };
