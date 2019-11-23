@@ -1,7 +1,6 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start-linux": "yarn run adb-sync && expo start",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import Logo from '../../assets/images/logo.svg';
@@ -67,20 +67,25 @@ export const LoginScreen = props => {
             }
 
             if (!password) {
-              Alert.alert(
-                TS.string("global", "genericErrorTitle"),
-                TS.string("account", "loginNoPassword")
+              dispatch(
+                showMessage({
+                  message: TS.string("account", "loginNoPassword")
+                })
               );
+
               return false;
             }
 
             if (email && password) {
               dispatch(setLoading(true));
               await dispatch(
-                userLogin({
-                  email,
-                  password
-                })
+                userLogin(
+                  {
+                    email,
+                    password
+                  },
+                  props.navigation
+                )
               );
 
               dispatch(setLoading(false));

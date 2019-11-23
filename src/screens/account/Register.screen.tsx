@@ -58,8 +58,6 @@ export const RegisterScreen = () => {
       <BlockButton
         text={TS.string("account", "registerButtonText")}
         onPress={async () => {
-          console.log("registering");
-
           await dispatch(setLoading(true));
 
           await dispatch(

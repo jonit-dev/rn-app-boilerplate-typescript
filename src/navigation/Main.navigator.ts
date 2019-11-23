@@ -4,9 +4,19 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { colors } from '../constants/UI/Colors.constant';
 import { LoginScreen } from '../screens/account/Login.screen';
 import { RegisterScreen } from '../screens/account/Register.screen';
+import { DashboardScreen } from '../screens/Dashboard.screen';
+import { InitialScreen } from '../screens/Initial.screen';
 
 const MainNavigator = createStackNavigator(
   {
+    InitialScreen: {
+      screen: InitialScreen
+    },
+
+    DashboardScreen: {
+      screen: DashboardScreen
+    },
+
     LoginScreen: {
       screen: LoginScreen,
       navigationOptions: {

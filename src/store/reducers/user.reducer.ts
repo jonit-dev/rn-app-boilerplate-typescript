@@ -1,15 +1,19 @@
 const INITIAL_STATE = {
-  isLoggedIn: false,
-  user: null
+  user: null,
+  token: null
 };
 
 // tslint:disable-next-line: no-default-export
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case USER_LOGIN:
-      return { ...state, user: action.payload, isLoggedIn: true };
+      return {
+        ...state,
+        user: action.payload.user,
+        token: action.payload.token
+      };
     case USER_LOGOUT:
-      return { ...state, user: {}, isLoggedIn: false };
+      return { ...state, user: null, token: null };
     default:
       return state;
   }

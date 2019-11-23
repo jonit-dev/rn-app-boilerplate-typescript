@@ -16,8 +16,6 @@ export interface IMessage {
 }
 
 export const showMessage = (messageObject: IMessage) => dispatch => {
-  console.log("showing message...");
-
   dispatch({
     type: SET_MESSAGE,
     payload: messageObject

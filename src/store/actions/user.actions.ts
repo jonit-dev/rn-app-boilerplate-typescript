@@ -1,6 +1,7 @@
 import { Alert } from 'react-native';
 
 import { APIHelper } from '../../helpers/APIHelper';
+import { NavigatorHelper } from '../../helpers/NavigatorHelper';
 import { IRequestDefaultError, RequestTypes } from '../../typescript/Requests.types';
 import { USER_LOGIN } from '../reducers/user.reducer';
 import { showMessage } from './ui.actions';
@@ -17,7 +18,7 @@ export interface IRegisterCredentials {
   passwordConfirmation: string;
 }
 
-export const userLogin = (credentials: ICredentials) => async (
+export const userLogin = (credentials: ICredentials, navigation) => async (
   dispatch: any
 ) => {
   try {
@@ -27,8 +28,6 @@ export const userLogin = (credentials: ICredentials) => async (
       credentials,
       false
     );
-
-    console.log(response);
 
     if (response) {
       if (response.data.error) {
@@ -40,9 +39,8 @@ export const userLogin = (credentials: ICredentials) => async (
 
         return;
       }
-
       if (response.data.token) {
-        Alert.alert("Success", "logged in");
+        NavigatorHelper.resetAndNavigate(navigation, "DashboardScreen");
       }
 
       dispatch({ type: USER_LOGIN, payload: response.data });
