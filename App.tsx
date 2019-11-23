@@ -4,24 +4,13 @@ import React, { Component } from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { useScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
-import { applyMiddleware, compose, createStore } from 'redux';
-import thunk from 'redux-thunk';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import { GlobalStylesHelper } from './src/constants/GlobalStylesHelper';
 import { fonts } from './src/constants/UI/Fonts.constant';
 import { theme } from './src/constants/UI/Theme.constant';
 import MainNavigator from './src/navigation/Main.navigator';
-import reducers from './src/store/reducers/index.reducers';
-
-// @ts-ignore
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const middlewares = [thunk];
-
-const store = createStore(
-  reducers,
-  composeEnhancers(applyMiddleware(...middlewares))
-);
+import { persistor, store } from './src/store/persist.store';
 
 useScreens(); // screen transition performance
 
@@ -51,7 +40,9 @@ export default class App extends Component {
       return (
         <Provider store={store}>
           <PaperProvider theme={theme}>
-            <MainNavigator />
+            <PersistGate loading={null} persistor={persistor}>
+              <MainNavigator />
+            </PersistGate>
           </PaperProvider>
         </Provider>
       );
