@@ -2,28 +2,19 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
-import { BlockButton } from '../components/form/BlockButton';
-import { CustomHeaderButton } from '../components/navigator/CustomHeaderButton';
-import { persistor } from '../store/persist.store';
+import { CustomHeaderButton } from '../../components/navigator/CustomHeaderButton';
 
-export const DashboardScreen = props => {
+export const ProfileScreen = props => {
   return (
     <View style={styles.container}>
-      <Text>User dashboard!</Text>
-      <BlockButton
-        text="Logout"
-        onPress={() => {
-          persistor.purge();
-          props.navigation.navigate("LoginScreen");
-        }}
-      />
+      <Text>User profile</Text>
     </View>
   );
 };
 
-DashboardScreen.navigationOptions = navData => {
+ProfileScreen.navigationOptions = navData => {
   return {
-    headerTitle: "Dashboard",
+    headerTitle: "Profile",
     headerLeft: (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item

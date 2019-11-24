@@ -1,41 +1,36 @@
+import { Dimensions } from 'react-native';
 import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import { colors } from '../constants/UI/Colors.constant';
-import { LoginScreen } from '../screens/account/Login.screen';
-import { RegisterScreen } from '../screens/account/Register.screen';
-import { DashboardScreen } from '../screens/Dashboard.screen';
-import { InitialScreen } from '../screens/Initial.screen';
+import { defaultFont } from '../constants/UI/Typography.constant';
+import { CustomDrawerContentComponent } from './drawerNavigator/CustomDrawerContentComponent';
+import { MainStackNavigator } from './stackNavigators/mainStackNavigator';
+import { ProfileStackNavigator } from './stackNavigators/ProfileStackNavigator';
 
-const MainNavigator = createStackNavigator(
+const WIDTH = Dimensions.get("window").width;
+
+const MainDrawerNavigator = createDrawerNavigator(
   {
-    InitialScreen: {
-      screen: InitialScreen
-    },
-
-    DashboardScreen: {
-      screen: DashboardScreen
-    },
-
-    LoginScreen: {
-      screen: LoginScreen,
+    Main: MainStackNavigator,
+    Profile: {
+      screen: ProfileStackNavigator,
       navigationOptions: {
-        header: null // hide navigation bar on this screen only
+        drawerLabel: "Profile"
       }
-    },
-    RegisterScreen: {
-      screen: RegisterScreen
     }
   },
   {
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: colors.primary
-      },
-      headerTintColor: "white"
+    drawerWidth: WIDTH * 0.83,
+    contentComponent: CustomDrawerContentComponent,
+    contentOptions: {
+      activeTintColor: colors.accent,
+      labelStyle: {
+        fontFamily: defaultFont
+      }
     }
   }
 );
 
 // tslint:disable-next-line: no-default-export
-export default createAppContainer(MainNavigator);
+export default createAppContainer(MainDrawerNavigator);

@@ -1,5 +1,7 @@
 import { colors } from './Colors.constant';
 
+export const defaultFont = "muliRegular";
+
 export const typography = {
   text: {
     color: colors.dark,
