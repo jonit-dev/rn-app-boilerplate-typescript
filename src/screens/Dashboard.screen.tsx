@@ -1,37 +1,23 @@
+import { MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
-import { BlockButton } from '../components/form/BlockButton';
-import { CustomHeaderButton } from '../components/navigator/CustomHeaderButton';
-import { persistor } from '../store/persist.store';
+import { colors } from '../constants/UI/Colors.constant';
+import { HamburgerMenu } from '../navigation/HamburgerMenu';
 
 export const DashboardScreen = props => {
   return (
     <View style={styles.container}>
-      <Text>User dashboard!</Text>
-      <BlockButton
-        text="Logout"
-        onPress={() => {
-          persistor.purge();
-          props.navigation.navigate("LoginScreen");
-        }}
-      />
+      <Text>Dashboard Screen</Text>
     </View>
   );
 };
 
 DashboardScreen.navigationOptions = navData => {
   return {
-    headerTitle: "Dashboard",
-    headerLeft: (
-      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-        <Item
-          title="menu"
-          iconName="ios-menu"
-          onPress={() => navData.navigation.toggleDrawer()}
-        />
-      </HeaderButtons>
+    headerLeft: <HamburgerMenu navigation={navData.navigation} />,
+    drawerIcon: (
+      <MaterialIcons color={colors.white} size={24} name="account-circle" />
     )
   };
 };

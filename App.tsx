@@ -9,7 +9,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { GlobalStylesHelper } from './src/constants/GlobalStylesHelper';
 import { fonts } from './src/constants/UI/Fonts.constant';
 import { theme } from './src/constants/UI/Theme.constant';
-import MainStackNavigator from './src/navigation/Main.navigator';
+import RootNavigator from './src/navigation/Root.navigator';
 import { persistor, store } from './src/store/persist.store';
 
 useScreens(); // screen transition performance
@@ -41,7 +41,7 @@ export default class App extends Component {
         <Provider store={store}>
           <PaperProvider theme={theme}>
             <PersistGate loading={null} persistor={persistor}>
-              <MainStackNavigator />
+              <RootNavigator />
             </PersistGate>
           </PaperProvider>
         </Provider>

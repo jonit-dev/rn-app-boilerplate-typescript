@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
-import { CustomHeaderButton } from '../../components/navigator/CustomHeaderButton';
+import { HamburgerMenu } from '../../navigation/HamburgerMenu';
 
 export const ProfileScreen = props => {
   return (
@@ -15,15 +14,7 @@ export const ProfileScreen = props => {
 ProfileScreen.navigationOptions = navData => {
   return {
     headerTitle: "Profile",
-    headerLeft: (
-      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-        <Item
-          title="menu"
-          iconName="ios-menu"
-          onPress={() => navData.navigation.toggleDrawer()}
-        />
-      </HeaderButtons>
-    )
+    headerLeft: <HamburgerMenu navigation={navData.navigation} />
   };
 };
 
@@ -32,5 +23,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
-  }
+  },
+  icon: {}
 });

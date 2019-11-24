@@ -13,7 +13,7 @@ export const CustomDrawerContentComponent = props => {
         <View style={styles.header}>
           <Logo width={150} height={150} style={styles.logo} />
         </View>
-        <View style={styles.body}>
+        <View>
           <DrawerItems {...props} />
         </View>
       </ScrollView>
@@ -28,10 +28,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 12
   },
-  body: {},
   container: {
     flex: 1,
-    justifyContent: "flex-start"
+    justifyContent: "flex-start",
+
+    backgroundColor: colors.dark
   },
   logo: {
     alignSelf: "center"

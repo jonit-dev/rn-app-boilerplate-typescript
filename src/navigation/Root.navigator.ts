@@ -10,21 +10,22 @@ import { ProfileStackNavigator } from './stackNavigators/ProfileStackNavigator';
 
 const WIDTH = Dimensions.get("window").width;
 
-const MainDrawerNavigator = createDrawerNavigator(
+const RootNavigator = createDrawerNavigator(
   {
-    Main: MainStackNavigator,
+    Dashboard: {
+      screen: MainStackNavigator
+    },
     Profile: {
-      screen: ProfileStackNavigator,
-      navigationOptions: {
-        drawerLabel: "Profile"
-      }
+      screen: ProfileStackNavigator
     }
   },
   {
     drawerWidth: WIDTH * 0.83,
     contentComponent: CustomDrawerContentComponent,
     contentOptions: {
-      activeTintColor: colors.accent,
+      activeTintColor: colors.primary,
+      inactiveTintColor: colors.white,
+      // activeBackgroundColor: colors.lightGreen,
       labelStyle: {
         fontFamily: defaultFont
       }
@@ -33,4 +34,4 @@ const MainDrawerNavigator = createDrawerNavigator(
 );
 
 // tslint:disable-next-line: no-default-export
-export default createAppContainer(MainDrawerNavigator);
+export default createAppContainer(RootNavigator);
