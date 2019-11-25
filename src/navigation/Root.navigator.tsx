@@ -2,7 +2,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
 import { InitialScreen } from '../screens/Initial.screen';
 import { AuthStackNavigator } from './navigators/AuthNavigator';
-import { DashboardDrawerNavigator } from './navigators/drawerNavigator/DashboardDrawerNavigator';
+import { AppDrawerNavigator } from './navigators/drawerNavigator/AppDrawerNavigator';
 
 // tslint:disable-next-line: no-default-export
 export default createAppContainer(
@@ -11,6 +11,6 @@ export default createAppContainer(
       screen: InitialScreen
     },
     Auth: AuthStackNavigator,
-    App: DashboardDrawerNavigator
+    App: AppDrawerNavigator
   })
 );

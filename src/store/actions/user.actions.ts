@@ -3,7 +3,8 @@ import { NavigationActions } from 'react-navigation';
 
 import { APIHelper } from '../../helpers/APIHelper';
 import { IRequestDefaultError, RequestTypes } from '../../typescript/Requests.types';
-import { USER_LOGIN } from '../reducers/user.reducer';
+import { persistor } from '../persist.store';
+import { USER_LOGIN, USER_LOGOUT } from '../reducers/user.reducer';
 import { showMessage } from './ui.actions';
 
 export interface ICredentials {
@@ -53,6 +54,21 @@ export const userLogin = (credentials: ICredentials, navigation) => async (
   } catch (error) {
     console.error(error);
   }
+};
+
+export const userLogout = navigation => async dispatch => {
+  console.log("Logging out user");
+
+  persistor.purge();
+
+  navigation.navigate(
+    NavigationActions.navigate({
+      routeName: "Auth",
+      action: NavigationActions.navigate({ routeName: "LoginScreen" })
+    })
+  );
+
+  dispatch({ type: USER_LOGOUT });
 };
 
 export const userRegister = (

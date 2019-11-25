@@ -1,21 +1,33 @@
+import { MaterialIcons } from '@expo/vector-icons';
+import React from 'react';
 import { Dimensions } from 'react-native';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import { colors } from '../../../constants/UI/Colors.constant';
 import { defaultFont } from '../../../constants/UI/Typography.constant';
-import { DashboardScreen } from '../../../screens/Dashboard.screen';
-import { ProfileScreen } from '../../../screens/user/Profile.screen';
+import { ProfileScreen } from '../../../screens/Dashboard/Profile.screen';
+import { DashboardBottomTabNavigator } from '../bottomTabNavigator/DashboardBottomTabNavigator';
 import { CustomDrawerContentComponent } from './CustomDrawerContentComponent';
 
 const WIDTH = Dimensions.get("window").width;
 
-export const DashboardDrawerNavigator = createDrawerNavigator(
+export const AppDrawerNavigator = createDrawerNavigator(
   {
     Dashboard: {
-      screen: DashboardScreen
+      screen: DashboardBottomTabNavigator,
+      navigationOptions: {
+        drawerIcon: () => (
+          <MaterialIcons name="account-circle" size={24} color={colors.white} />
+        )
+      }
     },
     Profile: {
-      screen: ProfileScreen
+      screen: ProfileScreen,
+      navigationOptions: {
+        drawerIcon: () => (
+          <MaterialIcons name="assignment" size={24} color={colors.white} />
+        )
+      }
     }
   },
   {

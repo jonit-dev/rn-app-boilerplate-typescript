@@ -1,11 +1,14 @@
-import { MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
+import { useDispatch } from 'react-redux';
 
+import { BlockButton } from '../../components/form/BlockButton';
 import { DefaultScreen } from '../../components/navigator/DefaultScreen';
-import { colors } from '../../constants/UI/Colors.constant';
+import { userLogout } from '../../store/actions/user.actions';
 
 export const ProfileScreen = props => {
+  const dispatch = useDispatch();
+
   return (
     <DefaultScreen
       title="Profile"
@@ -13,22 +16,17 @@ export const ProfileScreen = props => {
       navigation={props.navigation}
     >
       <Text>Profile</Text>
+      <BlockButton
+        text="Logout"
+        onPress={() => dispatch(userLogout(props.navigation))}
+      />
     </DefaultScreen>
   );
-};
-
-ProfileScreen.navigationOptions = navData => {
-  return {
-    drawerIcon: (
-      <MaterialIcons color={colors.white} size={24} name="art-track" />
-    )
-  };
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: "center"
   }
 });
