@@ -1,21 +1,24 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
+import { DefaultScreen } from '../components/navigator/DefaultScreen';
 import { colors } from '../constants/UI/Colors.constant';
-import { HamburgerMenu } from '../navigation/HamburgerMenu';
 
 export const DashboardScreen = props => {
   return (
-    <View style={styles.container}>
-      <Text>Dashboard Screen</Text>
-    </View>
+    <DefaultScreen
+      title="Dashboard"
+      style={styles.container}
+      navigation={props.navigation}
+    >
+      <Text>Dashboard!</Text>
+    </DefaultScreen>
   );
 };
 
 DashboardScreen.navigationOptions = navData => {
   return {
-    headerLeft: <HamburgerMenu navigation={navData.navigation} />,
     drawerIcon: (
       <MaterialIcons color={colors.white} size={24} name="account-circle" />
     )

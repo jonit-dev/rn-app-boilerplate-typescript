@@ -3,19 +3,9 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { defaultStackNavigationOptions } from '../../constants/Navigator.constants';
 import { LoginScreen } from '../../screens/account/Login.screen';
 import { RegisterScreen } from '../../screens/account/Register.screen';
-import { DashboardScreen } from '../../screens/Dashboard.screen';
-import { InitialScreen } from '../../screens/Initial.screen';
 
-export const MainStackNavigator = createStackNavigator(
+export const AuthStackNavigator = createStackNavigator(
   {
-    InitialScreen: {
-      screen: InitialScreen
-    },
-
-    DashboardScreen: {
-      screen: DashboardScreen
-    },
-
     LoginScreen: {
       screen: LoginScreen,
       navigationOptions: {

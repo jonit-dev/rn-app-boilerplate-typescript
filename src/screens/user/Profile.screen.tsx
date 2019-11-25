@@ -1,20 +1,27 @@
+import { MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
-import { HamburgerMenu } from '../../navigation/HamburgerMenu';
+import { DefaultScreen } from '../../components/navigator/DefaultScreen';
+import { colors } from '../../constants/UI/Colors.constant';
 
 export const ProfileScreen = props => {
   return (
-    <View style={styles.container}>
-      <Text>User profile</Text>
-    </View>
+    <DefaultScreen
+      title="Profile"
+      style={styles.container}
+      navigation={props.navigation}
+    >
+      <Text>Profile</Text>
+    </DefaultScreen>
   );
 };
 
 ProfileScreen.navigationOptions = navData => {
   return {
-    headerTitle: "Profile",
-    headerLeft: <HamburgerMenu navigation={navData.navigation} />
+    drawerIcon: (
+      <MaterialIcons color={colors.white} size={24} name="art-track" />
+    )
   };
 };
 
@@ -23,6 +30,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
-  },
-  icon: {}
+  }
 });

@@ -1,7 +1,7 @@
 import { Alert } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 
 import { APIHelper } from '../../helpers/APIHelper';
-import { NavigatorHelper } from '../../helpers/NavigatorHelper';
 import { IRequestDefaultError, RequestTypes } from '../../typescript/Requests.types';
 import { USER_LOGIN } from '../reducers/user.reducer';
 import { showMessage } from './ui.actions';
@@ -40,7 +40,12 @@ export const userLogin = (credentials: ICredentials, navigation) => async (
         return;
       }
       if (response.data.token) {
-        NavigatorHelper.resetAndNavigate(navigation, "DashboardScreen");
+        navigation.navigate(
+          NavigationActions.navigate({
+            routeName: "App",
+            action: NavigationActions.navigate({ routeName: "DashboardScreen" })
+          })
+        );
       }
 
       dispatch({ type: USER_LOGIN, payload: response.data });

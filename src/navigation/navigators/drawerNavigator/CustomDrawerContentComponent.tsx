@@ -3,8 +3,8 @@ import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { DrawerItems } from 'react-navigation-drawer';
 
-import Logo from '../../assets/images/logo.svg';
-import { colors } from '../../constants/UI/Colors.constant';
+import Logo from '../../../assets/images/logo.svg';
+import { colors } from '../../../constants/UI/Colors.constant';
 
 export const CustomDrawerContentComponent = props => {
   return (
