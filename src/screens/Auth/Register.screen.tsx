@@ -23,24 +23,26 @@ export const RegisterScreen = () => {
     <Form style={styles.container}>
       <Logo width={100} height={100} style={styles.logo} />
 
-      <H2 style={styles.h2}>Create your Account</H2>
+      <H2 style={styles.h2}>
+        {TS.string("account", "registerCreateYourAccount")}
+      </H2>
 
       <View style={styles.main}>
         <TextInput
           style={styles.input}
-          label="Name"
+          label={TS.string("account", "registerInputName")}
           value={name}
           onChangeText={(text: string) => setName(text)}
         />
         <TextInput
           style={styles.input}
-          label="Email"
+          label={TS.string("account", "registerInputEmail")}
           value={email}
           onChangeText={(text: string) => setEmail(text)}
         />
         <TextInput
           style={styles.input}
-          label="Password"
+          label={TS.string("account", "registerInputPassword")}
           value={password}
           secureTextEntry={true}
           onChangeText={(text: string) => setPassword(text)}
@@ -48,7 +50,7 @@ export const RegisterScreen = () => {
 
         <TextInput
           style={styles.input}
-          label="Password Confirmation"
+          label={TS.string("account", "registerInputPasswordConfirmation")}
           value={passwordConfirmation}
           secureTextEntry={true}
           onChangeText={(text: string) => setPasswordConfirmation(text)}

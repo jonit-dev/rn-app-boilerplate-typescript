@@ -3,7 +3,9 @@ import axios from 'axios';
 import { Alert, AsyncStorage } from 'react-native';
 
 import { appEnv } from '../constants/Env.constant';
+import { persistor } from '../store/persist.store';
 import { TS } from './LanguageHelper';
+import NavigationHelper from './NavigationHelper';
 
 export class APIHelper {
   public static request = async (
@@ -69,7 +71,21 @@ export class APIHelper {
             : { ...GUEST_HEADERS, ...customHeaders }
         });
 
+        if (response.status === 401) {
+          if (response.data.message.includes("User not authenticated")) {
+            // clear current redux store
+            persistor.purge();
+
+            Alert.alert(
+              TS.string("account", "loginAuthenticationError"),
+              TS.string("account", "loginUserNotAuthenticated")
+            );
+            NavigationHelper.navigate("LoginScreen", null);
+          }
+        }
+
         clearTimeout(timeoutCallback);
+
         return response;
       }
     } catch (error) {

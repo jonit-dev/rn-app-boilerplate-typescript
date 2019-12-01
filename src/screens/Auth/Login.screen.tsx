@@ -95,12 +95,12 @@ export const LoginScreen = props => {
 
         <View style={styles.registerTextContainer}>
           <Text style={typography.text}>
-            Don't have an account?{" "}
+            {TS.string("account", "loginDontHaveAccount")}{" "}
             <Text
               style={common.link}
               onPress={() => props.navigation.navigate("RegisterScreen")}
             >
-              Signup here
+              {TS.string("account", "loginSignupHere")}
             </Text>
           </Text>
         </View>

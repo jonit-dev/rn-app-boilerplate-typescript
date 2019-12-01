@@ -9,6 +9,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { GlobalStylesHelper } from './src/constants/GlobalStylesHelper';
 import { fonts } from './src/constants/UI/Fonts.constant';
 import { theme } from './src/constants/UI/Theme.constant';
+import NavigationHelper from './src/helpers/NavigationHelper';
 import RootNavigator from './src/navigation/Root.navigator';
 import { persistor, store } from './src/store/persist.store';
 
@@ -41,7 +42,11 @@ export default class App extends Component {
         <Provider store={store}>
           <PaperProvider theme={theme}>
             <PersistGate loading={null} persistor={persistor}>
-              <RootNavigator />
+              <RootNavigator
+                ref={navigatorRef =>
+                  NavigationHelper.setTopLevelNavigator(navigatorRef)
+                }
+              />
             </PersistGate>
           </PaperProvider>
         </Provider>
