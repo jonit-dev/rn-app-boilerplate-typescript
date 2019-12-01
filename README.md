@@ -20,6 +20,11 @@ This boilerplate theme is inspired on Waplants Plants UI theme (Free for commerc
 - Typescript
 - TSLint
 
+**Rebranding checklist**
+You should do the following to customize your app to your needs:
+
+1. Edit app.json (especially your app name, slug, and ios and android bundle/package names)
+
 **Technology stack**:
 
 - React Native, Expo

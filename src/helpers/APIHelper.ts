@@ -71,6 +71,7 @@ export class APIHelper {
             : { ...GUEST_HEADERS, ...customHeaders }
         });
 
+        // If user is not authenticated...
         if (response.status === 401) {
           if (response.data.message.includes("User not authenticated")) {
             // clear current redux store

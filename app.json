@@ -35,6 +35,12 @@
         "tsx",
         "svg"
       ]
+    },
+    "ios": {
+      "bundleIdentifier": "com.mycompany.boilerplateapp"
+    },
+    "android": {
+      "package": "com.mycompany.boilerplateapp"
     }
   }
 }
