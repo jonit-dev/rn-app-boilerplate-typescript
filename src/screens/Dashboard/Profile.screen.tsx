@@ -11,6 +11,7 @@ export const ProfileScreen = ({ navigation }) => {
 
   // On screen focus
   const focusListener = navigation.addListener("didFocus", () => {
+    // This is a protected route. User will go back to the login screen if some authentication error occurs
     dispatch(userGetProfileInfo());
   });
 
