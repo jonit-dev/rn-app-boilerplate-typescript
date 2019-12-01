@@ -24,6 +24,11 @@ This boilerplate theme is inspired on Waplants Plants UI theme (Free for commerc
 You should do the following to customize your app to your needs:
 
 1. Edit app.json (especially your app name, slug, and ios and android bundle/package names)
+2. Edit src/constants/Env.constant.ts
+   - Set your environment there and change your urls
+3. Change your app logo and splash screen's image unser src/assets
+4. Customize your UI under src/constants/UI ts files
+5. Customize your translation files under src/languages
 
 **Technology stack**:
 
