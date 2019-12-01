@@ -29,6 +29,9 @@ You should do the following to customize your app to your needs:
 3. Change your app logo and splash screen's image unser src/assets
 4. Customize your UI under src/constants/UI ts files
 5. Customize your translation files under src/languages
+6. Setup your push notifications
+   - Check: https://docs.expo.io/versions/latest/guides/push-notifications/
+   - and also FCM for Android: https://docs.expo.io/versions/latest/guides/using-fcm/
 
 **Technology stack**:
 
