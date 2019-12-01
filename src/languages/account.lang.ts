@@ -29,6 +29,9 @@ export const strings = {
   registerInputPasswordConfirmation: {
     eng: "Password Confirmation"
   },
+  registerSuccess: {
+    eng: "Your new account was created successfully!"
+  },
   loginFailedTitle: {
     eng: "Error"
   },
@@ -41,6 +44,7 @@ export const strings = {
   loginSuccessTitle: {
     eng: "Success!"
   },
+
   loginNoEmail: {
     eng: "Please, insert an e-mail address"
   },

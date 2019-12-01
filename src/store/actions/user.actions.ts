@@ -2,6 +2,7 @@ import { Alert } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
 import { APIHelper } from '../../helpers/APIHelper';
+import { TS } from '../../helpers/LanguageHelper';
 import { IRequestDefaultError, RequestTypes } from '../../typescript/Requests.types';
 import { persistor } from '../persist.store';
 import { USER_LOGIN, USER_LOGOUT, USER_REFRESH_INFO } from '../reducers/user.reducer';
@@ -72,7 +73,8 @@ export const userLogout = navigation => async dispatch => {
 };
 
 export const userRegister = (
-  registerCredentials: IRegisterCredentials
+  registerCredentials: IRegisterCredentials,
+  navigation: any
 ) => async (dispatch: any) => {
   try {
     const response: any = await APIHelper.request(
@@ -85,11 +87,21 @@ export const userRegister = (
     if (response.status === 201) {
       // success
       dispatch({ type: USER_LOGIN, payload: response.data });
-      Alert.alert("Success", "registered!");
+      Alert.alert(
+        TS.string("account", "loginSuccessTitle"),
+        TS.string("account", "registerSuccess")
+      );
+
+      navigation.navigate(
+        NavigationActions.navigate({
+          routeName: "App",
+          action: NavigationActions.navigate({ routeName: "DashboardScreen" })
+        })
+      );
     } else {
       const error: IRequestDefaultError = response.data;
 
-      Alert.alert(error.status, error.message);
+      Alert.alert(TS.string("global", "genericErrorTitle"), error.message);
     }
   } catch (error) {
     console.error(error);

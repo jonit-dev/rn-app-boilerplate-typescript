@@ -11,7 +11,7 @@ import { TS } from '../../helpers/LanguageHelper';
 import { setLoading } from '../../store/actions/ui.actions';
 import { userRegister } from '../../store/actions/user.actions';
 
-export const RegisterScreen = () => {
+export const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -63,12 +63,15 @@ export const RegisterScreen = () => {
           await dispatch(setLoading(true));
 
           await dispatch(
-            userRegister({
-              name,
-              email,
-              password,
-              passwordConfirmation
-            })
+            userRegister(
+              {
+                name,
+                email,
+                password,
+                passwordConfirmation
+              },
+              navigation
+            )
           );
 
           await dispatch(setLoading(false));

@@ -14,5 +14,8 @@ export const strings = {
   },
   genericErrorTitle: {
     eng: "Oops!"
+  },
+  genericSuccessTitle: {
+    eng: "Success!"
   }
 };
