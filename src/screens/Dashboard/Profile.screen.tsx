@@ -1,24 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { BlockButton } from '../../components/form/BlockButton';
 import { DefaultScreen } from '../../components/navigator/DefaultScreen';
-import { userLogout } from '../../store/actions/user.actions';
+import { userGetProfileInfo, userLogout } from '../../store/actions/user.actions';
 
-export const ProfileScreen = props => {
+export const ProfileScreen = ({ navigation }) => {
   const dispatch = useDispatch();
+
+  // On screen focus
+  const focusListener = navigation.addListener("didFocus", () => {
+    dispatch(userGetProfileInfo());
+  });
+
+  // on "componentWillUnmount" hooks version
+  useEffect(() => {
+    return () => {
+      focusListener.remove();
+    };
+  }, []);
 
   return (
     <DefaultScreen
       title="Profile"
       style={styles.container}
-      navigation={props.navigation}
+      navigation={navigation}
     >
-      <Text>Profile</Text>
+      <Text>Profile (Authentication protected screen!)</Text>
       <BlockButton
         text="Logout"
-        onPress={() => dispatch(userLogout(props.navigation))}
+        onPress={() => dispatch(userLogout(navigation))}
       />
     </DefaultScreen>
   );

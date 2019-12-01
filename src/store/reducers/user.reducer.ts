@@ -1,3 +1,5 @@
+import { AsyncStorage } from 'react-native';
+
 const INITIAL_STATE = {
   user: null,
   token: null
@@ -6,7 +8,12 @@ const INITIAL_STATE = {
 // tslint:disable-next-line: no-default-export
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case USER_REFRESH_INFO:
     case USER_LOGIN:
+      // Store token on async storage as well (some classes cannot access redux, so we'll have to use async storage to store the token)
+
+      AsyncStorage.setItem("token", action.payload.token);
+
       return {
         ...state,
         user: action.payload.user,
@@ -23,3 +30,4 @@ export default (state = INITIAL_STATE, action) => {
 
 export const USER_LOGIN = "USER_LOGIN";
 export const USER_LOGOUT = "USER_LOGOUT";
+export const USER_REFRESH_INFO = "USER_REFRESH_INFO";

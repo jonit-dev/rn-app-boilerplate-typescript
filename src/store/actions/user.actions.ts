@@ -4,7 +4,7 @@ import { NavigationActions } from 'react-navigation';
 import { APIHelper } from '../../helpers/APIHelper';
 import { IRequestDefaultError, RequestTypes } from '../../typescript/Requests.types';
 import { persistor } from '../persist.store';
-import { USER_LOGIN, USER_LOGOUT } from '../reducers/user.reducer';
+import { USER_LOGIN, USER_LOGOUT, USER_REFRESH_INFO } from '../reducers/user.reducer';
 import { showMessage } from './ui.actions';
 
 export interface ICredentials {
@@ -94,4 +94,26 @@ export const userRegister = (
   } catch (error) {
     console.error(error);
   }
+};
+
+export const userGetProfileInfo = () => async dispatch => {
+  console.log("getting profile info...");
+  const response = await APIHelper.request(
+    RequestTypes.GET,
+    "/users/profile",
+    {},
+    true
+  );
+
+  if (response) {
+    console.log("got profile info!");
+    console.log(response.data);
+    dispatch({
+      type: USER_REFRESH_INFO,
+      payload: {
+        user: response.data.user
+      }
+    });
+  }
+  return false;
 };

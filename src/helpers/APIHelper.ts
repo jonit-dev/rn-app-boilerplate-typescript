@@ -1,18 +1,9 @@
 import NetInfo from '@react-native-community/netinfo';
 import axios from 'axios';
-import { Alert } from 'react-native';
+import { Alert, AsyncStorage } from 'react-native';
 
 import { appEnv } from '../constants/Env.constant';
 import { TS } from './LanguageHelper';
-
-const AUTH_HEADERS = {
-  Authorization: "Bearer TOKENHERE",
-  "Content-type": "application/json"
-};
-
-const GUEST_HEADERS = {
-  "Content-type": "application/json"
-};
 
 export class APIHelper {
   public static request = async (
@@ -24,7 +15,21 @@ export class APIHelper {
     onTimeoutCallback = () => null,
     timeout = 5000
   ) => {
+    let AUTH_HEADERS;
     try {
+      if (useAuth) {
+        const token = await AsyncStorage.getItem("token");
+
+        AUTH_HEADERS = {
+          Authorization: `Bearer ${token}`,
+          "Content-type": "application/json"
+        };
+      }
+
+      const GUEST_HEADERS = {
+        "Content-type": "application/json"
+      };
+
       const netInfo = await NetInfo.fetch();
 
       if (!netInfo.isConnected) {
