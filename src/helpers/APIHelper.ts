@@ -57,6 +57,8 @@ export class APIHelper {
           }
         }, timeout);
 
+        console.log(`Request to: ${appEnv.serverUrl}${url}`);
+
         // execute request
         const response = await axios({
           method,
