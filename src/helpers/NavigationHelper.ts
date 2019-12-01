@@ -17,6 +17,7 @@ function navigate(routeName, params) {
 
 // add other navigation functions that you need and export them
 
+// tslint:disable-next-line: no-default-export
 export default {
   navigate,
   setTopLevelNavigator
