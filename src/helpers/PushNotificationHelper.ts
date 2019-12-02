@@ -1,7 +1,25 @@
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
 
+import { RequestTypes } from '../typescript/Requests.types';
+import { APIHelper } from './APIHelper';
+
 export class PushNotificationHelper {
+  public static async checkAndRefreshPushToken(savedPushToken: string) {
+    console.log("Trying to refresh user's push notification...");
+    const devicePushToken = await PushNotificationHelper.getPushToken();
+
+    // if user does not have a push token currently registered, lets try to register it.
+    if (!savedPushToken) {
+      await PushNotificationHelper.storePushToken(devicePushToken);
+    } else if (devicePushToken !== savedPushToken) {
+      // if current device's push token is not in sync with what we have saved in database, let's refresh it.
+      await PushNotificationHelper.storePushToken(devicePushToken);
+    } else {
+      console.log(`User's push notification is in sync with database`);
+    }
+  }
+
   public static async getPushToken() {
     const { status: existingStatus } = await Permissions.getAsync(
       Permissions.NOTIFICATIONS
@@ -26,5 +44,24 @@ export class PushNotificationHelper {
     const pushToken = await Notifications.getExpoPushTokenAsync();
 
     return pushToken;
+  }
+
+  public static async storePushToken(devicePushToken) {
+    const response = await APIHelper.request(
+      RequestTypes.POST,
+      "/users/push-notification",
+      {
+        pushToken: devicePushToken
+      },
+      true
+    );
+
+    if (response) {
+      if (response.status === 200) {
+        console.log("Push notification token saved successfully.");
+      } else {
+        console.log(response.data.message);
+      }
+    }
   }
 }

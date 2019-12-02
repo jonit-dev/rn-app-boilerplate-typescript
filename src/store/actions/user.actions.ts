@@ -3,6 +3,7 @@ import { NavigationActions } from 'react-navigation';
 
 import { APIHelper } from '../../helpers/APIHelper';
 import { TS } from '../../helpers/LanguageHelper';
+import { PushNotificationHelper } from '../../helpers/PushNotificationHelper';
 import { IRequestDefaultError, RequestTypes } from '../../typescript/Requests.types';
 import { persistor } from '../persist.store';
 import { USER_LOGIN, USER_LOGOUT, USER_REFRESH_INFO } from '../reducers/user.reducer';
@@ -19,6 +20,35 @@ export interface IRegisterCredentials {
   password: string;
   passwordConfirmation: string;
 }
+
+export const userRefreshPushToken = () => async (dispatch, getState) => {
+  // Refresh user's token
+  const user = getState().userReducer.user;
+
+  const savedPushToken = user.pushToken;
+
+  console.log("User login... refreshing token!");
+  console.log(savedPushToken);
+  console.log(user);
+
+  const devicePushToken = await PushNotificationHelper.getPushToken();
+
+  if (!savedPushToken) {
+    console.log("User do not have a registered push token. Saving one...");
+    PushNotificationHelper.storePushToken(devicePushToken);
+    return;
+  }
+
+  // it means that we have an outdated saved push token in our back-end. So let's update it!
+  if (devicePushToken !== savedPushToken) {
+    // it means that we have an outdated saved push token in our back-end. So let's update it!
+    PushNotificationHelper.storePushToken(devicePushToken);
+  } else {
+    console.log(
+      "User push notification token is already updated. Skipping saving to server."
+    );
+  }
+};
 
 export const userLogin = (credentials: ICredentials, navigation) => async (
   dispatch: any
@@ -42,6 +72,13 @@ export const userLogin = (credentials: ICredentials, navigation) => async (
         return;
       }
       if (response.data.token) {
+        // refresh push token
+
+        const user = response.data.user;
+
+        // Verify user's current push token and tries to refresh it if needed...
+        PushNotificationHelper.checkAndRefreshPushToken(user.pushToken);
+
         navigation.navigate(
           NavigationActions.navigate({
             routeName: "App",
@@ -51,6 +88,8 @@ export const userLogin = (credentials: ICredentials, navigation) => async (
       }
 
       dispatch({ type: USER_LOGIN, payload: response.data });
+
+      // dispatch(userRefreshPushToken());
     }
   } catch (error) {
     console.error(error);
@@ -118,14 +157,19 @@ export const userGetProfileInfo = () => async dispatch => {
   );
 
   if (response) {
-    console.log("got profile info!");
-    console.log(response.data);
-    dispatch({
-      type: USER_REFRESH_INFO,
-      payload: {
-        user: response.data.user
-      }
-    });
+    if (response.data.user) {
+      // Refresh push notifications
+      PushNotificationHelper.checkAndRefreshPushToken(
+        response.data.user.pushToken
+      );
+
+      console.log("User profile info refreshed!");
+      dispatch({
+        type: USER_REFRESH_INFO,
+        payload: {
+          user: response.data.user
+        }
+      });
+    }
   }
-  return false;
 };

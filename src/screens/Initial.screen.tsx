@@ -1,66 +1,24 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { APIHelper } from '../helpers/APIHelper';
-import { PushNotificationHelper } from '../helpers/PushNotificationHelper';
-import { RequestTypes } from '../typescript/Requests.types';
+import { userGetProfileInfo } from '../store/actions/user.actions';
 
 export const InitialScreen = props => {
   // Check user token
 
   const userToken = useSelector<any, any>(state => state.userReducer.token);
-  const user = useSelector<any, any>(state => state.userReducer.user);
 
-  const savePushToken = async devicePushToken => {
-    const response = await APIHelper.request(
-      RequestTypes.POST,
-      "/users/push-notification",
-      {
-        pushToken: devicePushToken
-      },
-      true
-    );
+  if (!userToken) {
+    props.navigation.navigate("Auth"); // If user has no token, redirect to login
+  }
 
-    if (response) {
-      if (response.status === 200) {
-        console.log("Push notification saved successfully.");
-      } else {
-        console.log(response.data.message);
-      }
-    }
-  };
+  const dispatch = useDispatch();
+  // If user has a token, tries to refresh profile info. If its invalid, it will redirect the user to Auth. If not, he'll be redirected to Auth
+  // Check APIHelper line 86 to see how its made.
 
-  useEffect(() => {
-    async function pushInit() {
-      const savedPushToken = user.pushToken;
+  dispatch(userGetProfileInfo());
 
-      console.log("Refreshing registered token");
-      const devicePushToken = await PushNotificationHelper.getPushToken();
-      console.log(devicePushToken);
-
-      // check if our current push token is different from our saved one
-
-      if (!savedPushToken) {
-        savePushToken(devicePushToken);
-        return;
-      }
-
-      if (devicePushToken !== savedPushToken) {
-        // it means that we have an outdated saved push token in our back-end. So let's update it!
-        savePushToken(devicePushToken);
-      } else {
-        console.log(
-          "User push notification token is already updated. Skipping saving to server."
-        );
-      }
-    }
-    if (user) {
-      // if there's an user logged in...
-      pushInit();
-    }
-  }, []);
-
-  props.navigation.navigate(userToken ? "App" : "Auth");
+  props.navigation.navigate("App");
 
   return null;
 };

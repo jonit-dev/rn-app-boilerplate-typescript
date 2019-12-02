@@ -47,7 +47,7 @@ export class APIHelper {
 
         const timeoutCallback = setTimeout(() => {
           abort.cancel(`Timeout of ${timeout}ms.`);
-          if (onTimeoutCallback) {
+          if (onTimeoutCallback() !== null) {
             onTimeoutCallback();
           } else {
             Alert.alert(
@@ -74,17 +74,17 @@ export class APIHelper {
         });
 
         // If user is not authenticated...
+        // 401 = Unauthorized status
         if (response.status === 401) {
-          if (response.data.message.includes("User not authenticated")) {
-            // clear current redux store
-            persistor.purge();
+          console.log("User is not authenticated. Redirecting to Login...");
+          // clear current redux store
+          persistor.purge();
 
-            Alert.alert(
-              TS.string("account", "loginAuthenticationError"),
-              TS.string("account", "loginUserNotAuthenticated")
-            );
-            NavigationHelper.navigate("LoginScreen", null);
-          }
+          Alert.alert(
+            TS.string("account", "loginAuthenticationError"),
+            TS.string("account", "loginUserNotAuthenticated")
+          );
+          NavigationHelper.navigate("Auth", null);
         }
 
         clearTimeout(timeoutCallback);
