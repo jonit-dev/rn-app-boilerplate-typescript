@@ -169,8 +169,8 @@ export const userGetProfileInfo = () => async dispatch => {
       dispatch({
         type: USER_REFRESH_INFO,
         payload: {
-          user: response.data.user
-          // token: response.data.token
+          user: response.data.user,
+          token: response.data.token
         }
       });
     }
