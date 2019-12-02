@@ -57,6 +57,12 @@ export const strings = {
   loginSignupHere: {
     eng: "Signup here"
   },
+  changePasswordLoginText: {
+    eng: "Change password"
+  },
+  forgotPasswordLoginText: {
+    eng: "Forgot Password?"
+  },
   changePasswordTitle: {
     eng: "Change your Password"
   },

@@ -8,12 +8,14 @@ import { BlockButton } from '../../components/form/BlockButton';
 import { Form } from '../../components/form/Form';
 import { H2 } from '../../components/form/H2';
 import { TS } from '../../helpers/LanguageHelper';
+import { UserHelper } from '../../helpers/UserHelper';
 import { setLoading } from '../../store/actions/ui.actions';
 
 export const ChangePasswordScreen = ({ navigation }) => {
+  const [email, setEmail] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [repeatNewPassword, setRepeatNewPassoword] = useState("");
+  const [repeatNewPassword, setRepeatNewPassword] = useState("");
   const dispatch = useDispatch();
 
   return (
@@ -25,21 +27,30 @@ export const ChangePasswordScreen = ({ navigation }) => {
       <View style={styles.main}>
         <TextInput
           style={styles.input}
+          label={TS.string("account", "emailInput")}
+          value={email}
+          onChangeText={(text: string) => setEmail(text)}
+        />
+        <TextInput
+          style={styles.input}
+          secureTextEntry={true}
           label={TS.string("account", "changePasswordCurrentPasswordInput")}
           value={currentPassword}
           onChangeText={(text: string) => setCurrentPassword(text)}
         />
         <TextInput
           style={styles.input}
+          secureTextEntry={true}
           label={TS.string("account", "changePasswordNewPasswordInput")}
           value={newPassword}
           onChangeText={(text: string) => setNewPassword(text)}
         />
         <TextInput
           style={styles.input}
+          secureTextEntry={true}
           label={TS.string("account", "changePasswordRepeatNewPasswordInput")}
           value={repeatNewPassword}
-          onChangeText={(text: string) => setRepeatNewPassoword(text)}
+          onChangeText={(text: string) => setRepeatNewPassword(text)}
         />
       </View>
 
@@ -48,7 +59,12 @@ export const ChangePasswordScreen = ({ navigation }) => {
         onPress={async () => {
           await dispatch(setLoading(true));
 
-          // action
+          await UserHelper.changeUserPassword({
+            email,
+            currentPassword,
+            newPassword,
+            repeatNewPassword
+          });
 
           await dispatch(setLoading(false));
         }}

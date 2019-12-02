@@ -8,7 +8,6 @@ export const typography = {
     fontFamily: "muliRegular"
   },
   textBold: {
-    color: colors.dark,
     fontFamily: "muliBold"
   },
   p: {

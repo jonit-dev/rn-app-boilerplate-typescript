@@ -21,35 +21,6 @@ export interface IRegisterCredentials {
   passwordConfirmation: string;
 }
 
-export const userRefreshPushToken = () => async (dispatch, getState) => {
-  // Refresh user's token
-  const user = getState().userReducer.user;
-
-  const savedPushToken = user.pushToken;
-
-  console.log("User login... refreshing token!");
-  console.log(savedPushToken);
-  console.log(user);
-
-  const devicePushToken = await PushNotificationHelper.getPushToken();
-
-  if (!savedPushToken) {
-    console.log("User do not have a registered push token. Saving one...");
-    PushNotificationHelper.storePushToken(devicePushToken);
-    return;
-  }
-
-  // it means that we have an outdated saved push token in our back-end. So let's update it!
-  if (devicePushToken !== savedPushToken) {
-    // it means that we have an outdated saved push token in our back-end. So let's update it!
-    PushNotificationHelper.storePushToken(devicePushToken);
-  } else {
-    console.log(
-      "User push notification token is already updated. Skipping saving to server."
-    );
-  }
-};
-
 export const userLogin = (credentials: ICredentials, navigation) => async (
   dispatch: any
 ) => {
@@ -88,8 +59,6 @@ export const userLogin = (credentials: ICredentials, navigation) => async (
       }
 
       dispatch({ type: USER_LOGIN, payload: response.data });
-
-      // dispatch(userRefreshPushToken());
     }
   } catch (error) {
     console.error(error);
