@@ -5,6 +5,7 @@ import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import { colors } from '../../../constants/UI/Colors.constant';
 import { defaultFont } from '../../../constants/UI/Typography.constant';
+import { MyAccountScreen } from '../../../screens/Dashboard/MyAccount.screen';
 import { ProfileScreen } from '../../../screens/Dashboard/Profile.screen';
 import { DashboardBottomTabNavigator } from '../bottomTabNavigator/DashboardBottomTabNavigator';
 import { CustomDrawerContentComponent } from './CustomDrawerContentComponent';
@@ -17,7 +18,7 @@ export const AppDrawerNavigator = createDrawerNavigator(
       screen: DashboardBottomTabNavigator,
       navigationOptions: {
         drawerIcon: () => (
-          <MaterialIcons name="account-circle" size={24} color={colors.white} />
+          <MaterialIcons name="dashboard" size={24} color={colors.white} />
         )
       }
     },
@@ -26,6 +27,14 @@ export const AppDrawerNavigator = createDrawerNavigator(
       navigationOptions: {
         drawerIcon: () => (
           <MaterialIcons name="assignment" size={24} color={colors.white} />
+        )
+      }
+    },
+    "My Account": {
+      screen: MyAccountScreen,
+      navigationOptions: {
+        drawerIcon: () => (
+          <MaterialIcons name="account-circle" size={24} color={colors.white} />
         )
       }
     }
