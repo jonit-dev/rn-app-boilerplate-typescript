@@ -4,7 +4,7 @@
 
 **UI Kit**
 
-This boilerplate theme is inspired on Waplants Plants UI theme (Free for commercial use)
+This boilerplate theme is inspired on [Waplants Plants UI theme](https://www.uistore.design/items/waplant-plants-mobile-apps-free-ui-kit/) (Free for commercial use)
 
 **Server-side**
 
@@ -36,7 +36,7 @@ You should do the following to customize your app to your needs:
 **Technology stack**:
 
 - React Native, Expo
-- Redux, Redux-tjunk
+- Redux, Redux-thunk
 - Typescript, TSLint
 - Axios
 
