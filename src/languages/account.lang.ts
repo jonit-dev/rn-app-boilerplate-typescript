@@ -56,5 +56,20 @@ export const strings = {
   },
   loginSignupHere: {
     eng: "Signup here"
+  },
+  changePasswordTitle: {
+    eng: "Change your Password"
+  },
+  changePasswordButton: {
+    eng: "Change"
+  },
+  changePasswordCurrentPasswordInput: {
+    eng: "Current Password"
+  },
+  changePasswordNewPasswordInput: {
+    eng: "New Password"
+  },
+  changePasswordRepeatNewPasswordInput: {
+    eng: "Repeat Your New Password"
   }
 };

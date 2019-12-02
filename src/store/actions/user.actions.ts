@@ -1,4 +1,4 @@
-import { Alert } from 'react-native';
+import { Alert, AsyncStorage } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
 import { APIHelper } from '../../helpers/APIHelper';
@@ -99,7 +99,11 @@ export const userLogin = (credentials: ICredentials, navigation) => async (
 export const userLogout = navigation => async dispatch => {
   console.log("Logging out user");
 
-  persistor.purge();
+  await persistor.purge();
+
+  await AsyncStorage.clear();
+
+  await dispatch({ type: USER_LOGOUT });
 
   navigation.navigate(
     NavigationActions.navigate({
@@ -107,8 +111,6 @@ export const userLogout = navigation => async dispatch => {
       action: NavigationActions.navigate({ routeName: "LoginScreen" })
     })
   );
-
-  dispatch({ type: USER_LOGOUT });
 };
 
 export const userRegister = (
@@ -168,6 +170,7 @@ export const userGetProfileInfo = () => async dispatch => {
         type: USER_REFRESH_INFO,
         payload: {
           user: response.data.user
+          // token: response.data.token
         }
       });
     }

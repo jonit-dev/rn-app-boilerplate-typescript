@@ -54,6 +54,9 @@ export const LoginScreen = props => {
           iconPackage={IconPackageTypes.FontAwesome}
           onChange={text => setPassword(text)}
         />
+
+        <View style={styles.passwordManagementContainer} />
+
         <BlockButton
           text={TS.string("account", "loginButtonText")}
           onPress={async () => {
@@ -135,5 +138,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
 
     marginTop: 22
+  },
+  passwordManagementContainer: {
+    borderWidth: 1,
+    borderColor: "hotpink",
+    minHeight: 100
   }
 });

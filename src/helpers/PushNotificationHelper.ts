@@ -21,32 +21,46 @@ export class PushNotificationHelper {
   }
 
   public static async getPushToken() {
-    const { status: existingStatus } = await Permissions.getAsync(
-      Permissions.NOTIFICATIONS
-    );
-    let finalStatus = existingStatus;
+    try {
+      const { status: existingStatus } = await Permissions.getAsync(
+        Permissions.NOTIFICATIONS
+      );
+      let finalStatus = existingStatus;
 
-    // only ask if permissions have not already been determined, because
-    // iOS won't necessarily prompt the user a second time.
-    if (existingStatus !== "granted") {
-      // Android remote notification permissions are granted during the app
-      // install, so this will only ask on iOS
-      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-      finalStatus = status;
+      // only ask if permissions have not already been determined, because
+      // iOS won't necessarily prompt the user a second time.
+      if (existingStatus !== "granted") {
+        // Android remote notification permissions are granted during the app
+        // install, so this will only ask on iOS
+        const { status } = await Permissions.askAsync(
+          Permissions.NOTIFICATIONS
+        );
+        finalStatus = status;
+      }
+
+      // Stop here if the user did not grant permissions
+      if (finalStatus !== "granted") {
+        return false;
+      }
+
+      // Get the token that uniquely identifies this device
+      const pushToken = await Notifications.getExpoPushTokenAsync();
+
+      return pushToken;
+    } catch (error) {
+      console.log(
+        `PUSH NOTIFICATION: Error while trying to get device's push notification`
+      );
+      console.log(error.message);
     }
-
-    // Stop here if the user did not grant permissions
-    if (finalStatus !== "granted") {
-      return false;
-    }
-
-    // Get the token that uniquely identifies this device
-    const pushToken = await Notifications.getExpoPushTokenAsync();
-
-    return pushToken;
   }
 
   public static async storePushToken(devicePushToken) {
+    if (!devicePushToken) {
+      console.log(`Device's push token not available to store on database!`);
+      return false;
+    }
+
     const response = await APIHelper.request(
       RequestTypes.POST,
       "/users/push-notification",

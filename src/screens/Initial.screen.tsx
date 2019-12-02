@@ -5,10 +5,12 @@ import { userGetProfileInfo } from '../store/actions/user.actions';
 export const InitialScreen = props => {
   // Check user token
 
+  const user = useSelector<any, any>(state => state.userReducer.user);
   const userToken = useSelector<any, any>(state => state.userReducer.token);
 
-  if (!userToken) {
+  if (!userToken || !user) {
     props.navigation.navigate("Auth"); // If user has no token, redirect to login
+    return null;
   }
 
   const dispatch = useDispatch();

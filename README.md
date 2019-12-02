@@ -21,6 +21,7 @@ This boilerplate theme is inspired on [Waplants Plants UI theme](https://www.uis
 - TSLint
 
 **Rebranding checklist**
+
 You should do the following to customize your app to your needs:
 
 1. Edit app.json (especially your app name, slug, and ios and android bundle/package names)
@@ -32,6 +33,12 @@ You should do the following to customize your app to your needs:
 6. Setup your push notifications
    - Check: https://docs.expo.io/versions/latest/guides/push-notifications/
    - and also FCM for Android: https://docs.expo.io/versions/latest/guides/using-fcm/
+
+**Common issues & How to solve**
+
+- Could'nt get GCM token for device:
+  - Follow this approach: https://stackoverflow.com/questions/53946199/how-to-fix-expo-push-notifications-error-couldnt-get-gcm-token-for-device?rq=1
+  - TDLR: Disconnect the device from USB, stop expo, login to expo, connect and try again.
 
 **Technology stack**:
 

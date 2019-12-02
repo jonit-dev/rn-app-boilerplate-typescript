@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { BlockButton } from '../../components/form/BlockButton';
 import { DefaultScreen } from '../../components/navigator/DefaultScreen';
+import { setLoading } from '../../store/actions/ui.actions';
 import { userGetProfileInfo, userLogout } from '../../store/actions/user.actions';
 
 export const ProfileScreen = ({ navigation }) => {
@@ -31,7 +32,13 @@ export const ProfileScreen = ({ navigation }) => {
       <Text>Profile (Authentication protected screen!)</Text>
       <BlockButton
         text="Logout"
-        onPress={() => dispatch(userLogout(navigation))}
+        onPress={() => {
+          dispatch(setLoading(true));
+
+          dispatch(userLogout(navigation));
+
+          dispatch(setLoading(false));
+        }}
       />
     </DefaultScreen>
   );
