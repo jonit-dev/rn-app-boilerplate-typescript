@@ -17,5 +17,14 @@ export const strings = {
   },
   genericSuccessTitle: {
     eng: "Success!"
+  },
+  genericConfirmationTitle: {
+    eng: "Confirmation"
+  },
+  genericTextYes: {
+    eng: "Yes"
+  },
+  genericTextNo: {
+    eng: "No"
   }
 };

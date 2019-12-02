@@ -77,5 +77,12 @@ export const strings = {
   },
   changePasswordRepeatNewPasswordInput: {
     eng: "Repeat Your New Password"
+  },
+  accountDeletionConfirmationText: {
+    eng:
+      "This will delete your account and all information associated with it. Are you sure?"
+  },
+  accountDeletionConfirmYes: {
+    eng: "Yes, delete account"
   }
 };

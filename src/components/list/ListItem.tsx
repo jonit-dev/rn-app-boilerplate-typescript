@@ -10,6 +10,7 @@ interface IProps {
   iconName?: string;
   iconColor?: string;
   iconSize?: number;
+  textColor?: string;
   onPress: () => any;
 }
 
@@ -18,12 +19,13 @@ export const ListItem = ({
   iconName = "ios-arrow-forward",
   iconColor = colors.dark,
   iconSize = 20,
-  onPress
+  onPress,
+  textColor = colors.dark
 }: IProps) => {
   return (
     <TouchableOpacity style={styles.container} onPress={() => onPress()}>
       <View style={styles.textContainer}>
-        <Text style={styles.text}>{children}</Text>
+        <Text style={[styles.text, { color: textColor }]}>{children}</Text>
       </View>
       <View style={styles.iconContainer}>
         <Ionicons
@@ -66,7 +68,6 @@ const styles = StyleSheet.create({
     flex: 8
   },
   text: {
-    paddingLeft: 20,
-    color: colors.dark
+    paddingLeft: 20
   }
 });

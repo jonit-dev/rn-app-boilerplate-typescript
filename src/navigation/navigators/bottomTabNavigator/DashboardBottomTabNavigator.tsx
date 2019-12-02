@@ -38,10 +38,10 @@ export const DashboardBottomTabNavigator = createBottomTabNavigator(
   {
     tabBarOptions: {
       showIcon: true,
-      activeTintColor: colors.accent,
-      activeBackgroundColor: colors.darker,
-      inactiveBackgroundColor: colors.dark,
-      inactiveTintColor: colors.white,
+      activeTintColor: colors.primary,
+      activeBackgroundColor: colors.white,
+      inactiveBackgroundColor: colors.white,
+      inactiveTintColor: colors.gray,
       // activeBackgroundColor: colors.lightGreen,
       labelStyle: {
         fontFamily: defaultFont
