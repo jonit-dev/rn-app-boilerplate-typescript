@@ -2,6 +2,9 @@ export const strings = {
   loginButtonText: {
     eng: "Login"
   },
+  logoutButtonText: {
+    eng: "Logout"
+  },
   emailInput: {
     eng: "Email"
   },
@@ -81,6 +84,9 @@ export const strings = {
   accountDeletionConfirmationText: {
     eng:
       "This will delete your account and all information associated with it. Are you sure?"
+  },
+  accountLogoutConfirmationText: {
+    eng: "Are you sure that you want to logout?"
   },
   accountDeletionConfirmYes: {
     eng: "Yes, delete account"

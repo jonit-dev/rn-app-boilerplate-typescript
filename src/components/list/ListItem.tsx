@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     maxHeight: 60,
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 1,
+    borderBottomWidth: 1,
     borderColor: colors.mediumGray
   },
   iconContainer: {

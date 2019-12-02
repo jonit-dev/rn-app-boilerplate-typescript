@@ -3,6 +3,7 @@ import { NavigationActions } from 'react-navigation';
 
 import { APIHelper } from '../../helpers/APIHelper';
 import { TS } from '../../helpers/LanguageHelper';
+import NavigationHelper from '../../helpers/NavigationHelper';
 import { PushNotificationHelper } from '../../helpers/PushNotificationHelper';
 import { IRequestDefaultError, RequestTypes } from '../../typescript/Requests.types';
 import { persistor } from '../persist.store';
@@ -65,7 +66,7 @@ export const userLogin = (credentials: ICredentials, navigation) => async (
   }
 };
 
-export const userLogout = navigation => async dispatch => {
+export const userLogout = () => async dispatch => {
   console.log("Logging out user");
 
   await persistor.purge();
@@ -74,12 +75,7 @@ export const userLogout = navigation => async dispatch => {
 
   await dispatch({ type: USER_LOGOUT });
 
-  navigation.navigate(
-    NavigationActions.navigate({
-      routeName: "Auth",
-      action: NavigationActions.navigate({ routeName: "LoginScreen" })
-    })
-  );
+  NavigationHelper.navigate("LoginScreen", null);
 };
 
 export const userRegister = (

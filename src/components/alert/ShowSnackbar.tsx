@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { Snackbar } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -30,18 +31,28 @@ export const ShowSnackbar = () => {
   if (showMessage) {
     if (showMessage.message) {
       return (
-        <Snackbar
-          visible={visible}
-          onDismiss={() => clearMessage()}
-          action={{
-            label: "Ok",
-            onPress: () => executeCallback()
-          }}
-        >
-          {showMessage.message}
-        </Snackbar>
+        <View style={styles.container}>
+          <Snackbar
+            visible={visible}
+            onDismiss={() => clearMessage()}
+            action={{
+              label: "Ok",
+              onPress: () => executeCallback()
+            }}
+          >
+            {showMessage.message}
+          </Snackbar>
+        </View>
       );
     }
   }
   return null;
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  }
+});
