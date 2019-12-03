@@ -8,7 +8,7 @@ export const strings = {
     ptbr: "Sua data de nascimento"
   },
   birthdayInputFormat: {
-    eng: "YYYY-MM-DD",
-    ptbr: "DD-MM-YYYY"
+    eng: "YYYY-MM-DD"
+    // ptbr: "DD-MM-YYYY" // TODO: needs bugfix
   }
 };

@@ -8,9 +8,6 @@ import { RegisterScreen } from '../../screens/Auth/Register.screen';
 
 export const AuthStackNavigator = createStackNavigator(
   {
-    ForgotPasswordScreen: {
-      screen: ForgotPasswordScreen
-    },
     LoginScreen: {
       screen: LoginScreen,
       navigationOptions: {
@@ -19,6 +16,9 @@ export const AuthStackNavigator = createStackNavigator(
     },
     RegisterScreen: {
       screen: RegisterScreen
+    },
+    ForgotPasswordScreen: {
+      screen: ForgotPasswordScreen
     },
     ChangePasswordScreen: {
       screen: ChangePasswordScreen

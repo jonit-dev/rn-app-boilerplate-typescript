@@ -74,6 +74,10 @@ export const LoginScreen = props => {
     props.navigation.navigate("ChangePasswordScreen");
   };
 
+  const forgotPasswordClick = () => {
+    props.navigation.navigate("ForgotPasswordScreen");
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -107,11 +111,11 @@ export const LoginScreen = props => {
             </Text>
           </TouchableOpacity>
 
-          <View>
+          <TouchableOpacity onPress={() => forgotPasswordClick()}>
             <Text style={common.link}>
               {TS.string("account", "forgotPasswordLoginText")}
             </Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <BlockButton
