@@ -40,6 +40,10 @@ export class APIHelper {
           TS.string("global", "networkErrorTitle"),
           TS.string("global", "networkErrorMessage")
         );
+
+        // move to login screen, if user is not there yet
+        NavigationHelper.navigate("LoginScreen", null);
+
         return;
       } else {
         // prepare connection timeout callback

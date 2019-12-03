@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/bin/node /usr/share/yarn/bin/yarn.js add @types/react-native-paper --save
+  /usr/local/bin/node /usr/share/yarn/bin/yarn.js add react-native-datepicker
 
 PATH: 
-  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/jonit/Java/jdk1.8.0_221/bin:/home/jonit/Android/Sdk/tools:/home/jonit/Android/Sdk/platform-tools:/home/jonit/Android/Sdk/build-tools:/home/jonit/Android/Sdk/platforms:/home/jonit/Java/jdk1.8.0_221/bin:/home/jonit/Android/Sdk/tools:/home/jonit/Android/Sdk/platform-tools:/home/jonit/Android/Sdk/build-tools:/home/jonit/Android/Sdk/platforms
 
 Yarn version: 
   1.19.1
@@ -14,23 +14,12 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2freact-native-paper: Not found
-      at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66926:18)
-      at Request.self.callback (/usr/share/yarn/lib/cli.js:140564:22)
-      at Request.emit (events.js:198:13)
-      at Request.<anonymous> (/usr/share/yarn/lib/cli.js:141536:10)
-      at Request.emit (events.js:198:13)
-      at IncomingMessage.<anonymous> (/usr/share/yarn/lib/cli.js:141458:12)
-      at Object.onceWrapper (events.js:286:20)
-      at IncomingMessage.emit (events.js:203:15)
-      at endReadableNT (_stream_readable.js:1129:12)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
+  Error: EACCES: permission denied, unlink '/home/jonit/Personal_projects/rn-boilerplate-app/node_modules/.yarn-integrity'
 
 npm manifest: 
   {
     "main": "node_modules/expo/AppEntry.js",
     "scripts": {
-      "start-linux": "yarn run adb-sync && expo start",
       "start": "expo start",
       "android": "expo start --android",
       "ios": "expo start --ios",
@@ -38,7 +27,7 @@ npm manifest:
       "eject": "expo eject",
       "android-shake": "adb shell input keyevent 82",
       "android-reload": "adb shell input text 'RR'",
-      "adb-sync": "sudo adb kill-server && sudo adb start-server",
+      "adb-sync": "sudo adb kill-server && sudo adb start-server && adb reverse tcp:3000 tcp:3000",
       "lint": "tslint './src/**/*.{ts,tsx}' --fix"
     },
     "husky": {
@@ -64,9 +53,12 @@ npm manifest:
       "react-native-svg": "~9.9.2",
       "react-native-web": "^0.11.7",
       "react-navigation": "^4.0.10",
+      "react-navigation-drawer": "^2.3.3",
+      "react-navigation-header-buttons": "^3.0.4",
       "react-navigation-stack": "^1.9.3",
       "react-redux": "^7.1.1",
       "redux": "^4.0.4",
+      "redux-persist": "^6.0.0",
       "redux-thunk": "^2.3.0",
       "tslint-react-native": "^0.0.7"
     },
@@ -5030,6 +5022,11 @@ Lockfile:
       color "^3.1.2"
       react-native-safe-area-view "^0.12.0"
   
+  react-native-platform-touchable@^1.1.1:
+    version "1.1.1"
+    resolved "https://registry.yarnpkg.com/react-native-platform-touchable/-/react-native-platform-touchable-1.1.1.tgz#fde4acc65eea585d28b164d0c3716a42129a68e4"
+    integrity sha1-/eSsxl7qWF0osWTQw3FqQhKaaOQ=
+  
   react-native-reanimated@~1.2.0:
     version "1.2.0"
     resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.2.0.tgz#9219227a52a5dfa4d34c324596d6726ccd874293"
@@ -5147,6 +5144,18 @@ Lockfile:
       xmldoc "^0.4.0"
       yargs "^9.0.0"
   
+  react-navigation-drawer@^2.3.3:
+    version "2.3.3"
+    resolved "https://registry.yarnpkg.com/react-navigation-drawer/-/react-navigation-drawer-2.3.3.tgz#d7e607d5e10f2b3c40ab7dc9720228ce3f888a0f"
+    integrity sha512-d/rA8Slqv7HoMfONKVDBQUrRF7YQH796Gzal/KOhaY4VOwUUqIwfxMRJ3WrsdL2OkDPixtkXJE2Fz6KAj658uA==
+  
+  react-navigation-header-buttons@^3.0.4:
+    version "3.0.4"
+    resolved "https://registry.yarnpkg.com/react-navigation-header-buttons/-/react-navigation-header-buttons-3.0.4.tgz#63480ae356745549ede8b0232fda9c23c8526ea1"
+    integrity sha512-9wXSciaY1bxGxJQMhzVoPrVR20DQd487Re3119crVYZbAvQpugTznAc4VKc4rY4Z68LR//V7x7a00uEGAiZQDA==
+    dependencies:
+      react-native-platform-touchable "^1.1.1"
+  
   react-navigation-stack@^1.9.3:
     version "1.9.3"
     resolved "https://registry.yarnpkg.com/react-navigation-stack/-/react-navigation-stack-1.9.3.tgz#956a41796878d82c4db506075afea5e3cef64120"
@@ -5244,6 +5253,11 @@ Lockfile:
       safe-buffer "~5.1.1"
       string_decoder "~1.1.1"
       util-deprecate "~1.0.1"
+  
+  redux-persist@^6.0.0:
+    version "6.0.0"
+    resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-6.0.0.tgz#b4d2972f9859597c130d40d4b146fecdab51b3a8"
+    integrity sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ==
   
   redux-thunk@^2.3.0:
     version "2.3.0"

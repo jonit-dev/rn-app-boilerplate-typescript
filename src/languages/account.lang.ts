@@ -90,5 +90,11 @@ export const strings = {
   },
   accountDeletionConfirmYes: {
     eng: "Yes, delete account"
+  },
+  forgotPasswordTitle: {
+    eng: "Forgot Password"
+  },
+  forgotPasswordBirthdayInput: {
+    eng: "Birthday"
   }
 };
