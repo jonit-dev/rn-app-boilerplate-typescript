@@ -93,8 +93,5 @@ export const strings = {
   },
   forgotPasswordTitle: {
     eng: "Forgot Password"
-  },
-  forgotPasswordBirthdayInput: {
-    eng: "Birthday"
   }
 };

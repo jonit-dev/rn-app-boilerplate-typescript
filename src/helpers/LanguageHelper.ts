@@ -19,6 +19,12 @@ export class TS {
     // Replace variables {{ n }}
 
     let string: string = languageStrings[key][appEnv.language];
+
+    if (!string) {
+      //if no translation is available for this string, use english as fallback!
+      string = languageStrings[key].eng;
+    }
+
     const customVarsKeys = Object.keys(customVars);
     if (customVarsKeys) {
       for (const k of customVarsKeys) {

@@ -32,7 +32,7 @@ export const ForgotPasswordScreen = ({ navigation }) => {
       </View>
 
       <DateInput
-        label={TS.string("account", "forgotPasswordBirthdayInput")}
+        label={TS.string("form", "birthdayInputLabel")}
         onChange={date => console.log(date)}
       />
 

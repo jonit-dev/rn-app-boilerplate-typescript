@@ -26,5 +26,11 @@ export const strings = {
   },
   genericTextNo: {
     eng: "No"
+  },
+  genericConfirm: {
+    eng: "Confirm"
+  },
+  genericCancel: {
+    eng: "Cancel"
   }
 };
