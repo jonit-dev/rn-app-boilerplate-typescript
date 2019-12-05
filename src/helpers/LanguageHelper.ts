@@ -21,7 +21,7 @@ export class TS {
     let string: string = languageStrings[key][appEnv.language];
 
     if (!string) {
-      //if no translation is available for this string, use english as fallback!
+      // if no translation is available for this string, use english as fallback!
       string = languageStrings[key].eng;
     }
 

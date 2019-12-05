@@ -93,5 +93,12 @@ export const strings = {
   },
   forgotPasswordTitle: {
     eng: "Forgot Password"
+  },
+  forgotPasswordText: {
+    eng:
+      "Fill your e-mail below to receive a link in your e-mail to reset your password"
+  },
+  forgotPasswordButton: {
+    eng: "Recover Password"
   }
 };

@@ -12,6 +12,10 @@ export interface IChangePasswordPayload {
   repeatNewPassword: string;
 }
 
+export interface IForgotUserPassword {
+  email: string;
+}
+
 export class UserHelper {
   public static async changeUserPassword(payload: IChangePasswordPayload) {
     const response = await APIHelper.request(
@@ -36,7 +40,29 @@ export class UserHelper {
         );
       }
     }
+  }
 
-    console.log(response);
+  public static async forgotUserPassword(payload: IForgotUserPassword) {
+    const response = await APIHelper.request(
+      RequestTypes.POST,
+      "/users/reset-password",
+      payload,
+      false
+    );
+
+    if (response) {
+      if (response.status === 200) {
+        Alert.alert(
+          TS.string("global", "genericSuccessTitle"),
+          response.data.message
+        );
+        NavigationHelper.navigate("LoginScreen", null);
+      } else {
+        Alert.alert(
+          TS.string("global", "genericErrorTitle"),
+          response.data.message
+        );
+      }
+    }
   }
 }

@@ -5,10 +5,11 @@ import { useDispatch } from 'react-redux';
 
 import Logo from '../../assets/images/logo.svg';
 import { BlockButton } from '../../components/form/BlockButton';
-import { DateInput } from '../../components/form/DateInput';
 import { Form } from '../../components/form/Form';
 import { H2 } from '../../components/form/H2';
+import { P } from '../../components/form/P';
 import { TS } from '../../helpers/LanguageHelper';
+import { UserHelper } from '../../helpers/UserHelper';
 import { setLoading } from '../../store/actions/ui.actions';
 
 export const ForgotPasswordScreen = ({ navigation }) => {
@@ -16,11 +17,26 @@ export const ForgotPasswordScreen = ({ navigation }) => {
 
   const dispatch = useDispatch();
 
+  const onClickForgotPassword = async () => {
+    await dispatch(setLoading(true));
+
+    // Forgot password
+    await UserHelper.forgotUserPassword({
+      email
+    });
+
+    await dispatch(setLoading(false));
+  };
+
   return (
     <Form style={styles.container}>
       <Logo width={100} height={100} style={styles.logo} />
 
       <H2 style={styles.h2}>{TS.string("account", "forgotPasswordTitle")}</H2>
+
+      <P center={true} styles={styles.p}>
+        {TS.string("account", "forgotPasswordText")}
+      </P>
 
       <View style={styles.main}>
         <TextInput
@@ -31,20 +47,9 @@ export const ForgotPasswordScreen = ({ navigation }) => {
         />
       </View>
 
-      <DateInput
-        label={TS.string("form", "birthdayInputLabel")}
-        onChange={date => console.log(date)}
-      />
-
       <BlockButton
-        text={TS.string("account", "changePasswordButton")}
-        onPress={async () => {
-          await dispatch(setLoading(true));
-
-          // dispatch forgot password action
-
-          await dispatch(setLoading(false));
-        }}
+        text={TS.string("account", "forgotPasswordButton")}
+        onPress={() => onClickForgotPassword()}
       />
     </Form>
   );
@@ -68,5 +73,8 @@ const styles = StyleSheet.create({
   main: {
     marginTop: 12,
     marginBottom: 40
+  },
+  p: {
+    marginVertical: 15
   }
 });
