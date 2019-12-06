@@ -2,9 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 
-import { BlockButton } from '../../components/form/BlockButton';
 import { DefaultScreen } from '../../components/navigator/DefaultScreen';
-import { setLoading } from '../../store/actions/ui.actions';
 import { userGetProfileInfo } from '../../store/actions/user.actions';
 
 export const ProfileScreen = ({ navigation }) => {
@@ -30,14 +28,6 @@ export const ProfileScreen = ({ navigation }) => {
       navigation={navigation}
     >
       <Text>Profile (Authentication protected screen!)</Text>
-      <BlockButton
-        text="Logout"
-        onPress={() => {
-          dispatch(setLoading(true));
-
-          dispatch(setLoading(false));
-        }}
-      />
     </DefaultScreen>
   );
 };

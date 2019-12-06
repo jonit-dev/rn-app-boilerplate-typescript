@@ -10,9 +10,20 @@ import { persistor } from '../persist.store';
 import { USER_LOGIN, USER_LOGOUT, USER_REFRESH_INFO } from '../reducers/user.reducer';
 import { showMessage } from './ui.actions';
 
+export enum AuthType {
+  EmailPassword = "EmailPassword",
+  GoogleOAuth = "GoogleOAuth",
+  FacebookOAuth = "FacebookOAuth"
+}
+
 export interface ICredentials {
   email: string;
   password: string;
+}
+
+export interface IGoogleAuthPayload {
+  idToken: string | null;
+  appClientId: string;
 }
 
 export interface IRegisterCredentials {
@@ -22,16 +33,31 @@ export interface IRegisterCredentials {
   passwordConfirmation: string;
 }
 
-export const userLogin = (credentials: ICredentials, navigation) => async (
-  dispatch: any
-) => {
+export const userLogin = (
+  payload: ICredentials | IGoogleAuthPayload,
+  navigation,
+  type: AuthType = AuthType.EmailPassword
+) => async (dispatch: any) => {
   try {
-    const response = await APIHelper.request(
-      RequestTypes.POST,
-      "/users/login",
-      credentials,
-      false
-    );
+    let response;
+
+    if (type === AuthType.EmailPassword) {
+      response = await APIHelper.request(
+        RequestTypes.POST,
+        "/users/login",
+        payload,
+        false
+      );
+    }
+
+    if (type === AuthType.GoogleOAuth) {
+      response = await APIHelper.request(
+        RequestTypes.POST,
+        "/users/login/google-oauth",
+        payload,
+        false
+      );
+    }
 
     if (response) {
       if (response.data.error) {

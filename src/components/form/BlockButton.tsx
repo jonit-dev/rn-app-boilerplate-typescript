@@ -1,11 +1,12 @@
-import React from 'react';
-import { Keyboard, StyleSheet } from 'react-native';
+import React, { ReactNode } from 'react';
+import { Keyboard, StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 
 interface IProps {
-  text: string;
+  children?: ReactNode;
   onPress: () => void;
+  style?: StyleProp<ViewStyle>;
 }
 
 export const BlockButton = (props: IProps) => {
@@ -21,8 +22,9 @@ export const BlockButton = (props: IProps) => {
         Keyboard.dismiss();
         props.onPress();
       }}
+      style={props.style}
     >
-      {props.text}
+      {props.children}
     </Button>
   );
 };

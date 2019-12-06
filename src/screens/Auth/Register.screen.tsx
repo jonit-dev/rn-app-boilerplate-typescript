@@ -19,6 +19,24 @@ export const RegisterScreen = ({ navigation }) => {
 
   const dispatch = useDispatch();
 
+  const registerButtonClick = async () => {
+    await dispatch(setLoading(true));
+
+    await dispatch(
+      userRegister(
+        {
+          name,
+          email,
+          password,
+          passwordConfirmation
+        },
+        navigation
+      )
+    );
+
+    await dispatch(setLoading(false));
+  };
+
   return (
     <Form style={styles.container}>
       <Logo width={100} height={100} style={styles.logo} />
@@ -57,26 +75,9 @@ export const RegisterScreen = ({ navigation }) => {
         />
       </View>
 
-      <BlockButton
-        text={TS.string("account", "registerButtonText")}
-        onPress={async () => {
-          await dispatch(setLoading(true));
-
-          await dispatch(
-            userRegister(
-              {
-                name,
-                email,
-                password,
-                passwordConfirmation
-              },
-              navigation
-            )
-          );
-
-          await dispatch(setLoading(false));
-        }}
-      />
+      <BlockButton onPress={async () => registerButtonClick()}>
+        {TS.string("account", "registerButtonText")}
+      </BlockButton>
     </Form>
   );
 };

@@ -24,7 +24,7 @@ This boilerplate theme is inspired on [Waplants Plants UI theme](https://www.uis
 
 You should do the following to customize your app to your needs:
 
-1. Edit app.json (especially your app name, slug, and ios and android bundle/package names)
+1. Edit app.json (especially your app name, slug, and ios and android bundle/package names, also the configurations for google signIn)
 2. Edit src/constants/Env.constant.ts
    - Set your environment there and change your urls
 3. Change your app logo and splash screen's image unser src/assets
@@ -33,6 +33,7 @@ You should do the following to customize your app to your needs:
 6. Setup your push notifications
    - Check: https://docs.expo.io/versions/latest/guides/push-notifications/
    - and also FCM for Android: https://docs.expo.io/versions/latest/guides/using-fcm/
+7. Firebase: Download the GoogleService-info.plist (iOS) & the google-services.json (Android). Move them to your Expo project.
 
 **Common issues & How to solve**
 

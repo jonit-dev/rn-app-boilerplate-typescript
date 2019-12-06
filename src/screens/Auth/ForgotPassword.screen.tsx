@@ -47,10 +47,9 @@ export const ForgotPasswordScreen = ({ navigation }) => {
         />
       </View>
 
-      <BlockButton
-        text={TS.string("account", "forgotPasswordButton")}
-        onPress={() => onClickForgotPassword()}
-      />
+      <BlockButton onPress={() => onClickForgotPassword()}>
+        {TS.string("account", "forgotPasswordButton")}
+      </BlockButton>
     </Form>
   );
 };

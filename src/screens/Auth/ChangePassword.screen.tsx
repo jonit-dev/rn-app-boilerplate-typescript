@@ -18,6 +18,19 @@ export const ChangePasswordScreen = ({ navigation }) => {
   const [repeatNewPassword, setRepeatNewPassword] = useState("");
   const dispatch = useDispatch();
 
+  const changePasswordClick = async () => {
+    await dispatch(setLoading(true));
+
+    await UserHelper.changeUserPassword({
+      email,
+      currentPassword,
+      newPassword,
+      repeatNewPassword
+    });
+
+    await dispatch(setLoading(false));
+  };
+
   return (
     <Form style={styles.container}>
       <Logo width={100} height={100} style={styles.logo} />
@@ -53,22 +66,9 @@ export const ChangePasswordScreen = ({ navigation }) => {
           onChangeText={(text: string) => setRepeatNewPassword(text)}
         />
       </View>
-
-      <BlockButton
-        text={TS.string("account", "changePasswordButton")}
-        onPress={async () => {
-          await dispatch(setLoading(true));
-
-          await UserHelper.changeUserPassword({
-            email,
-            currentPassword,
-            newPassword,
-            repeatNewPassword
-          });
-
-          await dispatch(setLoading(false));
-        }}
-      />
+      <BlockButton onPress={() => changePasswordClick()}>
+        {TS.string("account", "changePasswordButton")}
+      </BlockButton>
     </Form>
   );
 };

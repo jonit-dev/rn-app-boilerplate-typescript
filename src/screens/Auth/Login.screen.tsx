@@ -1,3 +1,6 @@
+import { FontAwesome } from '@expo/vector-icons';
+import { Platform } from '@unimodules/core';
+import * as Google from 'expo-google-app-auth';
 import React, { useState } from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -8,13 +11,14 @@ import { ShowSnackbar } from '../../components/alert/ShowSnackbar';
 import { BlockButton } from '../../components/form/BlockButton';
 import { Form } from '../../components/form/Form';
 import { IconInput, IconPackageTypes } from '../../components/form/IconInput';
+import { appEnv } from '../../constants/Env.constant';
 import { images } from '../../constants/Images.constant';
 import { colors } from '../../constants/UI/Colors.constant';
 import { common } from '../../constants/UI/Common.constant';
 import { typography } from '../../constants/UI/Typography.constant';
 import { TS } from '../../helpers/LanguageHelper';
 import { setLoading, showMessage } from '../../store/actions/ui.actions';
-import { userLogin } from '../../store/actions/user.actions';
+import { AuthType, userLogin } from '../../store/actions/user.actions';
 import { IUser } from '../../typescript/User.types';
 
 export interface IResponseLogin {
@@ -27,6 +31,42 @@ export const LoginScreen = props => {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
+
+  // GOOGLE OAUTH ========================================
+
+  const googleLogin = async () => {
+    try {
+      const result = await Google.logInAsync({
+        clientId: appEnv.oauth.google.androidClientId,
+        androidClientId: appEnv.oauth.google.androidClientId,
+        iosClientId: appEnv.oauth.google.iosClientId,
+        scopes: ["profile", "email"]
+      });
+
+      if (result.type === "success") {
+        dispatch(setLoading(true));
+        await dispatch(
+          userLogin(
+            {
+              idToken: result.idToken,
+              appClientId:
+                Platform.OS === "android"
+                  ? appEnv.oauth.google.androidClientId
+                  : appEnv.oauth.google.iosClientId
+            },
+            props.navigation,
+            AuthType.GoogleOAuth
+          )
+        );
+
+        dispatch(setLoading(false));
+      } else {
+        return { cancelled: true };
+      }
+    } catch (e) {
+      return { error: true };
+    }
+  };
 
   // check if user is logged in. If so, load navigation stack. If not, load login screen
 
@@ -118,10 +158,15 @@ export const LoginScreen = props => {
           </TouchableOpacity>
         </View>
 
-        <BlockButton
-          text={TS.string("account", "loginButtonText")}
-          onPress={() => userLoginButtonClick()}
-        />
+        <BlockButton onPress={() => userLoginButtonClick()}>
+          {TS.string("account", "loginButtonText")}
+        </BlockButton>
+
+        <BlockButton onPress={() => googleLogin()} style={styles.gmailLogin}>
+          <FontAwesome name={"google"} size={24} color={colors.white} />
+          {"  "}
+          {TS.string("account", "loginWithGmail")}
+        </BlockButton>
 
         <View style={styles.registerTextContainer}>
           <Text style={typography.text}>
@@ -172,5 +217,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between"
+  },
+  gmailLogin: {
+    marginVertical: 14,
+    backgroundColor: colors.red
   }
 });

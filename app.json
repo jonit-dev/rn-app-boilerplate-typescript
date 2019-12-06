@@ -37,7 +37,12 @@
       ]
     },
     "ios": {
-      "bundleIdentifier": "com.mycompany.boilerplateapp"
+      "bundleIdentifier": "com.mycompany.boilerplateapp",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.948796332411-33joe7auarqi73nfo0pg50ce1slsaiuq"
+        }
+      }
     },
     "android": {
       "package": "com.mycompany.boilerplateapp",

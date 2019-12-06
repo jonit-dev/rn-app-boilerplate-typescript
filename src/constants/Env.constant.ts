@@ -30,5 +30,14 @@ const defineServerUrl = () => {
 
 export const appEnv = {
   language: AvailableLanguages.eng,
-  serverUrl: defineServerUrl() // current serverUrl
+  serverUrl: defineServerUrl(), // current serverUrl
+  oauth: {
+    google: {
+      iosClientId:
+        "868221073357-62fb6bqh2i35ih18kv3rk0vs9u8bgk9c.apps.googleusercontent.com", // from GoogleService-Info.plist
+      // from google developers console
+      androidClientId:
+        "868221073357-cpmr7sijto13j45ja8q6rqr13bq4bk92.apps.googleusercontent.com"
+    }
+  }
 };

@@ -100,5 +100,8 @@ export const strings = {
   },
   forgotPasswordButton: {
     eng: "Recover Password"
+  },
+  loginWithGmail: {
+    eng: "Login with Gmail"
   }
 };
