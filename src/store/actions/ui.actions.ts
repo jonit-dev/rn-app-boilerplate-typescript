@@ -4,6 +4,9 @@ export const setLoading = (
   status: boolean,
   key: string = "default"
 ) => dispatch => {
+  // status regulates if we're in a loading state or not (useful for triggering the loading)
+  // key is used to set a loading bar to only certain elements (like BlockButton for example), if needed.
+
   dispatch({
     type: SET_LOADING,
     payload: {
