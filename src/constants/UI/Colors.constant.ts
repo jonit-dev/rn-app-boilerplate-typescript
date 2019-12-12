@@ -13,5 +13,7 @@ export const colors = {
   red: "#FF6724",
   blue: "#5483EF",
   lightBlue: "#50B0FB",
-  yellow: "#FFDC30"
+  yellow: "#FFDC30",
+  backgroundGmail: "#D44638",
+  backgroundFacebook: "#4267B2"
 };

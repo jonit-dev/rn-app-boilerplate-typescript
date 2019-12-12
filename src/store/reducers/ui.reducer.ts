@@ -1,9 +1,12 @@
 export interface IUireducer {
-  isLoading: boolean;
+  isLoading: object;
 }
 
 const INITIAL_STATE = {
-  isLoading: false,
+  isLoading: {
+    status: false,
+    key: null
+  },
   alert: {
     message: null,
     onPress: () => null,
@@ -15,7 +18,13 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_LOADING:
-      return { ...state, isLoading: action.payload.status };
+      return {
+        ...state,
+        isLoading: {
+          status: action.payload.status,
+          key: action.payload.key
+        }
+      };
 
     case SET_MESSAGE:
       return {

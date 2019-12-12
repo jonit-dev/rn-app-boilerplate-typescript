@@ -19,7 +19,7 @@ export const ChangePasswordScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const changePasswordClick = async () => {
-    await dispatch(setLoading(true));
+    await dispatch(setLoading(true, "changePassword"));
 
     await UserHelper.changeUserPassword({
       email,
@@ -28,7 +28,7 @@ export const ChangePasswordScreen = ({ navigation }) => {
       repeatNewPassword
     });
 
-    await dispatch(setLoading(false));
+    await dispatch(setLoading(false, "changePassword"));
   };
 
   return (
@@ -66,7 +66,10 @@ export const ChangePasswordScreen = ({ navigation }) => {
           onChangeText={(text: string) => setRepeatNewPassword(text)}
         />
       </View>
-      <BlockButton onPress={() => changePasswordClick()}>
+      <BlockButton
+        onPress={() => changePasswordClick()}
+        loadingKey={"changePassword"}
+      >
         {TS.string("account", "changePasswordButton")}
       </BlockButton>
     </Form>

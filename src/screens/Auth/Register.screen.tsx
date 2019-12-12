@@ -20,7 +20,7 @@ export const RegisterScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const registerButtonClick = async () => {
-    await dispatch(setLoading(true));
+    await dispatch(setLoading(true, "register"));
 
     await dispatch(
       userRegister(
@@ -34,7 +34,7 @@ export const RegisterScreen = ({ navigation }) => {
       )
     );
 
-    await dispatch(setLoading(false));
+    await dispatch(setLoading(false, "register"));
   };
 
   return (
@@ -75,7 +75,10 @@ export const RegisterScreen = ({ navigation }) => {
         />
       </View>
 
-      <BlockButton onPress={async () => registerButtonClick()}>
+      <BlockButton
+        onPress={async () => registerButtonClick()}
+        loadingKey={"register"}
+      >
         {TS.string("account", "registerButtonText")}
       </BlockButton>
     </Form>

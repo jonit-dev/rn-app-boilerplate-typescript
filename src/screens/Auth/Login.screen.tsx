@@ -44,7 +44,7 @@ export const LoginScreen = props => {
       });
 
       if (result.type === "success") {
-        dispatch(setLoading(true));
+        dispatch(setLoading(true, "gmail"));
         await dispatch(
           userLogin(
             {
@@ -59,7 +59,7 @@ export const LoginScreen = props => {
           )
         );
 
-        dispatch(setLoading(false));
+        dispatch(setLoading(false, "gmail"));
       } else {
         return { cancelled: true };
       }
@@ -91,7 +91,7 @@ export const LoginScreen = props => {
     }
 
     if (email && password) {
-      dispatch(setLoading(true));
+      dispatch(setLoading(true, "login"));
       await dispatch(
         userLogin(
           {
@@ -102,7 +102,7 @@ export const LoginScreen = props => {
         )
       );
 
-      dispatch(setLoading(false));
+      dispatch(setLoading(false, "login"));
     }
   };
 
@@ -158,11 +158,18 @@ export const LoginScreen = props => {
           </TouchableOpacity>
         </View>
 
-        <BlockButton onPress={() => userLoginButtonClick()}>
+        <BlockButton
+          onPress={() => userLoginButtonClick()}
+          loadingKey={"login"}
+        >
           {TS.string("account", "loginButtonText")}
         </BlockButton>
 
-        <BlockButton onPress={() => googleLogin()} style={styles.gmailLogin}>
+        <BlockButton
+          onPress={() => googleLogin()}
+          style={styles.gmailLogin}
+          loadingKey={"gmail"}
+        >
           <FontAwesome name={"google"} size={24} color={colors.white} />
           {"  "}
           {TS.string("account", "loginWithGmail")}
@@ -220,6 +227,6 @@ const styles = StyleSheet.create({
   },
   gmailLogin: {
     marginVertical: 14,
-    backgroundColor: colors.red
+    backgroundColor: colors.backgroundGmail
   }
 });

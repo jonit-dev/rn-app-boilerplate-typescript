@@ -1,10 +1,14 @@
 import { SET_LOADING, SET_MESSAGE } from '../reducers/ui.reducer';
 
-export const setLoading = (status: boolean) => dispatch => {
+export const setLoading = (
+  status: boolean,
+  key: string = "default"
+) => dispatch => {
   dispatch({
     type: SET_LOADING,
     payload: {
-      status
+      status,
+      key
     }
   });
 };

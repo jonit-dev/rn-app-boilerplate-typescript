@@ -7,6 +7,7 @@ interface IProps {
   children?: ReactNode;
   onPress: () => void;
   style?: StyleProp<ViewStyle>;
+  loadingKey?: string;
 }
 
 export const BlockButton = (props: IProps) => {
@@ -17,7 +18,7 @@ export const BlockButton = (props: IProps) => {
       contentStyle={styles.container}
       mode={"contained"}
       dark={true}
-      loading={isLoading}
+      loading={props.loadingKey === isLoading.key && isLoading.status === true}
       onPress={() => {
         Keyboard.dismiss();
         props.onPress();

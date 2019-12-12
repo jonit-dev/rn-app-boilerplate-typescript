@@ -18,14 +18,14 @@ export const ForgotPasswordScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const onClickForgotPassword = async () => {
-    await dispatch(setLoading(true));
+    await dispatch(setLoading(true, "forgotPassword"));
 
     // Forgot password
     await UserHelper.forgotUserPassword({
       email
     });
 
-    await dispatch(setLoading(false));
+    await dispatch(setLoading(false, "forgotPassword"));
   };
 
   return (
@@ -47,7 +47,10 @@ export const ForgotPasswordScreen = ({ navigation }) => {
         />
       </View>
 
-      <BlockButton onPress={() => onClickForgotPassword()}>
+      <BlockButton
+        onPress={() => onClickForgotPassword()}
+        loadingKey={"forgotPassword"}
+      >
         {TS.string("account", "forgotPasswordButton")}
       </BlockButton>
     </Form>
