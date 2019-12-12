@@ -118,17 +118,21 @@ export const userRegister = (
 
     if (response.status === 201) {
       // success
-      dispatch({ type: USER_LOGIN, payload: response.data });
+      const user = response.data.user;
+
       Alert.alert(
         TS.string("account", "loginSuccessTitle"),
         TS.string("account", "registerSuccess")
       );
 
-      navigation.navigate(
-        NavigationActions.navigate({
-          routeName: "App",
-          action: NavigationActions.navigate({ routeName: "DashboardScreen" })
-        })
+      await dispatch(
+        userLogin(
+          {
+            email: user.email,
+            password: registerCredentials.password
+          },
+          navigation
+        )
       );
     } else {
       const error: IRequestDefaultError = response.data;
