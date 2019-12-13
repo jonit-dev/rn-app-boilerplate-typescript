@@ -1,8 +1,9 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { Platform } from '@unimodules/core';
+import * as Facebook from 'expo-facebook';
 import * as Google from 'expo-google-app-auth';
 import React, { useState } from 'react';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { Alert, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
 
@@ -31,6 +32,39 @@ export const LoginScreen = props => {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
+
+  // FACEBOOK OAUTH ========================================
+
+  const facebookLogin = async () => {
+    console.log("Logging in with facebook");
+
+    try {
+      await Facebook.initializeAsync(appEnv.oauth.facebook.appId);
+      const {
+        type,
+        token,
+        expires,
+        permissions,
+        declinedPermissions
+      } = await Facebook.logInWithReadPermissionsAsync({
+        permissions: ["public_profile"]
+      });
+
+      console.log({ type, token, expires, permissions, declinedPermissions });
+
+      if (type === "success") {
+        // Get the user's name using Facebook's Graph API
+        const response = await fetch(
+          `https://graph.facebook.com/me?access_token=${token}`
+        );
+        Alert.alert("Logged in!", `Hi ${(await response.json()).name}!`);
+      } else {
+        // type === 'cancel'
+      }
+    } catch ({ message }) {
+      alert(`Facebook Login Error: ${message}`);
+    }
+  };
 
   // GOOGLE OAUTH ========================================
 
@@ -175,6 +209,16 @@ export const LoginScreen = props => {
           {TS.string("account", "loginWithGmail")}
         </BlockButton>
 
+        <BlockButton
+          onPress={() => facebookLogin()}
+          style={styles.facebookLogin}
+          loadingKey={"facebook"}
+        >
+          <FontAwesome name={"facebook"} size={24} color={colors.white} />
+          {"  "}
+          {TS.string("account", "loginWithFacebook")}
+        </BlockButton>
+
         <View style={styles.registerTextContainer}>
           <Text style={typography.text}>
             {TS.string("account", "loginDontHaveAccount")}{" "}
@@ -197,7 +241,6 @@ LoginScreen.navigationOptions = {};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     justifyContent: "center",
     alignItems: "center"
   },
@@ -228,5 +271,9 @@ const styles = StyleSheet.create({
   gmailLogin: {
     marginVertical: 14,
     backgroundColor: colors.backgroundGmail
+  },
+  facebookLogin: {
+    marginVertical: 14,
+    backgroundColor: colors.backgroundFacebook
   }
 });

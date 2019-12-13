@@ -95,13 +95,15 @@ export const strings = {
     eng: "Forgot Password"
   },
   forgotPasswordText: {
-    eng:
-      "Fill your e-mail below to receive a link in your e-mail to reset your password"
+    eng: "Fill your e-mail below to receive a link to reset your password"
   },
   forgotPasswordButton: {
     eng: "Recover Password"
   },
   loginWithGmail: {
     eng: "Login with Gmail"
+  },
+  loginWithFacebook: {
+    eng: "Login with Facebook"
   }
 };

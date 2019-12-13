@@ -47,6 +47,9 @@
     "android": {
       "package": "com.mycompany.boilerplateapp",
       "googleServicesFile": "./google-services.json"
-    }
+    },
+    "facebookAppId": "442424923110439",
+    "facebookDisplayName": "AppBoilerplate",
+    "facebookScheme": "fb442424923110439"
   }
 }

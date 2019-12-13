@@ -38,6 +38,9 @@ export const appEnv = {
       // from google developers console
       androidClientId:
         "868221073357-cpmr7sijto13j45ja8q6rqr13bq4bk92.apps.googleusercontent.com"
+    },
+    facebook: {
+      appId: "442424923110439"
     }
   }
 };
