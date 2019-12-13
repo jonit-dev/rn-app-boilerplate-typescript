@@ -2,7 +2,7 @@ import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import React, { Component } from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
-import { useScreens } from 'react-native-screens';
+import { enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -13,7 +13,7 @@ import NavigationHelper from './src/helpers/NavigationHelper';
 import RootNavigator from './src/navigation/Root.navigator';
 import { persistor, store } from './src/store/persist.store';
 
-useScreens(); // screen transition performance
+enableScreens(); // screen transition performance
 
 // tslint:disable-next-line: no-default-export
 export default class App extends Component {

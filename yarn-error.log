@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/share/yarn/bin/yarn.js add expo-facebook@~7.0.0
+  /usr/local/bin/node /usr/share/yarn/bin/yarn.js add expo@^36.0.0
 
 PATH: 
   /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/jonit/Java/jdk1.8.0_221/bin:/home/jonit/Android/Sdk/tools:/home/jonit/Android/Sdk/platform-tools:/home/jonit/Android/Sdk/build-tools:/home/jonit/Android/Sdk/platforms:/home/jonit/Java/jdk1.8.0_221/bin:/home/jonit/Android/Sdk/tools:/home/jonit/Android/Sdk/platform-tools:/home/jonit/Android/Sdk/build-tools:/home/jonit/Android/Sdk/platforms

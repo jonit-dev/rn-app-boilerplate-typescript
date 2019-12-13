@@ -26,6 +26,10 @@ export interface IGoogleAuthPayload {
   appClientId: string;
 }
 
+export interface IFacebookAuthPayload {
+  accessToken: string;
+}
+
 export interface IRegisterCredentials {
   name: string;
   email: string;
@@ -34,7 +38,7 @@ export interface IRegisterCredentials {
 }
 
 export const userLogin = (
-  payload: ICredentials | IGoogleAuthPayload,
+  payload: ICredentials | IGoogleAuthPayload | IFacebookAuthPayload,
   navigation,
   type: AuthType = AuthType.EmailPassword
 ) => async (dispatch: any) => {
@@ -45,6 +49,15 @@ export const userLogin = (
       response = await APIHelper.request(
         RequestTypes.POST,
         "/users/login",
+        payload,
+        false
+      );
+    }
+
+    if (type === AuthType.FacebookOAuth) {
+      response = await APIHelper.request(
+        RequestTypes.POST,
+        "/users/login/facebook-oauth",
         payload,
         false
       );

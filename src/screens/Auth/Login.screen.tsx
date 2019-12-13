@@ -3,7 +3,7 @@ import { Platform } from '@unimodules/core';
 import * as Facebook from 'expo-facebook';
 import * as Google from 'expo-google-app-auth';
 import React, { useState } from 'react';
-import { Alert, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
 
@@ -39,7 +39,11 @@ export const LoginScreen = props => {
     console.log("Logging in with facebook");
 
     try {
-      await Facebook.initializeAsync();
+      await Facebook.initializeAsync(
+        appEnv.oauth.facebook.appId,
+        appEnv.oauth.facebook.appName
+      );
+
       const {
         type,
         token,
@@ -48,6 +52,7 @@ export const LoginScreen = props => {
         declinedPermissions
       } = await Facebook.logInWithReadPermissionsAsync(
         appEnv.oauth.facebook.appId,
+        // @ts-ignore
         {
           permissions: ["public_profile", "email"]
         }
@@ -58,14 +63,18 @@ export const LoginScreen = props => {
       console.log({ type, token, expires });
 
       if (type === "success") {
-        // Get the user's name using Facebook's Graph API
-        const response = await fetch(
-          `https://graph.facebook.com/me?access_token=${token}`
+        dispatch(setLoading(true, "facebook"));
+        await dispatch(
+          userLogin(
+            {
+              accessToken
+            },
+            props.navigation,
+            AuthType.FacebookOAuth
+          )
         );
-        console.log("user info");
-        const user = await response.json();
 
-        Alert.alert("Logged in!", `Hi ${user.name}!`);
+        dispatch(setLoading(false, "facebook"));
       } else {
         // type === 'cancel'
       }
