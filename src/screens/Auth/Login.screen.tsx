@@ -39,25 +39,33 @@ export const LoginScreen = props => {
     console.log("Logging in with facebook");
 
     try {
-      await Facebook.initializeAsync(appEnv.oauth.facebook.appId);
+      await Facebook.initializeAsync();
       const {
         type,
         token,
         expires,
         permissions,
         declinedPermissions
-      } = await Facebook.logInWithReadPermissionsAsync({
-        permissions: ["public_profile"]
-      });
+      } = await Facebook.logInWithReadPermissionsAsync(
+        appEnv.oauth.facebook.appId,
+        {
+          permissions: ["public_profile", "email"]
+        }
+      );
 
-      console.log({ type, token, expires, permissions, declinedPermissions });
+      const accessToken = token;
+
+      console.log({ type, token, expires });
 
       if (type === "success") {
         // Get the user's name using Facebook's Graph API
         const response = await fetch(
           `https://graph.facebook.com/me?access_token=${token}`
         );
-        Alert.alert("Logged in!", `Hi ${(await response.json()).name}!`);
+        console.log("user info");
+        const user = await response.json();
+
+        Alert.alert("Logged in!", `Hi ${user.name}!`);
       } else {
         // type === 'cancel'
       }
