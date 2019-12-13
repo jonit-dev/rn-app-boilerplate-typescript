@@ -47,9 +47,7 @@ export const LoginScreen = props => {
       const {
         type,
         token,
-        expires,
-        permissions,
-        declinedPermissions
+        expires
       } = await Facebook.logInWithReadPermissionsAsync(
         appEnv.oauth.facebook.appId,
         // @ts-ignore
