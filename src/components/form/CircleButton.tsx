@@ -4,7 +4,7 @@ import { Keyboard, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-n
 interface IProps {
    children?: ReactNode,
    style?: ViewStyle,
-   onPress?: () => void
+   onPress: () => void
 }
 
 export const CircleButton = (props: IProps) => {
