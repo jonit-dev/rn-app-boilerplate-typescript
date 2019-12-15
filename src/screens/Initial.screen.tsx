@@ -1,15 +1,24 @@
 import { useDispatch, useSelector } from 'react-redux';
 
+import { appEnv } from '../constants/Env.constant';
 import { userGetProfileInfo } from '../store/actions/user.actions';
 
 export const InitialScreen = props => {
   // Check user token
 
-  const user = useSelector<any, any>(state => state.userReducer.user);
-  const userToken = useSelector<any, any>(state => state.userReducer.token);
+  const { user, token, onboarding } = useSelector<any, any>(
+    state => state.userReducer
+  );
+
+  const userToken = token; // just to avoid confusion, lets rename it...
 
   if (!userToken || !user) {
     props.navigation.navigate("Auth"); // If user has no token, redirect to login
+    return null;
+  }
+
+  if (!onboarding && appEnv.onboarding.enabled) {
+    props.navigation.navigate("Onboarding");
     return null;
   }
 

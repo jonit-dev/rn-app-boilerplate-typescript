@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 
-import { LoadingScreen } from '../Loading/LoadingScreen';
+import { LoadingScreen } from '../loading/LoadingScreen';
 import { DrawerHeader } from './DrawerHeader';
 
 export const DefaultScreen = props => {

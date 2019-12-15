@@ -7,7 +7,7 @@ import NavigationHelper from '../../helpers/NavigationHelper';
 import { PushNotificationHelper } from '../../helpers/PushNotificationHelper';
 import { IRequestDefaultError, RequestTypes } from '../../typescript/Requests.types';
 import { persistor } from '../persist.store';
-import { USER_LOGIN, USER_LOGOUT, USER_REFRESH_INFO } from '../reducers/user.reducer';
+import { USER_LOGIN, USER_LOGOUT, USER_REFRESH_INFO, USER_SET_ONBOARDING } from '../reducers/user.reducer';
 import { showMessage } from './ui.actions';
 
 export enum AuthType {
@@ -24,8 +24,8 @@ export interface ICredentials {
 export interface IGoogleAuthPayload {
   idToken?: string | null;
   appClientId?: string;
-  cancelled?: boolean,
-  error?: boolean
+  cancelled?: boolean;
+  error?: boolean;
 }
 
 export interface IFacebookAuthPayload {
@@ -92,15 +92,15 @@ export const userLogin = (
         // Verify user's current push token and tries to refresh it if needed...
         PushNotificationHelper.checkAndRefreshPushToken(user.pushToken);
 
+        await dispatch({ type: USER_LOGIN, payload: response.data });
+
         navigation.navigate(
           NavigationActions.navigate({
-            routeName: "App",
-            action: NavigationActions.navigate({ routeName: "DashboardScreen" })
+            routeName: "Init",
+            action: NavigationActions.navigate({ routeName: "InitialScreen" })
           })
         );
       }
-
-      dispatch({ type: USER_LOGIN, payload: response.data });
     }
   } catch (error) {
     console.error(error);
@@ -185,4 +185,8 @@ export const userGetProfileInfo = () => async dispatch => {
       });
     }
   }
+};
+
+export const toggleOnboarding = (onboardingStatus: boolean) => dispatch => {
+  dispatch({ type: USER_SET_ONBOARDING, payload: onboardingStatus });
 };

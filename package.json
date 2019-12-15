@@ -34,6 +34,7 @@
     "react-native-datepicker": "^1.7.2",
     "react-native-gesture-handler": "~1.5.0",
     "react-native-global-props": "^1.1.5",
+    "react-native-onboarding-swiper": "^1.1.0",
     "react-native-paper": "^3.2.1",
     "react-native-reanimated": "~1.4.0",
     "react-native-screens": "2.0.0-alpha.12",

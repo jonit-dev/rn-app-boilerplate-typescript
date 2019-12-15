@@ -61,5 +61,9 @@ export const appEnv = {
     // * REMEMBER: you should also configure app.json with proper ids
     enabled: false,
     adUnitID: "ca-app-pub-3940256099942544/1033173712"
+  },
+  onboarding: {
+    // * Configure it at Onboarding.screen.tsx
+    enabled: false
   }
 };
