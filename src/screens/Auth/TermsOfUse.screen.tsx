@@ -4,7 +4,8 @@ import { ScrollView, StyleSheet } from 'react-native';
 import { H2 } from '../../components/form/H2';
 import { H3 } from '../../components/form/H3';
 import { P } from '../../components/form/P';
-import { typography } from '../../constants/UI/Typography.constant';
+import { STRONG } from '../../components/form/STRONG';
+import { appEnv } from '../../constants/Env.constant';
 
 export const TermsOfUseScreen = ({ navigation }) => {
 
@@ -14,7 +15,7 @@ export const TermsOfUseScreen = ({ navigation }) => {
       <H2>AGREEMENT TO TERMS</H2>
 
       <P>
-      These Terms of Use constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“you”) and APP_NAME_FULL ("Company", “we”, “us”, or “our”), concerning your access to and use of the app_url website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the “Site”). You agree that by accessing the Site, you have read, understood, and agreed to be bound by all of these Terms of Use. IF YOU DO NOT AGREE WITH ALL OF THESE TERMS OF USE, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SITE AND YOU MUST DISCONTINUE USE IMMEDIATELY.
+      These Terms of Use constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“you”) and {appEnv.appNameFull} ("Company", “we”, “us”, or “our”), concerning your access to and use of the {appEnv.appUrl} website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the “Site”). You agree that by accessing the Site, you have read, understood, and agreed to be bound by all of these Terms of Use. IF YOU DO NOT AGREE WITH ALL OF THESE TERMS OF USE, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SITE AND YOU MUST DISCONTINUE USE IMMEDIATELY.
       {'\n \n'}
       Supplemental terms and conditions or documents that may be posted on the Site from time to time are hereby expressly incorporated herein by reference. We reserve the right, in our sole discretion, to make changes or modifications to these Terms of Use at any time and for any reason. We will alert you about any changes by updating the “Last updated” date of these Terms of Use, and you waive any right to receive specific notice of each such change. It is your responsibility to periodically review these Terms of Use to stay informed of updates. You will be subject to, and will be deemed to have been made aware of and to have accepted, the changes in any revised Terms of Use by your continued use of the Site after the date such revised Terms of Use are posted.
       {'\n \n'}
@@ -162,7 +163,7 @@ export const TermsOfUseScreen = ({ navigation }) => {
 
         <H2>PRIVACY POLICY</H2>
         <P>
-        We care about data privacy and security. Please review our Privacy Policy: app_privacy_policy. By using the Site, you agree to be bound by our Privacy Policy, which is incorporated into these Terms of Use. Please be advised the Site is hosted in the United States. If you access the Site from the European Union, Asia, or any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in the United States, then through your continued use of the Site, you are transferring your data to the United States, and you expressly consent to have your data transferred to and processed in the United States.  Further, we do not knowingly accept, request, or solicit information from children or knowingly market to children. Therefore, in accordance with the U.S. Children’s Online Privacy Protection Act, if we receive actual knowledge that anyone under the age of 13 has provided personal information to us without the requisite and verifiable parental consent, we will delete that information from the Site as quickly as is reasonably practical.
+        We care about data privacy and security. Please review our Privacy Policy: {appEnv.appPrivacyPolicyUrl}. By using the Site, you agree to be bound by our Privacy Policy, which is incorporated into these Terms of Use. Please be advised the Site is hosted in the United States. If you access the Site from the European Union, Asia, or any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in the United States, then through your continued use of the Site, you are transferring your data to the United States, and you expressly consent to have your data transferred to and processed in the United States.  Further, we do not knowingly accept, request, or solicit information from children or knowingly market to children. Therefore, in accordance with the U.S. Children’s Online Privacy Protection Act, if we receive actual knowledge that anyone under the age of 13 has provided personal information to us without the requisite and verifiable parental consent, we will delete that information from the Site as quickly as is reasonably practical.
         </P>
 
         <H2>COPYRIGHT INFRINGEMENTS</H2>
@@ -185,11 +186,11 @@ export const TermsOfUseScreen = ({ navigation }) => {
         </P>
         <H2>GOVERNING LAW</H2>
         <P>
-        These Terms of Use and your use of the Site are governed by and construed in accordance with the laws of the State of APP_STATE applicable to agreements made and to be entirely performed within the State of AP_STATE, without regard to its conflict of law principles.
+        These Terms of Use and your use of the Site are governed by and construed in accordance with the laws of the State of {appEnv.appState} applicable to agreements made and to be entirely performed within the State of AP_STATE, without regard to its conflict of law principles.
         </P>
         <H2>DISPUTE RESOLUTION</H2>
         <P>
-        Any legal action of whatever nature brought by either you or us (collectively, the “Parties” and individually, a “Party”) shall be commenced or prosecuted in the state and federal courts located in Canada County, APP_CITY, and the Parties hereby consent to, and waive all defenses of lack of personal jurisdiction and forum non conveniens with respect to venue and jurisdiction in such state and federal courts. Application of the United Nations Convention on Contracts for the International Sale of Goods and the Uniform Computer Information Transaction Act (UCITA) are excluded from these Terms of Use. In no event shall any claim, action, or proceeding brought by either Party related in any way to the Site be commenced more than one (1) years after the cause of action arose.
+        Any legal action of whatever nature brought by either you or us (collectively, the “Parties” and individually, a “Party”) shall be commenced or prosecuted in the state and federal courts located in Canada County, {appEnv.appCity}, and the Parties hereby consent to, and waive all defenses of lack of personal jurisdiction and forum non conveniens with respect to venue and jurisdiction in such state and federal courts. Application of the United Nations Convention on Contracts for the International Sale of Goods and the Uniform Computer Information Transaction Act (UCITA) are excluded from these Terms of Use. In no event shall any claim, action, or proceeding brought by either Party related in any way to the Site be commenced more than one (1) years after the cause of action arose.
         </P>
         <H2>CORRECTIONS</H2>
         <P>
@@ -222,14 +223,14 @@ export const TermsOfUseScreen = ({ navigation }) => {
         <P>
         In order to resolve a complaint regarding the Site or to receive further information regarding use of the Site, please contact us at:
         </P>
-        <P textStyle={typography.textBold}>
-        APP_NAME_FULL  {'\n'}
-        APP_ADDRESS {'\n'}
-        APP_CITY, APP_STATE APP_ZIPCODE {'\n'}
-        APP_COUNTRY {'\n'}
-        Phone: APP_PHONE {'\n'}
-        APP_EMAIL
-        </P>
+        <STRONG>
+        {appEnv.appNameFull}  {'\n'}
+        {appEnv.appAddress} {'\n'}
+        {appEnv.appCity}, {appEnv.appState} {'\n'}
+        {appEnv.appCountry} {'\n'}
+
+        {appEnv.appEmail}
+        </STRONG>
 
     </ScrollView>
   );

@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
      flex: 4,
      flexDirection: 'row',
      flexWrap: 'wrap',
-     maxHeight: 30,
+
   },
   lineContainer: {
     flex: 1,
@@ -68,13 +68,16 @@ const styles = StyleSheet.create({
 
   },
   line: {
-    flex: 1,
+    flex: 2,
     maxHeight: 1,
     width: '100%',
-    backgroundColor: colors.gray
+    backgroundColor: colors.silver
   },
   text: {
-    flex: 2,
-    textAlign: 'center'
+    flex: 1,
+    alignSelf: 'center',
+    textAlign: 'center',
+    color: colors.silver,
+    fontSize: typography.small.fontSize
   }
 });

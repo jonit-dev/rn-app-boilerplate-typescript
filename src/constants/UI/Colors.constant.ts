@@ -16,5 +16,5 @@ export const colors = {
   yellow: "#FFDC30",
   backgroundGmail: "#D44638",
   backgroundFacebook: "#4267B2",
-  silver: '#cecece',
+  silver: '#a3a3a3',
 };

@@ -9,7 +9,8 @@
     "android-shake": "adb shell input keyevent 82",
     "android-reload": "adb shell input text 'RR'",
     "adb-sync": "sudo adb kill-server && sudo adb start-server && adb reverse tcp:3000 tcp:3000",
-    "lint": "tslint './src/**/*.{ts,tsx}' --fix"
+    "lint": "tslint './src/**/*.{ts,tsx}' --fix",
+    "tslint-check": "tslint-config-prettier-check ./tslint.json"
   },
   "husky": {
     "hooks": {

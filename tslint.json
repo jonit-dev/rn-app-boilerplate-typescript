@@ -1,10 +1,10 @@
 {
     "defaultSeverity": "error",
     "extends": [
-        "tslint:recommended",
+        "tslint:latest",
         "tslint-react",
-        "tslint-config-prettier",
-        "tslint-react-native"
+        "tslint-react-native",
+        "tslint-config-prettier"
     ],
     "jsRules": {},
     "rules": {
@@ -16,10 +16,7 @@
         "no-unused-styles": true,
         "no-default-export": true,
         "no-console": false,
-        "no-trailing-whitespace": [
-            true,
-            "always"
-        ],
+        "no-implicit-dependencies": false,
         "only-arrow-functions": false,
         "variable-name": false,
         "prefer-const": [

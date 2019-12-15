@@ -5,5 +5,9 @@
     "*.ts": "typescriptreact",
     "*.tsx": "typescriptreact"
   },
-  "workbench.colorTheme": "Activate UMBRA protocol"
+  "workbench.colorTheme": "Activate UMBRA protocol",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

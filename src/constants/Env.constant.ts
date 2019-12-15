@@ -31,7 +31,13 @@ const defineServerUrl = () => {
 export const appEnv = {
   appName: 'App Boilerplate',
   appNameFull: 'App Boilerplate LLC',
-
+  appPrivacyPolicyUrl: "https://appboilerplate.com/privacy",
+  appUrl: 'https://appboilerplate.com',
+  appState: 'British Columbia',
+  appAddress: '18th Street',
+  appCity: 'North Vancouver',
+  appCountry: 'Canada',
+  appEmail: 'appboilerplate@app.com',
   language: AvailableLanguages.eng,
   serverUrl: defineServerUrl(), // current serverUrl
   oauth: {
