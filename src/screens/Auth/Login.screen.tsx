@@ -1,7 +1,4 @@
 import { FontAwesome } from '@expo/vector-icons';
-import { Platform } from '@unimodules/core';
-import * as Facebook from 'expo-facebook';
-import * as Google from 'expo-google-app-auth';
 import React, { useState } from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -14,12 +11,12 @@ import { CircleButton } from '../../components/form/CircleButton';
 import { Divisor } from '../../components/form/Divisor';
 import { Form } from '../../components/form/Form';
 import { IconInput, IconPackageTypes } from '../../components/form/IconInput';
-import { appEnv } from '../../constants/Env.constant';
 import { images } from '../../constants/Images.constant';
 import { colors } from '../../constants/UI/Colors.constant';
 import { common } from '../../constants/UI/Common.constant';
 import { typography } from '../../constants/UI/Typography.constant';
 import { TS } from '../../helpers/LanguageHelper';
+import { OAuthHelper } from '../../helpers/OAuthHelper';
 import { setLoading, showMessage } from '../../store/actions/ui.actions';
 import { AuthType, userLogin } from '../../store/actions/user.actions';
 import { IUser } from '../../typescript/User.types';
@@ -35,88 +32,41 @@ export const LoginScreen = props => {
 
   const dispatch = useDispatch();
 
-  // FACEBOOK OAUTH ========================================
 
-  const facebookLogin = async () => {
-    console.log("Logging in with facebook");
+  // OAUTH ========================================
 
-    try {
-      await Facebook.initializeAsync(
-        appEnv.oauth.facebook.appId,
-        appEnv.oauth.facebook.appName
-      );
+  const facebookLoginClick = async () => {
 
-      const {
-        type,
-        token,
-        expires
-      } = await Facebook.logInWithReadPermissionsAsync(
-        appEnv.oauth.facebook.appId,
-        // @ts-ignore
-        {
-          permissions: ["public_profile", "email"]
-        }
-      );
+    const result: any  = await OAuthHelper.facebookLogin()
 
-      const accessToken = token;
+    dispatch(setLoading(true, "facebook"));
+    await dispatch(
+      userLogin(
+        result,
+        props.navigation,
+        AuthType.FacebookOAuth
+      )
+    );
 
-      // console.log({ type, token, expires });
+    dispatch(setLoading(false, "facebook"));
 
-      if (type === "success") {
-        dispatch(setLoading(true, "facebook"));
-        await dispatch(
-          userLogin(
-            {
-              accessToken
-            },
-            props.navigation,
-            AuthType.FacebookOAuth
-          )
-        );
-
-        dispatch(setLoading(false, "facebook"));
-      } else {
-        // type === 'cancel'
-      }
-    } catch ({ message }) {
-      alert(`Facebook Login Error: ${message}`);
-    }
-  };
+  }
 
   // GOOGLE OAUTH ========================================
 
-  const googleLogin = async () => {
-    try {
-      const result = await Google.logInAsync({
-        clientId: appEnv.oauth.google.androidClientId,
-        androidClientId: appEnv.oauth.google.androidClientId,
-        iosClientId: appEnv.oauth.google.iosClientId,
-        scopes: ["profile", "email"]
-      });
+  const googleLoginClick = async () => {
 
-      if (result.type === "success") {
-        dispatch(setLoading(true, "gmail"));
-        await dispatch(
-          userLogin(
-            {
-              idToken: result.idToken,
-              appClientId:
-                Platform.OS === "android"
-                  ? appEnv.oauth.google.androidClientId
-                  : appEnv.oauth.google.iosClientId
-            },
-            props.navigation,
-            AuthType.GoogleOAuth
-          )
-        );
+    const result = await OAuthHelper.googleLogin();
+    dispatch(setLoading(true, "gmail"));
+    await dispatch(
+      userLogin(
+        result,
+        props.navigation,
+        AuthType.GoogleOAuth
+      )
+    );
 
-        dispatch(setLoading(false, "gmail"));
-      } else {
-        return { cancelled: true };
-      }
-    } catch (e) {
-      return { error: true };
-    }
+    dispatch(setLoading(false, "gmail"));
   };
 
   // check if user is logged in. If so, load navigation stack. If not, load login screen
@@ -161,9 +111,7 @@ export const LoginScreen = props => {
     props.navigation.navigate("RegisterScreen");
   };
 
-  const changePasswordClick = () => {
-    props.navigation.navigate("ChangePasswordScreen");
-  };
+
 
   const forgotPasswordClick = () => {
     props.navigation.navigate("ForgotPasswordScreen");
@@ -229,11 +177,11 @@ export const LoginScreen = props => {
         </Divisor>
 
       <View style={styles.socialAuthRow}>
-      <CircleButton style={styles.gmailLogin} onPress={() => googleLogin() }>
+      <CircleButton style={styles.gmailLogin} onPress={() => googleLoginClick() }>
           <FontAwesome name={"google"} size={24} color={colors.white} />
         </CircleButton>
 
-        <CircleButton style={styles.facebookLogin} onPress={() => facebookLogin() }>
+        <CircleButton style={styles.facebookLogin} onPress={() => facebookLoginClick() }>
         <FontAwesome name={"facebook"} size={24} color={colors.white} />
         </CircleButton>
       </View>

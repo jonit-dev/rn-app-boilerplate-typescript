@@ -22,8 +22,10 @@ export interface ICredentials {
 }
 
 export interface IGoogleAuthPayload {
-  idToken: string | null;
-  appClientId: string;
+  idToken?: string | null;
+  appClientId?: string;
+  cancelled?: boolean,
+  error?: boolean
 }
 
 export interface IFacebookAuthPayload {
