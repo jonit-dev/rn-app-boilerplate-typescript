@@ -28,7 +28,8 @@
       "config": {
         "googleSignIn": {
           "reservedClientId": "com.googleusercontent.apps.948796332411-33joe7auarqi73nfo0pg50ce1slsaiuq"
-        }
+        },
+        "googleMobileAdsAppId": "ca-app-pub-3940256099942544~1458002511"
       }
     },
     "packagerOpts": {
@@ -43,7 +44,10 @@
     },
     "android": {
       "package": "com.mycompany.boilerplateapp",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-3940256099942544~3347511713"
+      }
     },
     "facebookAppId": "442424923110439",
     "facebookDisplayName": "AppBoilerplate",

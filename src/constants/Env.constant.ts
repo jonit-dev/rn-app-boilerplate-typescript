@@ -29,28 +29,37 @@ const defineServerUrl = () => {
 };
 
 export const appEnv = {
-  appName: 'App Boilerplate',
-  appNameFull: 'App Boilerplate LLC',
+  appName: "App Boilerplate",
+  appNameFull: "App Boilerplate LLC",
   appPrivacyPolicyUrl: "https://appboilerplate.com/privacy",
-  appUrl: 'https://appboilerplate.com',
-  appState: 'British Columbia',
-  appAddress: '18th Street',
-  appCity: 'North Vancouver',
-  appCountry: 'Canada',
-  appEmail: 'appboilerplate@app.com',
+  appUrl: "https://appboilerplate.com",
+  appState: "British Columbia",
+  appAddress: "18th Street",
+  appCity: "North Vancouver",
+  appCountry: "Canada",
+  appEmail: "appboilerplate@app.com",
   language: AvailableLanguages.eng,
   serverUrl: defineServerUrl(), // current serverUrl
   oauth: {
+    // * REMEMBER: you should also configure app.json with proper ids
     google: {
+      // * Docs: https://docs.expo.io/versions/latest/sdk/google/
       iosClientId:
         "868221073357-62fb6bqh2i35ih18kv3rk0vs9u8bgk9c.apps.googleusercontent.com", // from GoogleService-Info.plist
       // from google developers console
       androidClientId:
         "868221073357-cpmr7sijto13j45ja8q6rqr13bq4bk92.apps.googleusercontent.com"
     },
+    // * Docs: https://docs.expo.io/versions/latest/sdk/facebook/
     facebook: {
       appId: "442424923110439",
       appName: "AppBoilerplate"
     }
+  },
+  admob: {
+    // * Docs: https://docs.expo.io/versions/latest/sdk/admob/
+    // * REMEMBER: you should also configure app.json with proper ids
+    enabled: false,
+    adUnitID: "ca-app-pub-3940256099942544/1033173712"
   }
 };
