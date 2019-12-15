@@ -111,11 +111,14 @@ export const LoginScreen = props => {
     props.navigation.navigate("RegisterScreen");
   };
 
-
-
   const forgotPasswordClick = () => {
     props.navigation.navigate("ForgotPasswordScreen");
   };
+
+  const termsOfUseClick = () => {
+    props.navigation.navigate("TermsOfUseScreen");
+
+  }
 
   return (
     <View style={styles.container}>
@@ -152,12 +155,6 @@ export const LoginScreen = props => {
               {TS.string("account", "loginSignupHere")}
             </Text>
 
-          {/* <TouchableOpacity onPress={() => changePasswordClick()}>
-            <Text style={typography.p}>
-              {TS.string("account", "changePasswordLoginText")}
-            </Text>
-          </TouchableOpacity> */}
-
           <TouchableOpacity onPress={() => forgotPasswordClick()}>
             <Text style={typography.p}>
               {TS.string("account", "forgotPasswordLoginText")}
@@ -187,6 +184,12 @@ export const LoginScreen = props => {
       </View>
 
 
+      <View style={styles.termsOfUseContainer}>
+          <TouchableOpacity onPress={() => termsOfUseClick()}>
+          <Text style={typography.small}>By signing up you agree with our terms of use</Text>
+          </TouchableOpacity>
+      </View>
+
 
 
         <ShowSnackbar />
@@ -214,12 +217,7 @@ const styles = StyleSheet.create({
   logo: {
     alignSelf: "center"
   },
-  registerTextContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
 
-    marginTop: 22
-  },
   passwordManagementContainer: {
     marginBottom: 40,
 
@@ -245,5 +243,19 @@ const styles = StyleSheet.create({
   },
   divisor: {
     marginVertical: 20
+  },
+  termsOfUseContainer: {
+    marginTop: 20,
+    maxHeight: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'hotpink',
+    flex: 1,
+  },
+  termsOfUse: {
+    color: colors.silver,
+    textAlign: 'center',
+    fontSize: typography.small.fontSize
   }
 });

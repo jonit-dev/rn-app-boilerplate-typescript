@@ -5,6 +5,7 @@ import { ChangePasswordScreen } from '../../screens/Auth/ChangePassword.screen';
 import { ForgotPasswordScreen } from '../../screens/Auth/ForgotPassword.screen';
 import { LoginScreen } from '../../screens/Auth/Login.screen';
 import { RegisterScreen } from '../../screens/Auth/Register.screen';
+import { TermsOfUseScreen } from '../../screens/Auth/TermsOfUse.screen';
 
 export const AuthStackNavigator = createStackNavigator(
   {
@@ -22,6 +23,12 @@ export const AuthStackNavigator = createStackNavigator(
     },
     ChangePasswordScreen: {
       screen: ChangePasswordScreen
+    },
+    TermsOfUseScreen: {
+      screen: TermsOfUseScreen,
+      navigationOptions: {
+        title: 'Terms of Use'
+      }
     }
   },
   defaultStackNavigationOptions

@@ -29,6 +29,9 @@ const defineServerUrl = () => {
 };
 
 export const appEnv = {
+  appName: 'App Boilerplate',
+  appNameFull: 'App Boilerplate LLC',
+
   language: AvailableLanguages.eng,
   serverUrl: defineServerUrl(), // current serverUrl
   oauth: {

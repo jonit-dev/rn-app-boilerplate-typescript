@@ -34,7 +34,7 @@ export const ForgotPasswordScreen = ({ navigation }) => {
 
       <H2 style={styles.h2}>{TS.string("account", "forgotPasswordTitle")}</H2>
 
-      <P center={true} styles={styles.p}>
+      <P center={true} style={styles.p}>
         {TS.string("account", "forgotPasswordText")}
       </P>
 
