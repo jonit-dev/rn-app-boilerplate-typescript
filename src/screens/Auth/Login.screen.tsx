@@ -10,6 +10,8 @@ import { useDispatch } from 'react-redux';
 import Logo from '../../assets/images/logo.svg';
 import { ShowSnackbar } from '../../components/alert/ShowSnackbar';
 import { BlockButton } from '../../components/form/BlockButton';
+import { CircleButton } from '../../components/form/CircleButton';
+import { Divisor } from '../../components/form/Divisor';
 import { Form } from '../../components/form/Form';
 import { IconInput, IconPackageTypes } from '../../components/form/IconInput';
 import { appEnv } from '../../constants/Env.constant';
@@ -58,7 +60,7 @@ export const LoginScreen = props => {
 
       const accessToken = token;
 
-      console.log({ type, token, expires });
+      // console.log({ type, token, expires });
 
       if (type === "success") {
         dispatch(setLoading(true, "facebook"));
@@ -194,14 +196,22 @@ export const LoginScreen = props => {
         />
 
         <View style={styles.passwordManagementContainer}>
-          <TouchableOpacity onPress={() => changePasswordClick()}>
+
+            <Text
+              style={[common.link, typography.textBold]}
+              onPress={() => registerScreenClick()}
+            >
+              {TS.string("account", "loginSignupHere")}
+            </Text>
+
+          {/* <TouchableOpacity onPress={() => changePasswordClick()}>
             <Text style={typography.p}>
               {TS.string("account", "changePasswordLoginText")}
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
           <TouchableOpacity onPress={() => forgotPasswordClick()}>
-            <Text style={common.link}>
+            <Text style={typography.p}>
               {TS.string("account", "forgotPasswordLoginText")}
             </Text>
           </TouchableOpacity>
@@ -214,37 +224,23 @@ export const LoginScreen = props => {
           {TS.string("account", "loginButtonText")}
         </BlockButton>
 
-        <BlockButton
-          onPress={() => googleLogin()}
-          style={styles.gmailLogin}
-          loadingKey={"gmail"}
-        >
+        <Divisor style={styles.divisor}>
+          Or Sign in with
+        </Divisor>
+
+      <View style={styles.socialAuthRow}>
+      <CircleButton style={styles.gmailLogin} onPress={() => googleLogin() }>
           <FontAwesome name={"google"} size={24} color={colors.white} />
-          {"  "}
-          {TS.string("account", "loginWithGmail")}
-        </BlockButton>
+        </CircleButton>
 
-        <BlockButton
-          onPress={() => facebookLogin()}
-          style={styles.facebookLogin}
-          loadingKey={"facebook"}
-        >
-          <FontAwesome name={"facebook"} size={24} color={colors.white} />
-          {"  "}
-          {TS.string("account", "loginWithFacebook")}
-        </BlockButton>
+        <CircleButton style={styles.facebookLogin} onPress={() => facebookLogin() }>
+        <FontAwesome name={"facebook"} size={24} color={colors.white} />
+        </CircleButton>
+      </View>
 
-        <View style={styles.registerTextContainer}>
-          <Text style={typography.text}>
-            {TS.string("account", "loginDontHaveAccount")}{" "}
-            <Text
-              style={[common.link, typography.textBold]}
-              onPress={() => registerScreenClick()}
-            >
-              {TS.string("account", "loginSignupHere")}
-            </Text>
-          </Text>
-        </View>
+
+
+
         <ShowSnackbar />
       </Form>
     </View>
@@ -277,18 +273,29 @@ const styles = StyleSheet.create({
     marginTop: 22
   },
   passwordManagementContainer: {
-    marginBottom: 60,
+    marginBottom: 40,
 
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between"
   },
+  socialAuthRow: {
+    flex: 1,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: 200,
+    minHeight: 55,
+    maxHeight: 55,
+  },
   gmailLogin: {
-    marginVertical: 14,
     backgroundColor: colors.backgroundGmail
   },
   facebookLogin: {
-    marginVertical: 14,
     backgroundColor: colors.backgroundFacebook
+  },
+  divisor: {
+    marginVertical: 20
   }
 });
