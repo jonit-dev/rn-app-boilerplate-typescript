@@ -33,40 +33,23 @@ export const LoginScreen = props => {
 
   const dispatch = useDispatch();
 
-
   // OAUTH ========================================
 
   const facebookLoginClick = async () => {
-
-    const result: any = await OAuthHelper.facebookLogin()
+    const result: any = await OAuthHelper.facebookLogin();
 
     dispatch(setLoading(true, "facebook"));
-    await dispatch(
-      userLogin(
-        result,
-        props.navigation,
-        AuthType.FacebookOAuth
-      )
-    );
+    await dispatch(userLogin(result, props.navigation, AuthType.FacebookOAuth));
 
     dispatch(setLoading(false, "facebook"));
-
-  }
+  };
 
   // GOOGLE OAUTH ========================================
 
   const googleLoginClick = async () => {
-
     const result = await OAuthHelper.googleLogin();
     dispatch(setLoading(true, "gmail"));
-    await dispatch(
-      userLogin(
-        result,
-        props.navigation,
-        AuthType.GoogleOAuth
-      )
-    );
-
+    await dispatch(userLogin(result, props.navigation, AuthType.GoogleOAuth));
     dispatch(setLoading(false, "gmail"));
   };
 
@@ -118,8 +101,7 @@ export const LoginScreen = props => {
 
   const termsOfUseClick = () => {
     props.navigation.navigate("TermsOfUseScreen");
-
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -148,7 +130,6 @@ export const LoginScreen = props => {
         />
 
         <View style={styles.passwordManagementContainer}>
-
           <Text
             style={[common.link, typography.textBold]}
             onPress={() => registerScreenClick()}
@@ -170,23 +151,31 @@ export const LoginScreen = props => {
           {TS.string("account", "loginButtonText")}
         </BlockButton>
 
-        <Divisor>
-          Or Sign in with
-        </Divisor>
+        <Divisor>Or Sign in with</Divisor>
 
         <View style={styles.socialAuthRow}>
-          <CircleButton style={styles.gmailLogin} onPress={() => googleLoginClick()}>
+          <CircleButton
+            style={styles.gmailLogin}
+            onPress={() => googleLoginClick()}
+          >
             <FontAwesome name={"google"} size={24} color={colors.white} />
           </CircleButton>
 
-          <CircleButton style={styles.facebookLogin} onPress={() => facebookLoginClick()}>
+          <CircleButton
+            style={styles.facebookLogin}
+            onPress={() => facebookLoginClick()}
+          >
             <FontAwesome name={"facebook"} size={24} color={colors.white} />
           </CircleButton>
         </View>
 
-
         <TouchableOpacity onPress={() => termsOfUseClick()}>
-          <SMALL center={true} textStyle={styles.termsOfUse}>By signing in you agree with our <Text style={[typography.small, styles.bold, styles.termsOfUse]}>terms of use</Text></SMALL>
+          <SMALL center={true} textStyle={styles.termsOfUse}>
+            By signing in you agree with our{" "}
+            <Text style={[typography.small, styles.bold, styles.termsOfUse]}>
+              terms of use
+            </Text>
+          </SMALL>
         </TouchableOpacity>
 
         <ShowSnackbar />
@@ -205,7 +194,7 @@ const styles = StyleSheet.create({
   },
 
   bold: {
-    fontFamily: 'muliBold'
+    fontFamily: "muliBold"
   },
   imageBackground: {
     position: "absolute",
@@ -228,13 +217,13 @@ const styles = StyleSheet.create({
   },
   socialAuthRow: {
     flex: 1,
-    alignSelf: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    alignSelf: "center",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
     width: 200,
     minHeight: 55,
-    maxHeight: 55,
+    maxHeight: 55
   },
   gmailLogin: {
     backgroundColor: colors.backgroundGmail
@@ -243,9 +232,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.backgroundFacebook
   },
 
-
   termsOfUse: {
-    color: colors.silver,
-
+    color: colors.silver
   }
 });

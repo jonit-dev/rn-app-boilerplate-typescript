@@ -6,8 +6,9 @@
     "*.tsx": "typescriptreact"
   },
   "workbench.colorTheme": "Activate UMBRA protocol",
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "ms-vscode.vscode-typescript-tslint-plugin",
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+    "editor.defaultFormatter": "ms-vscode.vscode-typescript-tslint-plugin"
+  },
+  "eslint.enable": false
 }

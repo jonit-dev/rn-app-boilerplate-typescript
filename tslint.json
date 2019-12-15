@@ -1,10 +1,10 @@
 {
     "defaultSeverity": "error",
     "extends": [
-        "tslint:latest",
+        "tslint:recommended",
         "tslint-react",
-        "tslint-react-native",
-        "tslint-config-prettier"
+        "tslint-config-prettier",
+        "tslint-react-native"
     ],
     "jsRules": {},
     "rules": {
