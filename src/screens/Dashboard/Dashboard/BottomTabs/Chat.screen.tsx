@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import io from 'socket.io-client';
 
 import { ChatContactItem } from '../../../../components/chat/ChatContactItem';
 import { Dropdown } from '../../../../components/form/Dropdown';
 import { DropdownItem } from '../../../../components/form/DropdownItem';
 import { IconInput, IconPackageTypes } from '../../../../components/form/IconInput';
 import { DefaultScreen } from '../../../../components/navigator/DefaultScreen';
-import { appEnv } from '../../../../constants/Env.constant';
 import { images } from '../../../../constants/Images.constant';
 import { colors } from '../../../../constants/UI/Colors.constant';
 import { clearSearchUsers, searchUsers } from '../../../../store/actions/chat.actions';
 
 export const ChatScreen = props => {
-  const socket = io(appEnv.serverUrl);
+  // const socket = io(appEnv.serverUrl);
 
   const [searchUsername, setSearchUserName] = useState("");
 

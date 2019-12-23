@@ -6,9 +6,9 @@ const INITIAL_STATE = {
 export const chatReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SEARCH_USERS:
-      return { searchedUsers: action.payload };
+      return { ...state, searchedUsers: action.payload };
     case CLEAR_SEARCH_USERS:
-      return { searchedUsers: [] };
+      return { ...state, searchedUsers: [] };
     default:
       return state;
   }
