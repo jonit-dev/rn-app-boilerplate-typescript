@@ -12,6 +12,7 @@ interface IProps {
   inputStyle?: StyleSheet;
   isPassword?: boolean;
   onChange: (text: any) => void;
+  placeholder?: string;
 }
 
 export enum IconPackageTypes {
@@ -27,7 +28,8 @@ export const IconInput = (props: IProps) => {
     iconPackage,
     isPassword,
     onChange,
-    inputStyle
+    inputStyle,
+    placeholder
   } = props;
 
   const renderIcon = () => {
@@ -60,6 +62,7 @@ export const IconInput = (props: IProps) => {
         style={styles.input}
         onChangeText={text => onChange(text)}
         secureTextEntry={isPassword}
+        placeholder={placeholder}
       />
     </View>
   );
