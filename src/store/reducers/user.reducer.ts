@@ -5,9 +5,7 @@ const INITIAL_STATE = {
   token: null,
   onboarding: false
 };
-
-// tslint:disable-next-line: no-default-export
-export default (state = INITIAL_STATE, action) => {
+export const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case USER_REFRESH_INFO:
     case USER_LOGIN:

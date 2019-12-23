@@ -12,6 +12,7 @@ interface IProps {
   inputStyle?: StyleSheet;
   isPassword?: boolean;
   onChange: (text: any) => void;
+  onBlur?: () => void;
   placeholder?: string;
 }
 
@@ -29,7 +30,8 @@ export const IconInput = (props: IProps) => {
     isPassword,
     onChange,
     inputStyle,
-    placeholder
+    placeholder,
+    onBlur
   } = props;
 
   const renderIcon = () => {
@@ -63,6 +65,7 @@ export const IconInput = (props: IProps) => {
         onChangeText={text => onChange(text)}
         secureTextEntry={isPassword}
         placeholder={placeholder}
+        onBlur={onBlur}
       />
     </View>
   );

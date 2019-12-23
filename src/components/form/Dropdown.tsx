@@ -24,6 +24,15 @@ const styles = StyleSheet.create({
     zIndex: 1,
     borderWidth: 0.5,
     borderColor: colors.lightGray,
-    borderRadius: 10
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 3
   }
 });

@@ -14,8 +14,7 @@ const INITIAL_STATE = {
   }
 };
 
-// tslint:disable-next-line: no-default-export
-export default (state = INITIAL_STATE, action) => {
+export const uiReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_LOADING:
       return {
