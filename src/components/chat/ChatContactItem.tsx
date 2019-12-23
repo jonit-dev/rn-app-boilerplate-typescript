@@ -20,7 +20,10 @@ export const ChatContactItem = ({
   return (
     <TouchableOpacity style={styles.container} onPress={() => onPress()}>
       <View style={styles.pictureContainer}>
-        <Image source={imageSource} style={styles.image} />
+        <Image
+          source={imageSource ? { uri: imageSource } : {}}
+          style={imageSource ? styles.image : styles.noPicture}
+        />
       </View>
       <View style={styles.infoContainer}>
         <View style={styles.infoRow}>
@@ -57,6 +60,12 @@ const styles = StyleSheet.create({
     width: imageWidthHeight,
     height: imageWidthHeight,
     borderRadius: imageWidthHeight / 2
+  },
+  noPicture: {
+    width: imageWidthHeight,
+    height: imageWidthHeight,
+    borderRadius: imageWidthHeight / 2,
+    backgroundColor: colors.mediumGray
   },
   pictureContainer: {
     flex: 2,

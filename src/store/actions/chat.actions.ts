@@ -1,6 +1,6 @@
 import { APIHelper } from '../../helpers/APIHelper';
 import { RequestTypes } from '../../typescript/Requests.types';
-import { CLEAR_SEARCH_USERS, SEARCH_USERS } from '../reducers/chat.reducer';
+import { ADD_CHAT_TO_LIST, CLEAR_SEARCH_USERS, SEARCH_USERS } from '../reducers/chat.reducer';
 
 export const searchUsers = (keyword: string) => async dispatch => {
   const response: any = await APIHelper.request(
@@ -17,4 +17,8 @@ export const searchUsers = (keyword: string) => async dispatch => {
 
 export const clearSearchUsers = () => async dispatch => {
   dispatch({ type: CLEAR_SEARCH_USERS });
+};
+
+export const addToChatList = chatUser => async dispatch => {
+  dispatch({ type: ADD_CHAT_TO_LIST, payload: chatUser });
 };

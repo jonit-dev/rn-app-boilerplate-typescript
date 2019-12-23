@@ -7,17 +7,16 @@ import { Dropdown } from '../../../../components/form/Dropdown';
 import { DropdownItem } from '../../../../components/form/DropdownItem';
 import { IconInput, IconPackageTypes } from '../../../../components/form/IconInput';
 import { DefaultScreen } from '../../../../components/navigator/DefaultScreen';
-import { images } from '../../../../constants/Images.constant';
 import { colors } from '../../../../constants/UI/Colors.constant';
-import { clearSearchUsers, searchUsers } from '../../../../store/actions/chat.actions';
+import { addToChatList, clearSearchUsers, searchUsers } from '../../../../store/actions/chat.actions';
 
 export const ChatScreen = props => {
   // const socket = io(appEnv.serverUrl);
 
   const [searchUsername, setSearchUserName] = useState("");
 
-  const searchedUsers = useSelector<any, any>(
-    state => state.chatReducer.searchedUsers
+  const { searchedUsers, conversations } = useSelector<any, any>(
+    state => state.chatReducer
   );
 
   const dispatch = useDispatch();
@@ -45,13 +44,34 @@ export const ChatScreen = props => {
             <DropdownItem
               key={user._id}
               title={user.name}
-              subtitle={"Something"}
-              onPress={() => console.log("adding to state")}
+              subtitle={user.type}
+              onPress={async () => {
+                if (
+                  !conversations.find(
+                    conversationUser => conversationUser._id === user._id
+                  )
+                ) {
+                  console.log(`adding ${user.name} to conversations list`);
+                  await dispatch(addToChatList(user));
+                }
+              }}
             />
           );
         })}
       </Dropdown>
     );
+  };
+
+  const renderChatContactItems = () => {
+    return conversations.map(conversationUser => (
+      <ChatContactItem
+        key={conversationUser._id}
+        onPress={() => console.log("enter chatroom")}
+        imageSource={conversationUser.avatarUrl}
+        title={conversationUser.name}
+        subtitle={conversationUser.type}
+      />
+    ));
   };
 
   return (
@@ -78,49 +98,7 @@ export const ChatScreen = props => {
       </View>
 
       <ScrollView style={styles.chatContactList}>
-        <ChatContactItem
-          onPress={() => console.log("enter chatroom")}
-          imageSource={images.chat.alice}
-          title={"Alice"}
-          subtitle={"Hello there!"}
-        />
-
-        <ChatContactItem
-          onPress={() => console.log("enter chatroom")}
-          imageSource={images.chat.gerard}
-          title={"Gerard"}
-          subtitle={"What's up, bro?"}
-        />
-        <ChatContactItem
-          onPress={() => console.log("enter chatroom")}
-          imageSource={images.chat.gerard}
-          title={"Gerard"}
-          subtitle={"What's up, bro?"}
-        />
-        <ChatContactItem
-          onPress={() => console.log("enter chatroom")}
-          imageSource={images.chat.gerard}
-          title={"Gerard"}
-          subtitle={"What's up, bro?"}
-        />
-        <ChatContactItem
-          onPress={() => console.log("enter chatroom")}
-          imageSource={images.chat.gerard}
-          title={"Gerard"}
-          subtitle={"What's up, bro?"}
-        />
-        <ChatContactItem
-          onPress={() => console.log("enter chatroom")}
-          imageSource={images.chat.gerard}
-          title={"Gerard"}
-          subtitle={"What's up, bro?"}
-        />
-        <ChatContactItem
-          onPress={() => console.log("enter chatroom")}
-          imageSource={images.chat.gerard}
-          title={"Gerard"}
-          subtitle={"What's up, bro?"}
-        />
+        {conversations && renderChatContactItems()}
       </ScrollView>
     </DefaultScreen>
   );
