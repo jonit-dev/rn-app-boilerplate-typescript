@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import io from 'socket.io-client';
 
 import { ChatContactItem } from '../../../../components/chat/ChatContactItem';
+import { Dropdown } from '../../../../components/form/Dropdown';
+import { DropdownItem } from '../../../../components/form/DropdownItem';
 import { IconInput, IconPackageTypes } from '../../../../components/form/IconInput';
 import { DefaultScreen } from '../../../../components/navigator/DefaultScreen';
 import { appEnv } from '../../../../constants/Env.constant';
@@ -17,7 +19,7 @@ export const ChatScreen = props => {
   return (
     <DefaultScreen
       title="Chat"
-      style={[styles.container]}
+      style={styles.container}
       navigation={props.navigation}
     >
       <View style={styles.searchContainer}>
@@ -29,22 +31,57 @@ export const ChatScreen = props => {
           onChange={text => setSearchUserName(text)}
           placeholder={"Search for a name"}
         />
-        {/* <Dropdown>
-          <DropdownItem title={"Option 1"} subtitle={"Friend"} />
-          <DropdownItem title={"Option 2"} subtitle={"Another person"} />
-        </Dropdown> */}
+        <Dropdown>
+          <DropdownItem title={"Alice"} subtitle={"K12 Teacher"} />
+          <DropdownItem title={"Gerard"} subtitle={"High School Teacher"} />
+        </Dropdown>
       </View>
 
-      <ChatContactItem
-        imageSource={images.chat.alice}
-        title={"Alice"}
-        subtitle={"Hello there!"}
-      />
-      <ChatContactItem
-        imageSource={images.chat.gerard}
-        title={"Gerard"}
-        subtitle={"What's up, bro?"}
-      />
+      <ScrollView style={styles.chatContactList}>
+        <ChatContactItem
+          onPress={() => console.log("enter chatroom")}
+          imageSource={images.chat.alice}
+          title={"Alice"}
+          subtitle={"Hello there!"}
+        />
+
+        <ChatContactItem
+          onPress={() => console.log("enter chatroom")}
+          imageSource={images.chat.gerard}
+          title={"Gerard"}
+          subtitle={"What's up, bro?"}
+        />
+        <ChatContactItem
+          onPress={() => console.log("enter chatroom")}
+          imageSource={images.chat.gerard}
+          title={"Gerard"}
+          subtitle={"What's up, bro?"}
+        />
+        <ChatContactItem
+          onPress={() => console.log("enter chatroom")}
+          imageSource={images.chat.gerard}
+          title={"Gerard"}
+          subtitle={"What's up, bro?"}
+        />
+        <ChatContactItem
+          onPress={() => console.log("enter chatroom")}
+          imageSource={images.chat.gerard}
+          title={"Gerard"}
+          subtitle={"What's up, bro?"}
+        />
+        <ChatContactItem
+          onPress={() => console.log("enter chatroom")}
+          imageSource={images.chat.gerard}
+          title={"Gerard"}
+          subtitle={"What's up, bro?"}
+        />
+        <ChatContactItem
+          onPress={() => console.log("enter chatroom")}
+          imageSource={images.chat.gerard}
+          title={"Gerard"}
+          subtitle={"What's up, bro?"}
+        />
+      </ScrollView>
     </DefaultScreen>
   );
 };
@@ -53,16 +90,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-start",
-
-    backgroundColor: colors.backgroundGray
+    backgroundColor: colors.backgroundGray,
+    flexWrap: "wrap"
   },
   searchContainer: {
     position: "relative",
     top: 0,
     left: 0,
     flex: 1,
-    borderWidth: 1,
-    borderColor: "hotpink",
+
     maxHeight: 60
+  },
+  chatContactList: {
+    flex: 1,
+    zIndex: -1
   }
 });

@@ -17,12 +17,13 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     minHeight: 55,
     position: "absolute",
-    top: 55,
+    top: 60,
     left: 0,
     backgroundColor: "white",
     width: "100%",
     zIndex: 1,
     borderWidth: 0.5,
-    borderColor: colors.lightGray
+    borderColor: colors.lightGray,
+    borderRadius: 10
   }
 });
