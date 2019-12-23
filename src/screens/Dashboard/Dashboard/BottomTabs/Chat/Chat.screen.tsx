@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ChatContactItem } from '../../../../components/chat/ChatContactItem';
-import { Dropdown } from '../../../../components/form/Dropdown';
-import { DropdownItem } from '../../../../components/form/DropdownItem';
-import { IconInput, IconPackageTypes } from '../../../../components/form/IconInput';
-import { DefaultScreen } from '../../../../components/navigator/DefaultScreen';
-import { colors } from '../../../../constants/UI/Colors.constant';
-import { addToChatList, clearSearchUsers, searchUsers } from '../../../../store/actions/chat.actions';
+import { ChatContactItem } from '../../../../../components/chat/ChatContactItem';
+import { Dropdown } from '../../../../../components/form/Dropdown';
+import { DropdownItem } from '../../../../../components/form/DropdownItem';
+import { IconInput, IconPackageTypes } from '../../../../../components/form/IconInput';
+import { DefaultScreen } from '../../../../../components/navigator/DefaultScreen';
+import { colors } from '../../../../../constants/UI/Colors.constant';
+import { addToChatList, clearSearchUsers, searchUsers } from '../../../../../store/actions/chat.actions';
 
 export const ChatScreen = props => {
   // const socket = io(appEnv.serverUrl);
@@ -66,7 +66,11 @@ export const ChatScreen = props => {
     return conversations.map(conversationUser => (
       <ChatContactItem
         key={conversationUser._id}
-        onPress={() => console.log("enter chatroom")}
+        onPress={() => {
+          console.log("Entering chat room...");
+
+          props.navigation.navigate("IndividualChat");
+        }}
         imageSource={conversationUser.avatarUrl}
         title={conversationUser.name}
         subtitle={conversationUser.type}

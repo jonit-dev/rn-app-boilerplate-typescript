@@ -15,7 +15,7 @@ import { SMALL } from '../../components/form/SMALL';
 import { images } from '../../constants/Images.constant';
 import { colors } from '../../constants/UI/Colors.constant';
 import { common } from '../../constants/UI/Common.constant';
-import { typography } from '../../constants/UI/Typography.constant';
+import { defaultBoldFont, typography } from '../../constants/UI/Typography.constant';
 import { TS } from '../../helpers/LanguageHelper';
 import { OAuthHelper } from '../../helpers/OAuthHelper';
 import { setLoading, showMessage } from '../../store/actions/ui.actions';
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
   },
 
   bold: {
-    fontFamily: "muliBold"
+    fontFamily: defaultBoldFont
   },
   imageBackground: {
     position: "absolute",
