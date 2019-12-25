@@ -9,9 +9,10 @@ import { DefaultTextInput } from '../form/DefaultTextInput';
 
 interface IProps {
   containerStyle?: ViewStyle;
-
+  onChange: (e: any) => void;
   sendColor?: string;
   onSend: () => void;
+  value: string;
 }
 
 export const ChatSendMessageBar = (props: IProps) => {
@@ -31,6 +32,8 @@ export const ChatSendMessageBar = (props: IProps) => {
         <DefaultTextInput
           placeholder={TS.string("chat", "chatInputPlaceholder")}
           style={styles.chatInput}
+          onChange={props.onChange}
+          value={props.value}
         />
       </View>
 

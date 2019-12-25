@@ -2,7 +2,8 @@ import { USER_LOGOUT } from './user.reducer';
 
 const INITIAL_STATE = {
   conversations: [],
-  searchedUsers: []
+  searchedUsers: [],
+  messages: []
 };
 
 export const chatReducer = (state = INITIAL_STATE, action) => {
@@ -14,6 +15,9 @@ export const chatReducer = (state = INITIAL_STATE, action) => {
 
     case USER_LOGOUT:
       return INITIAL_STATE;
+
+    case ADD_MESSAGE:
+      return { ...state, messages: [...state.messages, action.payload] };
 
     case ADD_CHAT_TO_LIST:
       return {
@@ -29,3 +33,4 @@ export const chatReducer = (state = INITIAL_STATE, action) => {
 export const SEARCH_USERS = "SEARCH_USERS";
 export const CLEAR_SEARCH_USERS = "CLEAR_SEARCH_USERS";
 export const ADD_CHAT_TO_LIST = "ADD_CHAT_TO_LIST";
+export const ADD_MESSAGE = "ADD_MESSAGE";

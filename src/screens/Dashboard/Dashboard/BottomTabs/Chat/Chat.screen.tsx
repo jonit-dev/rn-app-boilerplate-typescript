@@ -12,8 +12,6 @@ import { TS } from '../../../../../helpers/LanguageHelper';
 import { addToChatList, clearSearchUsers, searchUsers } from '../../../../../store/actions/chat.actions';
 
 export const ChatScreen = props => {
-  // const socket = io(appEnv.serverUrl);
-
   const [searchUsername, setSearchUserName] = useState("");
 
   const { searchedUsers, conversations } = useSelector<any, any>(
@@ -68,8 +66,6 @@ export const ChatScreen = props => {
       <ChatContactItem
         key={conversationUser._id}
         onPress={() => {
-          console.log("Entering chat room...");
-
           props.navigation.navigate({
             routeName: "IndividualChat",
             params: {

@@ -4,18 +4,25 @@ import { StyleSheet, TextInput, ViewStyle } from 'react-native';
 import { colors } from '../../constants/UI/Colors.constant';
 
 interface IProps {
-  containerStyle?: ViewStyle;
   style?: ViewStyle;
   placeholder: string;
+  onChange: (e: any) => void;
+  value: string;
 }
 
 export const DefaultTextInput = ({
-  containerStyle,
   style,
-  placeholder
+  placeholder,
+  onChange,
+  value
 }: IProps) => {
   return (
-    <TextInput style={[styles.textInput, style]} placeholder={placeholder} />
+    <TextInput
+      style={[styles.textInput, style]}
+      placeholder={placeholder}
+      onChange={onChange}
+      value={value}
+    />
   );
 };
 
