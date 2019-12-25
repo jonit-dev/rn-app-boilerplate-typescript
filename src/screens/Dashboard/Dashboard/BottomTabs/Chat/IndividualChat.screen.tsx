@@ -1,13 +1,10 @@
-import { FontAwesome } from '@expo/vector-icons';
 import React from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { ChatHeaderPicture } from '../../../../../components/chat/ChatHeaderPicture';
-import { CircleButton } from '../../../../../components/form/CircleButton';
-import { DefaultTextInput } from '../../../../../components/form/DefaultTextInput';
+import { ChatSendMessageBar } from '../../../../../components/chat/ChatSendMessageBar';
 import { colors } from '../../../../../constants/UI/Colors.constant';
-import { TS } from '../../../../../helpers/LanguageHelper';
 
 interface IProps {
   navigation?: any;
@@ -19,30 +16,18 @@ export const IndividualChatScreen = (props: IProps) => {
   return (
     <KeyboardAvoidingView
       style={styles.container}
-      behavior={"padding"}
+      behavior={"height"}
+      key={"key"}
       enabled
-      keyboardVerticalOffset={75}
+      keyboardVerticalOffset={80}
     >
-      <View style={styles.bodyContainer}>
-        <ScrollView>
-          <Text>Chat room</Text>
-        </ScrollView>
-      </View>
+      <ScrollView contentContainerStyle={styles.bodyContainer}>
+        <Text>Chat room</Text>
+      </ScrollView>
       <View style={styles.bottomContainer}>
-        <View style={styles.chatInputContainer}>
-          <DefaultTextInput
-            placeholder={TS.string("chat", "chatInputPlaceholder")}
-          />
-        </View>
-
-        <View style={styles.sendButtonContainer}>
-          <CircleButton
-            style={styles.sendButton}
-            onPress={() => console.log("sending message")}
-          >
-            <FontAwesome name={"send"} size={16} color={colors.white} />
-          </CircleButton>
-        </View>
+        <ChatSendMessageBar
+          onSend={() => console.log("sending chat message")}
+        />
       </View>
     </KeyboardAvoidingView>
   );
@@ -51,34 +36,19 @@ export const IndividualChatScreen = (props: IProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 8,
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
+    flexWrap: "wrap",
     backgroundColor: colors.backgroundGray
   },
   bodyContainer: {
-    flex: 1,
+    flex: 7,
     width: "100%"
   },
   bottomContainer: {
-    flex: 8,
-    maxHeight: 60,
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flex: 1,
+    width: "100%",
+    maxHeight: 65,
     justifyContent: "center",
-    alignItems: "center",
-    width: "100%"
-  },
-
-  chatInputContainer: {
-    flex: 6
-  },
-
-  sendButtonContainer: {
-    flex: 1
-  },
-  sendButton: {
-    backgroundColor: colors.primary
+    alignItems: "center"
   }
 });
 
