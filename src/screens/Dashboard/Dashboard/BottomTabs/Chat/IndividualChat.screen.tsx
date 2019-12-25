@@ -18,10 +18,10 @@ interface IProps {
 const socket = io(appEnv.serverUrl);
 
 export const IndividualChatScreen = (props: IProps) => {
-  const { userId, userName } = props.navigation.state.params;
+  const { userId } = props.navigation.state.params;
 
   const { user } = useSelector<any, any>(state => state.userReducer);
-  const { messages } = useSelector<any, any>(state => state.chatReducer);
+  // const { messages } = useSelector<any, any>(state => state.chatReducer);
 
   const [chatInputMessage, setChatInputMessage] = useState("");
   const [room, setRoom] = useState("");
