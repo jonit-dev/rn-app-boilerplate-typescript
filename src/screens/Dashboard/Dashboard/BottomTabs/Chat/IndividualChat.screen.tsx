@@ -1,8 +1,9 @@
 import React from 'react';
-import { KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, StyleSheet, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { ChatHeaderPicture } from '../../../../../components/chat/ChatHeaderPicture';
+import { ChatMessage, ChatType } from '../../../../../components/chat/ChatMessage';
 import { ChatSendMessageBar } from '../../../../../components/chat/ChatSendMessageBar';
 import { colors } from '../../../../../constants/UI/Colors.constant';
 
@@ -22,7 +23,8 @@ export const IndividualChatScreen = (props: IProps) => {
       keyboardVerticalOffset={80}
     >
       <ScrollView contentContainerStyle={styles.bodyContainer}>
-        <Text>Chat room</Text>
+        <ChatMessage type={ChatType.Received} />
+        <ChatMessage type={ChatType.Sender} />
       </ScrollView>
       <View style={styles.bottomContainer}>
         <ChatSendMessageBar
