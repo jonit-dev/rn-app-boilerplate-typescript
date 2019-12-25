@@ -19,12 +19,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         token: action.payload.token
       };
     case USER_LOGOUT:
-      return {
-        ...state,
-        user: null,
-        token: null,
-        onboarding: false
-      };
+      return INITIAL_STATE;
 
     case USER_SET_ONBOARDING:
       return { ...state, onboarding: action.payload };
@@ -40,3 +35,4 @@ export const USER_LOGIN = "USER_LOGIN";
 export const USER_LOGOUT = "USER_LOGOUT";
 export const USER_REFRESH_INFO = "USER_REFRESH_INFO";
 export const USER_SET_ONBOARDING = "USER_SET_ONBOARDING";
+export const PURGE = "PURGE";

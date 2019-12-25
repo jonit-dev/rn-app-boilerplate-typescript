@@ -1,3 +1,5 @@
+import { USER_LOGOUT } from './user.reducer';
+
 const INITIAL_STATE = {
   conversations: [],
   searchedUsers: []
@@ -9,6 +11,9 @@ export const chatReducer = (state = INITIAL_STATE, action) => {
       return { ...state, searchedUsers: action.payload };
     case CLEAR_SEARCH_USERS:
       return { ...state, searchedUsers: [] };
+
+    case USER_LOGOUT:
+      return INITIAL_STATE;
 
     case ADD_CHAT_TO_LIST:
       return {
