@@ -4,7 +4,7 @@ import { TextInput } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 
 import Logo from '../../assets/images/logo.svg';
-import { BlockButton } from '../../components/form/BlockButton';
+import { BlockButton } from '../../components/button/BlockButton';
 import { Form } from '../../components/form/Form';
 import { H2 } from '../../components/form/H2';
 import { P } from '../../components/form/P';

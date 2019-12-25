@@ -8,6 +8,7 @@ import { DropdownItem } from '../../../../../components/form/DropdownItem';
 import { IconInput, IconPackageTypes } from '../../../../../components/form/IconInput';
 import { DefaultScreen } from '../../../../../components/navigator/DefaultScreen';
 import { colors } from '../../../../../constants/UI/Colors.constant';
+import { TS } from '../../../../../helpers/LanguageHelper';
 import { addToChatList, clearSearchUsers, searchUsers } from '../../../../../store/actions/chat.actions';
 
 export const ChatScreen = props => {
@@ -69,7 +70,13 @@ export const ChatScreen = props => {
         onPress={() => {
           console.log("Entering chat room...");
 
-          props.navigation.navigate("IndividualChat");
+          props.navigation.navigate({
+            routeName: "IndividualChat",
+            params: {
+              userId: conversationUser._id,
+              userName: conversationUser.name
+            }
+          });
         }}
         imageSource={conversationUser.avatarUrl}
         title={conversationUser.name}
@@ -96,7 +103,7 @@ export const ChatScreen = props => {
             chatSearchUsers();
           }}
           onBlur={async () => await dispatch(clearSearchUsers())}
-          placeholder={"Search for a name"}
+          placeholder={TS.string("chat", "searchInputPlaceholder")}
         />
         {renderUsersDropdown()}
       </View>

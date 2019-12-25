@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 import Logo from '../../assets/images/logo.svg';
 import { ShowSnackbar } from '../../components/alert/ShowSnackbar';
-import { BlockButton } from '../../components/form/BlockButton';
+import { BlockButton } from '../../components/button/BlockButton';
 import { CircleButton } from '../../components/form/CircleButton';
 import { Divisor } from '../../components/form/Divisor';
 import { Form } from '../../components/form/Form';

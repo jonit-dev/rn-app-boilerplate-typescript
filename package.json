@@ -1,7 +1,7 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "sudo expo start",
+    "start": "sudo expo start && adb reverse tcp:3000 tcp:3000",
     "android": "sudo expo start --android",
     "ios": "sudo expo start --ios",
     "web": "sudo expo start --web",
