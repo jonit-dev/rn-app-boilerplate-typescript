@@ -19,7 +19,13 @@ export const chatReducer = (state = INITIAL_STATE, action) => {
     case ADD_MESSAGE:
       return { ...state, messages: [...state.messages, action.payload] };
 
-    case ADD_CHAT_TO_LIST:
+    case GET_CONVERSATIONS:
+      return {
+        ...state,
+        conversations: action.payload
+      };
+
+    case ADD_CONVERSATION:
       return {
         ...state,
         conversations: [...state.conversations, action.payload]
@@ -32,5 +38,9 @@ export const chatReducer = (state = INITIAL_STATE, action) => {
 
 export const SEARCH_USERS = "SEARCH_USERS";
 export const CLEAR_SEARCH_USERS = "CLEAR_SEARCH_USERS";
-export const ADD_CHAT_TO_LIST = "ADD_CHAT_TO_LIST";
+
 export const ADD_MESSAGE = "ADD_MESSAGE";
+
+export const GET_CONVERSATIONS = "GET_CONVERSATIONS";
+export const ADD_CONVERSATION = "ADD_CONVERSATION";
+export const DELETE_CONVERSATION = "DELETE_CONVERSATION";

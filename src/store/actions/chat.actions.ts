@@ -1,6 +1,14 @@
+import { Alert } from 'react-native';
+
 import { APIHelper } from '../../helpers/APIHelper';
 import { RequestTypes } from '../../typescript/Requests.types';
-import { ADD_CHAT_TO_LIST, ADD_MESSAGE, CLEAR_SEARCH_USERS, SEARCH_USERS } from '../reducers/chat.reducer';
+import {
+  ADD_CONVERSATION,
+  ADD_MESSAGE,
+  CLEAR_SEARCH_USERS,
+  GET_CONVERSATIONS,
+  SEARCH_USERS,
+} from '../reducers/chat.reducer';
 
 export interface IMessage {
   id: string;
@@ -25,10 +33,37 @@ export const clearSearchUsers = () => dispatch => {
   dispatch({ type: CLEAR_SEARCH_USERS });
 };
 
-export const addToChatList = chatUser => dispatch => {
-  dispatch({ type: ADD_CHAT_TO_LIST, payload: chatUser });
+export const createConversation = userId => async dispatch => {
+  const response: any = await APIHelper.request(
+    RequestTypes.POST,
+    "/conversations",
+    {
+      receiverId: userId
+    },
+    true
+  );
+
+  if (response.status !== 200) {
+    Alert.alert("Error", response.data.message);
+  }
+
+  dispatch({ type: ADD_CONVERSATION, payload: response.data });
 };
 
 export const addMessage = (message: IMessage) => async dispatch => {
   dispatch({ type: ADD_MESSAGE, payload: message });
+};
+
+export const getConversations = () => async dispatch => {
+  const response: any = await APIHelper.request(
+    RequestTypes.GET,
+    "/conversations",
+    {},
+    true
+  );
+  if (response.status === 200) {
+    dispatch({ type: GET_CONVERSATIONS, payload: response.data });
+  } else {
+    Alert.alert("Error", response.data.message);
+  }
 };

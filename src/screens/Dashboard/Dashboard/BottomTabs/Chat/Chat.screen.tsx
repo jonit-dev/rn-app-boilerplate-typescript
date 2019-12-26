@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,7 +9,12 @@ import { IconInput, IconPackageTypes } from '../../../../../components/form/Icon
 import { DefaultScreen } from '../../../../../components/navigator/DefaultScreen';
 import { colors } from '../../../../../constants/UI/Colors.constant';
 import { TS } from '../../../../../helpers/LanguageHelper';
-import { addToChatList, clearSearchUsers, searchUsers } from '../../../../../store/actions/chat.actions';
+import {
+  clearSearchUsers,
+  createConversation,
+  getConversations,
+  searchUsers,
+} from '../../../../../store/actions/chat.actions';
 
 export const ChatScreen = props => {
   const [searchUsername, setSearchUserName] = useState("");
@@ -17,8 +22,16 @@ export const ChatScreen = props => {
   const { searchedUsers, conversations } = useSelector<any, any>(
     state => state.chatReducer
   );
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Load user conversations
+
+    const loadUserConversations = async () => {
+      await dispatch(getConversations());
+    };
+    loadUserConversations();
+  }, []);
 
   const chatSearchUsers = async () => {
     if (searchUsername) {
@@ -51,7 +64,7 @@ export const ChatScreen = props => {
                   )
                 ) {
                   console.log(`adding ${user.name} to conversations list`);
-                  await dispatch(addToChatList(user));
+                  await dispatch(createConversation(user._id));
                 }
               }}
             />
@@ -62,21 +75,21 @@ export const ChatScreen = props => {
   };
 
   const renderChatContactItems = () => {
-    return conversations.map(conversationUser => (
+    return conversations.map(conversation => (
       <ChatContactItem
-        key={conversationUser._id}
+        key={conversation._id}
         onPress={() => {
           props.navigation.navigate({
             routeName: "IndividualChat",
             params: {
-              userId: conversationUser._id,
-              userName: conversationUser.name
+              userId: conversation._id,
+              userName: conversation.title
             }
           });
         }}
-        imageSource={conversationUser.avatarUrl}
-        title={conversationUser.name}
-        subtitle={conversationUser.type}
+        imageSource={conversation.avatarUrl}
+        title={conversation.title}
+        subtitle={conversation.subtitle}
       />
     ));
   };
