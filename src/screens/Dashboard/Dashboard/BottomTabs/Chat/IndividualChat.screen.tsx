@@ -27,7 +27,7 @@ export const IndividualChatScreen = (props: IProps) => {
     state => state.chatReducer
   );
   const [chatInputMessage, setChatInputMessage] = useState("");
-  const [room, setRoom] = useState("");
+  const [room, setRoom] = useState(conversationId);
   const scrollViewRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -62,8 +62,7 @@ export const IndividualChatScreen = (props: IProps) => {
     });
 
     // when initializing, join the chat room
-    const roomName = conversationId;
-    setRoom(roomName); // we will use it later on socket.emi('message',...)
+
     console.log(`joining chat room - conversation ID: ${room}`);
     socket.emit("join", { room });
   }, []);
