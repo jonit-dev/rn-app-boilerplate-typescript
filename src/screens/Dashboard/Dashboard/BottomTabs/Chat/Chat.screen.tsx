@@ -39,7 +39,6 @@ export const ChatScreen = props => {
     if (searchUsername) {
       console.log(`Searching for keyword... ${searchUsername}`);
       await dispatch(searchUsers(searchUsername));
-      console.log(searchedUsers);
     }
   };
 
@@ -90,9 +89,9 @@ export const ChatScreen = props => {
           props.navigation.navigate({
             routeName: "IndividualChat",
             params: {
-              userName: conversation.title,
+              conversationTitle: conversation.title,
               conversationId: conversation._id,
-              userAvatarUrl: conversation.avatarUrl
+              conversationImage: conversation.avatarUrl
             }
           });
         }}

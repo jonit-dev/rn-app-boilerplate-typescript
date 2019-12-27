@@ -1,6 +1,8 @@
+import { Notifications } from 'expo';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { appEnv } from '../constants/Env.constant';
+import NavigationHelper from '../helpers/NavigationHelper';
 import { userGetProfileInfo } from '../store/actions/user.actions';
 
 export const InitialScreen = props => {
@@ -27,6 +29,18 @@ export const InitialScreen = props => {
   // Check APIHelper line 86 to see how its made.
 
   dispatch(userGetProfileInfo());
+
+  // Check for push notifications!
+
+  Notifications.addListener(notification => {
+    const { toScreen, params } = notification.data;
+
+    console.log("Received push data...");
+    console.log(toScreen);
+    console.log(params);
+
+    NavigationHelper.navigate(toScreen, params);
+  });
 
   props.navigation.navigate("App");
 

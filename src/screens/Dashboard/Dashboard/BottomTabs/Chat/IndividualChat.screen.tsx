@@ -164,11 +164,17 @@ const styles = StyleSheet.create({
 });
 
 IndividualChatScreen.navigationOptions = navData => {
-  const { userName, userAvatarUrl } = navData.navigation.state.params;
+  const {
+    conversationTitle,
+    conversationImage
+  } = navData.navigation.state.params;
 
   return {
     headerTitle: (
-      <ChatHeaderPicture title={userName} imageSource={userAvatarUrl} />
+      <ChatHeaderPicture
+        title={conversationTitle}
+        imageSource={conversationImage}
+      />
     ),
     tabBarVisible: false
   };
