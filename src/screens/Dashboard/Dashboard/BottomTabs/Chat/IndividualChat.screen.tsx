@@ -62,8 +62,8 @@ export const IndividualChatScreen = (props: IProps) => {
     });
 
     // when initializing, join the chat room
-    const room = conversationId;
-    setRoom(room); // we will use it later on socket.emi('message',...)
+    const roomName = conversationId;
+    setRoom(roomName); // we will use it later on socket.emi('message',...)
     console.log(`joining chat room - conversation ID: ${room}`);
     socket.emit("join", { room });
   }, []);
