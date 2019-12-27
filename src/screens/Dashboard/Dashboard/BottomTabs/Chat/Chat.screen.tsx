@@ -91,7 +91,8 @@ export const ChatScreen = props => {
             routeName: "IndividualChat",
             params: {
               userName: conversation.title,
-              conversationId: conversation._id
+              conversationId: conversation._id,
+              userAvatarUrl: conversation.avatarUrl
             }
           });
         }}

@@ -37,13 +37,15 @@ export const IndividualChatScreen = (props: IProps) => {
   };
 
   useEffect(() => {
+    chatScrollBottom();
+  }, [currentConversation]); // when refreshing our currentConversation, scroll to bottom
+
+  useEffect(() => {
     // clear any socket, if somehow its available
     socketIOClear();
 
     // Get current conversation info
     refreshConversation();
-
-    // SOCKET IO ========================================
 
     // Initialize
     console.log("Initializing socket.io");
@@ -52,7 +54,7 @@ export const IndividualChatScreen = (props: IProps) => {
     // Events
     // bind socket events on componentDidMount (hook version), so they're executed only once!
 
-    socket.once("clientMessage", async ({ name, senderId, text }) => {
+    socket.on("clientMessage", async ({ name, senderId, text }) => {
       console.log("received message...");
       console.log(name, senderId, text);
 
@@ -72,6 +74,10 @@ export const IndividualChatScreen = (props: IProps) => {
   };
 
   const sendChatMessage = () => {
+    if (!chatInputMessage) {
+      return;
+    }
+
     console.log("sending a message...");
     console.log(chatInputMessage);
 
@@ -104,7 +110,7 @@ export const IndividualChatScreen = (props: IProps) => {
   };
   const socketIOClear = async () => {
     console.log("Clearing socket.io");
-
+    socket.off("clientMessage");
     socket.close();
   };
 
@@ -114,7 +120,7 @@ export const IndividualChatScreen = (props: IProps) => {
       behavior={"height"}
       key={"key"}
       enabled
-      keyboardVerticalOffset={80}
+      keyboardVerticalOffset={30}
     >
       <NavigationEvents
         onWillBlur={async event => {
@@ -158,10 +164,12 @@ const styles = StyleSheet.create({
 });
 
 IndividualChatScreen.navigationOptions = navData => {
-  const userName = navData.navigation.getParam("userName");
+  const { userName, userAvatarUrl } = navData.navigation.state.params;
 
   return {
-    headerTitle: <ChatHeaderPicture title={userName} />,
+    headerTitle: (
+      <ChatHeaderPicture title={userName} imageSource={userAvatarUrl} />
+    ),
     tabBarVisible: false
   };
 };
