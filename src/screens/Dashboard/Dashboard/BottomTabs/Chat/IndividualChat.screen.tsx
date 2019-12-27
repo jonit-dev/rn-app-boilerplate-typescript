@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { KeyboardAvoidingView, StyleSheet, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { NavigationEvents } from 'react-navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';
 
@@ -9,57 +10,104 @@ import { ChatMessage, ChatType } from '../../../../../components/chat/ChatMessag
 import { ChatSendMessageBar } from '../../../../../components/chat/ChatSendMessageBar';
 import { appEnv } from '../../../../../constants/Env.constant';
 import { colors } from '../../../../../constants/UI/Colors.constant';
-import { addMessage } from '../../../../../store/actions/chat.actions';
+import { getConversation, restartChatState } from '../../../../../store/actions/chat.actions';
 
 interface IProps {
   navigation?: any;
 }
 
-const socket = io(appEnv.serverUrl);
+const socket = io(appEnv.serverUrl, {
+  autoConnect: false
+});
 
 export const IndividualChatScreen = (props: IProps) => {
-  const { userId } = props.navigation.state.params;
-
-  const { user } = useSelector<any, any>(state => state.userReducer);
-  // const { messages } = useSelector<any, any>(state => state.chatReducer);
-
+  const { conversationId } = props.navigation.state.params;
+  const { user: ownUser } = useSelector<any, any>(state => state.userReducer);
+  const { currentConversation } = useSelector<any, any>(
+    state => state.chatReducer
+  );
   const [chatInputMessage, setChatInputMessage] = useState("");
   const [room, setRoom] = useState("");
+  const scrollViewRef = useRef(null);
 
   const dispatch = useDispatch();
 
+  const refreshConversation = async () => {
+    await dispatch(getConversation(conversationId));
+  };
+
   useEffect(() => {
+    // clear any socket, if somehow its available
+    socketIOClear();
+
+    // Get current conversation info
+    refreshConversation();
+
+    // SOCKET IO ========================================
+
+    // Initialize
+    console.log("Initializing socket.io");
+    socket.open();
+
+    // Events
+    // bind socket events on componentDidMount (hook version), so they're executed only once!
+
+    socket.once("clientMessage", async ({ name, senderId, text }) => {
+      console.log("received message...");
+      console.log(name, senderId, text);
+
+      await dispatch(getConversation(conversationId));
+    });
+
     // when initializing, join the chat room
-    const room = user._id + "#" + userId;
+    const room = conversationId;
     setRoom(room); // we will use it later on socket.emi('message',...)
-    console.log(`joining chat room ${room}`);
+    console.log(`joining chat room - conversation ID: ${room}`);
     socket.emit("join", { room });
   }, []);
 
-  socket.on("clientMessage", ({ id, name, message }) => {
-    console.log("received message...");
-
-    dispatch(
-      addMessage({
-        id,
-        name,
-        message
-      })
-    );
-  });
+  const chatScrollBottom = () => {
+    // @ts-ignore
+    scrollViewRef.current.scrollToEnd({ animated: true });
+  };
 
   const sendChatMessage = () => {
     console.log("sending a message...");
     console.log(chatInputMessage);
 
     socket.emit("serverMessage", {
-      name: user.name,
-      id: user._id,
-      message: chatInputMessage,
+      name: ownUser.name,
+      conversationId,
+      senderId: ownUser._id,
+      text: chatInputMessage,
       room
     });
     setChatInputMessage(""); // refresh message
   };
+
+  const renderChatMessages = () => {
+    if (!currentConversation) {
+      return null;
+    }
+    if (!currentConversation.messages) {
+      return null;
+    }
+    return currentConversation.messages.map(message => (
+      <ChatMessage
+        key={message._id}
+        type={
+          message.senderId === ownUser._id ? ChatType.Sender : ChatType.Received
+        }
+        text={message.text}
+      />
+    ));
+  };
+  const socketIOClear = async () => {
+    console.log("Clearing socket.io");
+
+    socket.close();
+  };
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -68,9 +116,14 @@ export const IndividualChatScreen = (props: IProps) => {
       enabled
       keyboardVerticalOffset={80}
     >
-      <ScrollView contentContainerStyle={styles.bodyContainer}>
-        <ChatMessage type={ChatType.Received} />
-        <ChatMessage type={ChatType.Sender} />
+      <NavigationEvents
+        onWillBlur={async event => {
+          socketIOClear();
+          await dispatch(restartChatState());
+        }}
+      />
+      <ScrollView style={styles.bodyContainer} ref={scrollViewRef}>
+        {renderChatMessages()}
       </ScrollView>
       <View style={styles.bottomContainer}>
         <ChatSendMessageBar

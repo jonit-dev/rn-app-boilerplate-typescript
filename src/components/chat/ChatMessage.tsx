@@ -10,6 +10,7 @@ export enum ChatType {
 
 interface IProps {
   type: ChatType;
+  text: string;
 }
 
 export const ChatMessage = (props: IProps) => {
@@ -24,10 +25,7 @@ export const ChatMessage = (props: IProps) => {
   return (
     <View style={styles.container}>
       <View style={[styles.message, alignBubble()]}>
-        <Text style={[styles.messageText, usersText()]}>
-          Are you going to the party? I was thinking that I will go but I have
-          to finish some assignment.
-        </Text>
+        <Text style={[styles.messageText, usersText()]}>{props.text}</Text>
       </View>
     </View>
   );

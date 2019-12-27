@@ -6,7 +6,9 @@ import {
   ADD_CONVERSATION,
   ADD_MESSAGE,
   CLEAR_SEARCH_USERS,
+  GET_CONVERSATION,
   GET_CONVERSATIONS,
+  RESTART_CURRENT_CONVERSATION,
   SEARCH_USERS,
 } from '../reducers/chat.reducer';
 
@@ -66,4 +68,22 @@ export const getConversations = () => async dispatch => {
   } else {
     Alert.alert("Error", response.data.message);
   }
+};
+
+export const getConversation = conversationId => async dispatch => {
+  const response: any = await APIHelper.request(
+    RequestTypes.GET,
+    `/conversations/?id=${conversationId}`,
+    {},
+    true
+  );
+  if (response.status === 200) {
+    dispatch({ type: GET_CONVERSATION, payload: response.data });
+  } else {
+    Alert.alert("Error", response.data.message);
+  }
+};
+
+export const restartChatState = () => async dispatch => {
+  dispatch({ type: RESTART_CURRENT_CONVERSATION });
 };

@@ -22,6 +22,8 @@ export const ChatScreen = props => {
   const { searchedUsers, conversations } = useSelector<any, any>(
     state => state.chatReducer
   );
+  const { user: ownUser } = useSelector<any, any>(state => state.userReducer);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -49,9 +51,15 @@ export const ChatScreen = props => {
       return null;
     }
 
+    // lets remove our own from this dropdown, before rendering
+
+    const filteredUsers = searchedUsers.filter(
+      searchedUser => searchedUser._id !== ownUser._id
+    );
+
     return (
       <Dropdown>
-        {searchedUsers.map(user => {
+        {filteredUsers.map(user => {
           return (
             <DropdownItem
               key={user._id}
@@ -82,8 +90,8 @@ export const ChatScreen = props => {
           props.navigation.navigate({
             routeName: "IndividualChat",
             params: {
-              userId: conversation._id,
-              userName: conversation.title
+              userName: conversation.title,
+              conversationId: conversation._id
             }
           });
         }}
