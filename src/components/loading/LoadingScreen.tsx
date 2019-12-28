@@ -1,12 +1,16 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ViewStyle } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 
 import { colors } from '../../constants/UI/Colors.constant';
 
-export const LoadingScreen = () => {
+interface IProps {
+  style?: ViewStyle;
+}
+
+export const LoadingScreen = (props: IProps) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, props.style]}>
       <ActivityIndicator
         size={"large"}
         animating={true}

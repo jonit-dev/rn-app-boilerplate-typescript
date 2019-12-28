@@ -8,9 +8,11 @@ import io from 'socket.io-client';
 import { ChatHeaderPicture } from '../../../../../components/chat/ChatHeaderPicture';
 import { ChatMessage, ChatType } from '../../../../../components/chat/ChatMessage';
 import { ChatSendMessageBar } from '../../../../../components/chat/ChatSendMessageBar';
+import { LoadingScreen } from '../../../../../components/loading/LoadingScreen';
 import { appEnv } from '../../../../../constants/Env.constant';
 import { colors } from '../../../../../constants/UI/Colors.constant';
 import { getConversation, restartChatState } from '../../../../../store/actions/chat.actions';
+import { setLoading } from '../../../../../store/actions/ui.actions';
 
 interface IProps {
   navigation?: any;
@@ -23,11 +25,14 @@ const socket = io(appEnv.serverUrl, {
 export const IndividualChatScreen = (props: IProps) => {
   const { conversationId } = props.navigation.state.params;
   const { user: ownUser } = useSelector<any, any>(state => state.userReducer);
+
+  const { isLoading } = useSelector<any, any>(state => state.uiReducer);
+
   const { currentConversation } = useSelector<any, any>(
     state => state.chatReducer
   );
   const [chatInputMessage, setChatInputMessage] = useState("");
-  const [room, setRoom] = useState(conversationId);
+  const [room] = useState(conversationId);
   const scrollViewRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -44,15 +49,19 @@ export const IndividualChatScreen = (props: IProps) => {
     // clear any socket, if somehow its available
     socketIOClear();
 
-    // Get current conversation info
-    refreshConversation();
+    const getConversationInfo = async () => {
+      // Get current conversation info
+      await dispatch(setLoading(true, "conversationInfo"));
+      refreshConversation();
+      await dispatch(setLoading(false, "conversationInfo"));
+    };
+    getConversationInfo();
 
     // Initialize
     console.log("Initializing socket.io");
     socket.open();
 
     // Events
-    // bind socket events on componentDidMount (hook version), so they're executed only once!
 
     socket.on("clientMessage", async ({ name, senderId, text }) => {
       console.log("received message...");
@@ -61,13 +70,16 @@ export const IndividualChatScreen = (props: IProps) => {
       await dispatch(getConversation(conversationId));
     });
 
-    // when initializing, join the chat room
-
+    // when initializing, join the chat room, so we can start exchanging messages
     console.log(`joining chat room - conversation ID: ${room}`);
     socket.emit("join", { room });
   }, []);
 
   const chatScrollBottom = () => {
+    if (!scrollViewRef.current) {
+      // this will avoid null errors when messages are loading
+      return false;
+    }
     // @ts-ignore
     scrollViewRef.current.scrollToEnd({ animated: true });
   };
@@ -88,6 +100,20 @@ export const IndividualChatScreen = (props: IProps) => {
       room
     });
     setChatInputMessage(""); // refresh message
+  };
+
+  const onLoadChatMessages = () => {
+    if (isLoading.status && isLoading.key === "conversationInfo") {
+      // If we're loading our conversation, show activity indicator
+      return <LoadingScreen />;
+    } else {
+      // else, load our messages
+      return (
+        <ScrollView style={styles.bodyContainer} ref={scrollViewRef}>
+          {renderChatMessages()}
+        </ScrollView>
+      );
+    }
   };
 
   const renderChatMessages = () => {
@@ -127,9 +153,7 @@ export const IndividualChatScreen = (props: IProps) => {
           await dispatch(restartChatState());
         }}
       />
-      <ScrollView style={styles.bodyContainer} ref={scrollViewRef}>
-        {renderChatMessages()}
-      </ScrollView>
+      {onLoadChatMessages()}
       <View style={styles.bottomContainer}>
         <ChatSendMessageBar
           onChange={e => {
@@ -159,6 +183,9 @@ const styles = StyleSheet.create({
     maxHeight: 65,
     justifyContent: "center",
     alignItems: "center"
+  },
+  loadingContainer: {
+    minHeight: "100%"
   }
 });
 

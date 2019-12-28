@@ -51,6 +51,10 @@
     },
     "facebookAppId": "442424923110439",
     "facebookDisplayName": "AppBoilerplate",
-    "facebookScheme": "fb442424923110439"
+    "facebookScheme": "fb442424923110439",
+    "notification": {
+      "icon": "./src/assets/icon.png",
+      "color": "#3ED400"
+    }
   }
 }
