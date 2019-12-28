@@ -32,14 +32,20 @@ export const InitialScreen = props => {
 
   // Check for push notifications!
 
-  Notifications.addListener(notification => {
+  Notifications.addListener(async notification => {
     const { toScreen, params } = notification.data;
 
     console.log("Received push data...");
     console.log(toScreen);
     console.log(params);
 
-    NavigationHelper.navigate(toScreen, params);
+    // get current route name
+    const { routeName } = await NavigationHelper.getCurrentRoute();
+
+    if (routeName !== toScreen) {
+      // If we're currently in a route that's different than the push one, redirect the user
+      NavigationHelper.navigate(toScreen, params);
+    }
   });
 
   props.navigation.navigate("App");
