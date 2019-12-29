@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { colors } from '../../constants/UI/Colors.constant';
+import { defaultFontSize } from '../../constants/UI/Typography.constant';
 
 export enum ChatType {
   Sender = "Sender",
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
     maxWidth: "80%"
   },
   messageText: {
-    fontSize: 14,
+    fontSize: defaultFontSize,
     lineHeight: 22
   },
   senderText: {

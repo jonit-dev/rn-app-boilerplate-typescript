@@ -31,6 +31,9 @@ export const FeedScreen = props => {
           avatarTitle={"Thea"}
           postDatetime={"13:17"}
           likesNumber={"1"}
+          postText={
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+          }
         />
       </ScrollView>
     </DefaultScreen>
@@ -44,8 +47,6 @@ const styles = StyleSheet.create({
   bodyContainer: {
     flex: 1,
     justifyContent: "flex-start",
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "hotpink"
+    alignItems: "center"
   }
 });

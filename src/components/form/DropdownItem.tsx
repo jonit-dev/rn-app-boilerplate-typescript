@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { colors } from '../../constants/UI/Colors.constant';
+import { defaultFontSize } from '../../constants/UI/Typography.constant';
 import { STRONG } from './STRONG';
 
 interface IProps {
@@ -48,6 +49,6 @@ const styles = StyleSheet.create({
   dropdownListItemSubtitle: {
     paddingLeft: 4,
     color: colors.silver,
-    fontSize: 14
+    fontSize: defaultFontSize
   }
 });

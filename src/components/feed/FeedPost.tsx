@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Card } from 'react-native-paper';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Card, Divider } from 'react-native-paper';
 
 import { colors } from '../../constants/UI/Colors.constant';
-import { defaultBoldFont } from '../../constants/UI/Typography.constant';
+import { defaultBoldFont, defaultFontSize } from '../../constants/UI/Typography.constant';
 import { AvatarPicture } from '../avatar/AvatarPicture';
 import { FeedPostLikes } from './FeedPostLikes';
 import { FeedPostOptions } from './FeedPostOptions';
@@ -12,6 +12,7 @@ interface IProps {
   avatarUrl: string;
   avatarTitle: string;
   postDatetime: string;
+  postText: string;
   likesNumber: string;
 }
 
@@ -19,50 +20,60 @@ export const FeedPost = ({
   avatarUrl,
   avatarTitle,
   postDatetime,
+  postText,
   likesNumber
 }: IProps) => {
-  return (
-    <Card style={styles.container}>
-      <View style={styles.topRow}>
-        <AvatarPicture
-          imageSource={avatarUrl}
-          imageSize={40}
-          title={avatarTitle}
-          titleColor={colors.dark}
-          titleSize={16}
-        />
+  const onFeedPostClick = () => {
+    console.log("On feed post click!");
+  };
 
-        <View style={styles.datetime}>
-          <Text style={styles.dateTimeText}>{postDatetime}</Text>
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity onPress={() => onFeedPostClick()}>
+        <View style={styles.topRow}>
+          <AvatarPicture
+            imageSource={avatarUrl}
+            imageSize={40}
+            title={avatarTitle}
+            titleColor={colors.dark}
+            titleSize={16}
+          />
+
+          <View style={styles.datetime}>
+            <Text style={styles.dateTimeText}>{postDatetime}</Text>
+          </View>
         </View>
-      </View>
-      <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
+        <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
+      </TouchableOpacity>
 
       <View style={styles.cardBody}>
         <View style={styles.cardRow}>
           <FeedPostLikes likesNumber={likesNumber} />
-
           <FeedPostOptions />
         </View>
+        <View style={styles.cardRow}>
+          <Text style={styles.postText} numberOfLines={2}>
+            {postText}
+          </Text>
+        </View>
       </View>
-    </Card>
+      <Divider />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    borderWidth: 1,
-    borderColor: "hotpink"
+    zIndex: 0
   },
   cardRow: {
     width: "100%",
     height: 30,
     flexDirection: "row",
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
     alignItems: "center",
-    borderWidth: 1,
-    borderColor: "blue"
+    flexWrap: "wrap"
   },
 
   topRow: {
@@ -71,28 +82,29 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingVertical: 10,
-    paddingHorizontal: 8,
-    borderWidth: 3,
-    borderColor: "blue"
+    paddingHorizontal: 8
   },
   datetime: {
-    borderWidth: 1,
-    borderColor: "hotpink",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     maxWidth: 50
   },
   dateTimeText: {
-    fontSize: 14,
+    fontSize: defaultFontSize,
     fontFamily: defaultBoldFont,
     color: colors.silver
   },
   cardBody: {
     flex: 1,
     flexWrap: "wrap",
-    backgroundColor: "yellow",
     width: "100%",
-    height: 90
+    height: 90,
+    padding: 8
+  },
+  postText: {
+    flex: 1,
+    color: colors.silver,
+    fontSize: defaultFontSize
   }
 });

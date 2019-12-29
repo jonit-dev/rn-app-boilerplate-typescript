@@ -21,7 +21,6 @@ export const FeedPostLikes = ({ likesNumber }: IProps) => {
         size={16}
         name={isLiked ? "heart" : "heart-o"}
         color={colors.accent}
-        style={styles.likeIcon}
       />
       <Text style={styles.likeText}>{likesNumber} likes</Text>
     </TouchableOpacity>
@@ -34,14 +33,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexWrap: "wrap",
-    minWidth: 50,
-    borderWidth: 1,
-    borderColor: "hotpink"
+
+    maxWidth: 100
   },
 
-  likeIcon: {
-    paddingLeft: 8
-  },
   likeText: {
     paddingLeft: 8
   }

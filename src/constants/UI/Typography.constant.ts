@@ -1,8 +1,9 @@
 import { colors } from './Colors.constant';
 
 export const defaultFont = "muliRegular";
-
 export const defaultBoldFont = "muliBold";
+
+export const defaultFontSize = 14;
 
 export const typography = {
   text: {

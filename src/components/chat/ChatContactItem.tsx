@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { colors } from '../../constants/UI/Colors.constant';
-import { typography } from '../../constants/UI/Typography.constant';
+import { defaultFontSize, typography } from '../../constants/UI/Typography.constant';
 
 interface IProps {
   imageSource: any;
@@ -86,6 +86,6 @@ const styles = StyleSheet.create({
   infoContainerTextSubtitle: {
     color: colors.silver,
     marginTop: 4,
-    fontSize: 14
+    fontSize: defaultFontSize
   }
 });
