@@ -5,7 +5,7 @@ import { NavigationEvents } from 'react-navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';
 
-import { ChatHeaderPicture } from '../../../../components/chat/ChatHeaderPicture';
+import { AvatarPicture } from '../../../../components/avatar/AvatarPicture';
 import { ChatMessage, ChatType } from '../../../../components/chat/ChatMessage';
 import { ChatSendMessageBar } from '../../../../components/chat/ChatSendMessageBar';
 import { LoadingScreen } from '../../../../components/loading/LoadingScreen';
@@ -197,7 +197,7 @@ IndividualChatScreen.navigationOptions = navData => {
 
   return {
     headerTitle: (
-      <ChatHeaderPicture
+      <AvatarPicture
         title={conversationTitle}
         imageSource={conversationImage}
       />

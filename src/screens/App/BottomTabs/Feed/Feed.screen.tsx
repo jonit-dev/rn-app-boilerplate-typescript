@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
 
+import { FeedPost } from '../../../../components/feed/FeedPost';
 import { DefaultScreen } from '../../../../components/navigator/DefaultScreen';
 import { AdMobHelper } from '../../../../helpers/AdMobHelper';
 
@@ -18,18 +20,32 @@ export const FeedScreen = props => {
   return (
     <DefaultScreen
       title="Feed"
-      style={styles.container}
       navigation={props.navigation}
+      style={styles.container}
     >
-      {user && <Text>News feed: Welcome {user.name}</Text>}
+      <ScrollView contentContainerStyle={styles.bodyContainer}>
+        <FeedPost
+          avatarUrl={
+            "https://lh3.googleusercontent.com/a-/AAuE7mAzIv_qjLPlkxKMWf7AGtBDUeBEqEhhaq_orgxD=s96-c"
+          }
+          avatarTitle={"Thea"}
+          postDatetime={"13:17"}
+          likesNumber={"1"}
+        />
+      </ScrollView>
     </DefaultScreen>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    padding: 0
+  },
+  bodyContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: "flex-start",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "hotpink"
   }
 });
