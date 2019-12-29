@@ -1,14 +1,11 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Menu } from 'react-native-paper';
 
 import { colors } from '../../constants/UI/Colors.constant';
 
-interface IProps {}
-
-export const FeedPostOptions = (props: IProps) => {
+export const FeedPostOptions = () => {
   const [visible, setVisible] = useState(false);
 
   const onDropdownDismiss = () => {
@@ -42,5 +39,3 @@ export const FeedPostOptions = (props: IProps) => {
     </Menu>
   );
 };
-
-const styles = StyleSheet.create({});

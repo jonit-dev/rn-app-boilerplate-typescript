@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { useSelector } from 'react-redux';
 
 import { FeedPost } from '../../../../components/feed/FeedPost';
 import { DefaultScreen } from '../../../../components/navigator/DefaultScreen';
 import { AdMobHelper } from '../../../../helpers/AdMobHelper';
 
 export const FeedScreen = props => {
-  const user = useSelector<any, any>(state => state.userReducer.user);
+  // const user = useSelector<any, any>(state => state.userReducer.user);
 
   useEffect(() => {
     const initAdMob = async () => {
