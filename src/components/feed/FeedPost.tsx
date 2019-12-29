@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
   postText: {
     flex: 1,
     color: colors.silver,
-    fontSize: defaultFontSize
+    fontSize: defaultFontSize,
+    marginTop: 8
   }
 });
