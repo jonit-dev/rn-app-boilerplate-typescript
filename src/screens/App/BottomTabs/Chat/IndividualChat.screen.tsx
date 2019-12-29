@@ -5,14 +5,14 @@ import { NavigationEvents } from 'react-navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';
 
-import { ChatHeaderPicture } from '../../../../../components/chat/ChatHeaderPicture';
-import { ChatMessage, ChatType } from '../../../../../components/chat/ChatMessage';
-import { ChatSendMessageBar } from '../../../../../components/chat/ChatSendMessageBar';
-import { LoadingScreen } from '../../../../../components/loading/LoadingScreen';
-import { appEnv } from '../../../../../constants/Env.constant';
-import { colors } from '../../../../../constants/UI/Colors.constant';
-import { getConversation, restartChatState } from '../../../../../store/actions/chat.actions';
-import { setLoading } from '../../../../../store/actions/ui.actions';
+import { ChatHeaderPicture } from '../../../../components/chat/ChatHeaderPicture';
+import { ChatMessage, ChatType } from '../../../../components/chat/ChatMessage';
+import { ChatSendMessageBar } from '../../../../components/chat/ChatSendMessageBar';
+import { LoadingScreen } from '../../../../components/loading/LoadingScreen';
+import { appEnv } from '../../../../constants/Env.constant';
+import { colors } from '../../../../constants/UI/Colors.constant';
+import { getConversation, restartChatState } from '../../../../store/actions/chat.actions';
+import { setLoading } from '../../../../store/actions/ui.actions';
 
 interface IProps {
   navigation?: any;

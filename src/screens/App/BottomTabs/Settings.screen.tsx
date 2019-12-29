@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
-import { DefaultScreen } from '../../../../components/navigator/DefaultScreen';
+import { DefaultScreen } from '../../../components/navigator/DefaultScreen';
 
 export const SettingsScreen = props => {
   return (

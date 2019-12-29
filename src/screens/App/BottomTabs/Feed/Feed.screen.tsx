@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { DefaultScreen } from '../../../../components/navigator/DefaultScreen';
 import { AdMobHelper } from '../../../../helpers/AdMobHelper';
 
-export const DashboardScreen = props => {
+export const FeedScreen = props => {
   const user = useSelector<any, any>(state => state.userReducer.user);
 
   useEffect(() => {
@@ -17,11 +17,11 @@ export const DashboardScreen = props => {
 
   return (
     <DefaultScreen
-      title="Dashboard"
+      title="Feed"
       style={styles.container}
       navigation={props.navigation}
     >
-      {user && <Text>Dashboard: Welcome {user.name}</Text>}
+      {user && <Text>News feed: Welcome {user.name}</Text>}
     </DefaultScreen>
   );
 };

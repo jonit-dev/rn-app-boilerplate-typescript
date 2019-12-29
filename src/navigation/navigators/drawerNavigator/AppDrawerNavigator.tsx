@@ -5,20 +5,20 @@ import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import { colors } from '../../../constants/UI/Colors.constant';
 import { defaultFont } from '../../../constants/UI/Typography.constant';
-import { MyAccountScreen } from '../../../screens/Dashboard/MyAccount.screen';
-import { ProfileScreen } from '../../../screens/Dashboard/Profile.screen';
-import { DashboardBottomTabNavigator } from '../bottomTabNavigator/DashboardBottomTabNavigator';
+import { MyAccountScreen } from '../../../screens/App/MyAccount.screen';
+import { ProfileScreen } from '../../../screens/App/Profile.screen';
+import { BottomTabNavigator } from '../bottomTabNavigator/BottomTabNavigator';
 import { CustomDrawerContentComponent } from './CustomDrawerContentComponent';
 
 const WIDTH = Dimensions.get("window").width;
 
 export const AppDrawerNavigator = createDrawerNavigator(
   {
-    Dashboard: {
-      screen: DashboardBottomTabNavigator,
+    Feed: {
+      screen: BottomTabNavigator,
       navigationOptions: {
         drawerIcon: () => (
-          <MaterialIcons name="dashboard" size={24} color={colors.white} />
+          <MaterialIcons name="rss-feed" size={24} color={colors.white} />
         )
       }
     },

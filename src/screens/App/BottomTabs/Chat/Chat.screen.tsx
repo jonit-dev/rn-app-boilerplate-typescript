@@ -2,19 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ChatContactItem } from '../../../../../components/chat/ChatContactItem';
-import { Dropdown } from '../../../../../components/form/Dropdown';
-import { DropdownItem } from '../../../../../components/form/DropdownItem';
-import { IconInput, IconPackageTypes } from '../../../../../components/form/IconInput';
-import { DefaultScreen } from '../../../../../components/navigator/DefaultScreen';
-import { colors } from '../../../../../constants/UI/Colors.constant';
-import { TS } from '../../../../../helpers/LanguageHelper';
+import { ChatContactItem } from '../../../../components/chat/ChatContactItem';
+import { Dropdown } from '../../../../components/form/Dropdown';
+import { DropdownItem } from '../../../../components/form/DropdownItem';
+import { IconInput, IconPackageTypes } from '../../../../components/form/IconInput';
+import { DefaultScreen } from '../../../../components/navigator/DefaultScreen';
+import { colors } from '../../../../constants/UI/Colors.constant';
+import { TS } from '../../../../helpers/LanguageHelper';
 import {
   clearSearchUsers,
   createConversation,
   getConversations,
   searchUsers,
-} from '../../../../../store/actions/chat.actions';
+} from '../../../../store/actions/chat.actions';
 
 export const ChatScreen = props => {
   const [searchUsername, setSearchUserName] = useState("");
