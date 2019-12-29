@@ -8,7 +8,7 @@ interface IProps {
   likesNumber: string;
 }
 
-export const PostLikes = ({ likesNumber }: IProps) => {
+export const FeedPostLikes = ({ likesNumber }: IProps) => {
   const [isLiked, setIsLiked] = useState(false);
 
   const onLikeClick = () => {

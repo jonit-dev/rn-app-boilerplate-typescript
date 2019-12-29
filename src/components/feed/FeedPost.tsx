@@ -5,7 +5,8 @@ import { Card } from 'react-native-paper';
 import { colors } from '../../constants/UI/Colors.constant';
 import { defaultBoldFont } from '../../constants/UI/Typography.constant';
 import { AvatarPicture } from '../avatar/AvatarPicture';
-import { PostLikes } from './PostLikes';
+import { FeedPostLikes } from './FeedPostLikes';
+import { FeedPostOptions } from './FeedPostOptions';
 
 interface IProps {
   avatarUrl: string;
@@ -38,8 +39,10 @@ export const FeedPost = ({
       <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
 
       <View style={styles.cardBody}>
-        <View style={styles.likeContainer}>
-          <PostLikes likesNumber={likesNumber} />
+        <View style={styles.cardRow}>
+          <FeedPostLikes likesNumber={likesNumber} />
+
+          <FeedPostOptions />
         </View>
       </View>
     </Card>
@@ -52,7 +55,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "hotpink"
   },
-  likeContainer: {
+  cardRow: {
     width: "100%",
     height: 30,
     flexDirection: "row",
@@ -61,6 +64,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "blue"
   },
+
   topRow: {
     flex: 1,
     flexWrap: "wrap",
