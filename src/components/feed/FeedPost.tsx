@@ -39,11 +39,11 @@ export const FeedPost = ({
             titleSize={16}
           />
 
-          <View style={styles.datetime}>
+          <View style={[styles.datetime]}>
             <Text style={styles.dateTimeText}>{postDatetime}</Text>
           </View>
         </View>
-        <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
+        <Card.Cover source={{ uri: avatarUrl }} />
       </TouchableOpacity>
 
       <View style={styles.cardBody}>
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    maxWidth: 50
+    maxWidth: 110
   },
   dateTimeText: {
     fontSize: defaultFontSize,
