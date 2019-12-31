@@ -10,9 +10,8 @@ import { AdMobHelper } from '../../../../helpers/AdMobHelper';
 import { feedPostRead } from '../../../../store/actions/feedpost.action';
 
 export const FeedScreen = props => {
-  // const user = useSelector<any, any>(state => state.userReducer.user);
-
   const { feedPosts } = useSelector<any, any>(state => state.feedPostReducer);
+  const { user } = useSelector<any, any>(state => state.userReducer);
 
   const dispatch = useDispatch();
 
@@ -30,12 +29,16 @@ export const FeedScreen = props => {
       const postDatetime = moment(post.createdAt).format("ddd, DD MMM YY");
       return (
         <FeedPost
+          currentUserId={user._id}
+          id={post._id}
           key={post._id}
           avatarUrl={post.image}
           avatarTitle={post.title}
           postDatetime={postDatetime}
           likesNumber={post.likes}
+          usersWhoLiked={post.usersWhoLiked}
           postText={post.text}
+          navigation={props.navigation}
         />
       );
     });

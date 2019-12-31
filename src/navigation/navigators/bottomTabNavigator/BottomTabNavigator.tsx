@@ -4,14 +4,14 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import { colors } from '../../../constants/UI/Colors.constant';
 import { defaultFont } from '../../../constants/UI/Typography.constant';
-import { FeedScreen } from '../../../screens/App/BottomTabs/Feed/Feed.screen';
 import { SettingsScreen } from '../../../screens/App/BottomTabs/Settings.screen';
-import { ChatStackNavigator } from './ChatStackNavigator/ChatStackNavigator';
+import { ChatStackNavigator } from './ChatStackNavigator';
+import { FeedPostStackNavigator } from './FeedPostStackNavigator';
 
 export const BottomTabNavigator = createBottomTabNavigator(
   {
     Feed: {
-      screen: FeedScreen,
+      screen: FeedPostStackNavigator,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
           <MaterialIcons name="rss-feed" size={24} color={tintColor} />

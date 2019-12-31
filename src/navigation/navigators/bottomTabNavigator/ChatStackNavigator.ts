@@ -1,8 +1,8 @@
 import { createStackNavigator } from 'react-navigation-stack';
 
-import { defaultStackNavigationOptions } from '../../../../constants/Navigator.constants';
-import { ChatScreen } from '../../../../screens/App/BottomTabs/Chat/Chat.screen';
-import { IndividualChatScreen } from '../../../../screens/App/BottomTabs/Chat/IndividualChat.screen';
+import { defaultStackNavigationOptions } from '../../../constants/Navigator.constants';
+import { ChatScreen } from '../../../screens/App/BottomTabs/Chat/Chat.screen';
+import { IndividualChatScreen } from '../../../screens/App/BottomTabs/Chat/IndividualChat.screen';
 
 export const ChatStackNavigator = createStackNavigator(
   {

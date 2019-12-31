@@ -9,24 +9,38 @@ import { FeedPostLikes } from './FeedPostLikes';
 import { FeedPostOptions } from './FeedPostOptions';
 
 interface IProps {
+  currentUserId: string;
+  id: string; // post id
   avatarUrl: string;
   avatarTitle: string;
   postDatetime: string;
   postText: string;
   likesNumber: string;
+  navigation: any;
+  usersWhoLiked: string[];
 }
 
 export const FeedPost = ({
+  currentUserId,
+  id,
   avatarUrl,
   avatarTitle,
   postDatetime,
   postText,
-  likesNumber
+  likesNumber,
+  usersWhoLiked,
+  navigation
 }: IProps) => {
   const onFeedPostClick = () => {
     console.log("On feed post click!");
+    navigation.navigate("IndividualFeed", {
+      id
+    });
   };
 
+  console.log(likesNumber);
+  console.log(usersWhoLiked);
+  console.log(id);
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => onFeedPostClick()}>
@@ -48,7 +62,12 @@ export const FeedPost = ({
 
       <View style={styles.cardBody}>
         <View style={styles.cardRow}>
-          <FeedPostLikes likesNumber={likesNumber} />
+          <FeedPostLikes
+            likesNumber={likesNumber}
+            usersWhoLiked={usersWhoLiked}
+            postId={id}
+            currentUserId={currentUserId}
+          />
           <FeedPostOptions />
         </View>
         <View style={styles.cardRow}>
