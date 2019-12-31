@@ -3,10 +3,10 @@ import { StyleSheet, Text, View } from 'react-native';
 
 interface IProps {}
 
-export const IndividualFeedScreen = (props: IProps) => {
+export const IndividualPostScreen = (props: IProps) => {
   return (
     <View style={styles.container}>
-      <Text>Individual feed screen</Text>
+      <Text>Individual post screen</Text>
     </View>
   );
 };

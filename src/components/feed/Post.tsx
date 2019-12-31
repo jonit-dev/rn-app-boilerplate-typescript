@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 import { colors } from '../../constants/UI/Colors.constant';
 import { defaultBoldFont, defaultFontSize } from '../../constants/UI/Typography.constant';
 import { AvatarPicture } from '../avatar/AvatarPicture';
-import { FeedPostLikes } from './FeedPostLikes';
-import { FeedPostOptions } from './FeedPostOptions';
+import { PostLikes } from './PostLikes';
+import { PostOptionsDropdown } from './PostOptionsDropdown';
 
 interface IProps {
   id: string; // post id
@@ -21,7 +21,7 @@ interface IProps {
   usersWhoLiked: string[];
 }
 
-export const FeedPost = ({
+export const Post = ({
   id, // post id
   ownerId,
   avatarUrl,
@@ -34,8 +34,8 @@ export const FeedPost = ({
 }: IProps) => {
   const { user } = useSelector<any, any>(state => state.userReducer);
 
-  const onFeedPostClick = () => {
-    console.log("On feed post click!");
+  const onPostClick = () => {
+    console.log("On post click!");
     navigation.navigate("IndividualFeed", {
       id
     });
@@ -46,7 +46,7 @@ export const FeedPost = ({
   console.log(id);
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => onFeedPostClick()}>
+      <TouchableOpacity onPress={() => onPostClick()}>
         <View style={styles.topRow}>
           <AvatarPicture
             imageSource={avatarUrl}
@@ -65,12 +65,12 @@ export const FeedPost = ({
 
       <View style={styles.cardBody}>
         <View style={styles.cardRow}>
-          <FeedPostLikes
+          <PostLikes
             likesNumber={likesNumber}
             usersWhoLiked={usersWhoLiked}
             postId={id}
           />
-          <FeedPostOptions ownerId={ownerId} user={user} />
+          <PostOptionsDropdown ownerId={ownerId} user={user} />
         </View>
         <View style={styles.cardRow}>
           <Text style={styles.postText} numberOfLines={2}>

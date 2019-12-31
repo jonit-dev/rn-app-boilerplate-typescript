@@ -10,7 +10,7 @@ interface IProps {
   user: any;
 }
 
-export const FeedPostOptions = ({ ownerId, user }: IProps) => {
+export const PostOptionsDropdown = ({ ownerId, user }: IProps) => {
   const [visible, setVisible] = useState(false);
 
   const isCurrentUserOwner = user._id === ownerId;
@@ -20,7 +20,7 @@ export const FeedPostOptions = ({ ownerId, user }: IProps) => {
     setVisible(false);
   };
 
-  const onClickFeedPostOptions = () => {
+  const OnPressPostOptions = () => {
     console.log("clicking post options");
     setVisible(!visible);
   };
@@ -30,7 +30,7 @@ export const FeedPostOptions = ({ ownerId, user }: IProps) => {
       visible={visible}
       onDismiss={() => onDropdownDismiss()}
       anchor={
-        <TouchableOpacity onPress={() => onClickFeedPostOptions()}>
+        <TouchableOpacity onPress={() => OnPressPostOptions()}>
           <MaterialCommunityIcons
             size={28}
             name={"dots-horizontal"}

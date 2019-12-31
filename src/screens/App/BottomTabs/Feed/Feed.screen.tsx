@@ -4,13 +4,13 @@ import { StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { FeedPost } from '../../../../components/feed/FeedPost';
+import { Post } from '../../../../components/feed/Post';
 import { DefaultScreen } from '../../../../components/navigator/DefaultScreen';
 import { AdMobHelper } from '../../../../helpers/AdMobHelper';
-import { feedPostRead } from '../../../../store/actions/feedpost.action';
+import { postRead } from '../../../../store/actions/post.action';
 
-export const FeedScreen = props => {
-  const { feedPosts } = useSelector<any, any>(state => state.feedPostReducer);
+export const PostScreen = props => {
+  const { posts } = useSelector<any, any>(state => state.postReducer);
   // const { user } = useSelector<any, any>(state => state.userReducer);
 
   const dispatch = useDispatch();
@@ -21,14 +21,14 @@ export const FeedScreen = props => {
     };
     initAdMob();
 
-    dispatch(feedPostRead());
+    dispatch(postRead());
   }, []);
 
-  const onRenderFeedPosts = () => {
-    return feedPosts.map(post => {
+  const onRenderPosts = () => {
+    return posts.map(post => {
       const postDatetime = moment(post.createdAt).format("ddd, DD MMM YY");
       return (
-        <FeedPost
+        <Post
           id={post._id}
           key={post._id}
           avatarUrl={post.image}
@@ -51,7 +51,7 @@ export const FeedScreen = props => {
       style={styles.container}
     >
       <ScrollView contentContainerStyle={styles.bodyContainer}>
-        {feedPosts && onRenderFeedPosts()}
+        {posts && onRenderPosts()}
       </ScrollView>
     </DefaultScreen>
   );

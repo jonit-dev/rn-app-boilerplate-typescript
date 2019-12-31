@@ -6,12 +6,12 @@ import { colors } from '../../../constants/UI/Colors.constant';
 import { defaultFont } from '../../../constants/UI/Typography.constant';
 import { SettingsScreen } from '../../../screens/App/BottomTabs/Settings.screen';
 import { ChatStackNavigator } from './ChatStackNavigator';
-import { FeedPostStackNavigator } from './FeedPostStackNavigator';
+import { PostStackNavigator } from './PostStackNavigator';
 
 export const BottomTabNavigator = createBottomTabNavigator(
   {
     Feed: {
-      screen: FeedPostStackNavigator,
+      screen: PostStackNavigator,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
           <MaterialIcons name="rss-feed" size={24} color={tintColor} />

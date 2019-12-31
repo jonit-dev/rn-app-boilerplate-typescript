@@ -2,12 +2,12 @@ import { Alert } from 'react-native';
 
 import { APIHelper } from '../../helpers/APIHelper';
 import { RequestTypes } from '../../typescript/Requests.types';
-import { FEEDPOST_READ, FEEDPOST_UPDATE } from '../reducers/feedpost.reducer';
+import { POST_READ, POST_UPDATE } from '../reducers/post.reducer';
 
-export const feedPostRead = () => async dispatch => {
+export const postRead = () => async dispatch => {
   const response: any = await APIHelper.request(
     RequestTypes.GET,
-    "/feed-post",
+    "/post",
     {},
     true
   );
@@ -18,14 +18,14 @@ export const feedPostRead = () => async dispatch => {
       return;
     }
 
-    dispatch({ type: FEEDPOST_READ, payload: response.data });
+    dispatch({ type: POST_READ, payload: response.data });
   }
 };
 
-export const feedPostLike = (id: string) => async dispatch => {
+export const postLike = (id: string) => async dispatch => {
   const response: any = await APIHelper.request(
     RequestTypes.POST,
-    `/feed-post/like`,
+    `/post/like`,
     {
       id
     },
@@ -38,13 +38,9 @@ export const feedPostLike = (id: string) => async dispatch => {
   }
 
   dispatch({
-    type: FEEDPOST_UPDATE,
+    type: POST_UPDATE,
     payload: response.data
   });
 
   return true;
 };
-
-// export const feedPostUpdate = () => async (dispatch) => {
-//   const response: any = await APIHelper.request(RequestTypes.UPDATE)
-// }

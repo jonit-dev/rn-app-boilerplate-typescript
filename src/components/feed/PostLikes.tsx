@@ -4,7 +4,7 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { colors } from '../../constants/UI/Colors.constant';
-import { feedPostLike } from '../../store/actions/feedpost.action';
+import { postLike } from '../../store/actions/post.action';
 
 interface IProps {
   likesNumber: string;
@@ -12,11 +12,7 @@ interface IProps {
   usersWhoLiked: string[];
 }
 
-export const FeedPostLikes = ({
-  likesNumber,
-  usersWhoLiked,
-  postId
-}: IProps) => {
+export const PostLikes = ({ likesNumber, usersWhoLiked, postId }: IProps) => {
   const { user } = useSelector<any, any>(state => state.userReducer);
 
   const [isLiked, setIsLiked] = useState(usersWhoLiked.includes(user._id));
@@ -24,7 +20,7 @@ export const FeedPostLikes = ({
   const dispatch = useDispatch();
 
   const onLikeClick = async () => {
-    const likePost: any = await dispatch(feedPostLike(postId));
+    const likePost: any = await dispatch(postLike(postId));
 
     if (likePost) {
       // if we successfully liked our post, then change the icon

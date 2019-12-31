@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 
 import { chatReducer } from './chat.reducer';
-import { feedPostReducer } from './feedpost.reducer';
+import { postReducer } from './post.reducer';
 import { uiReducer } from './ui.reducer';
 import { userReducer } from './user.reducer';
 
@@ -23,7 +23,7 @@ const rootReducerPersistConfig = {
 const rootReducer = combineReducers({
   uiReducer,
   userReducer,
-  feedPostReducer,
+  postReducer,
   // @ts-ignore
   // chatReducer: persistReducer(chatPersistconfig, chatReducer)
   chatReducer
