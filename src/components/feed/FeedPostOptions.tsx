@@ -5,8 +5,15 @@ import { Menu } from 'react-native-paper';
 
 import { colors } from '../../constants/UI/Colors.constant';
 
-export const FeedPostOptions = () => {
+interface IProps {
+  ownerId: string;
+  user: any;
+}
+
+export const FeedPostOptions = ({ ownerId, user }: IProps) => {
   const [visible, setVisible] = useState(false);
+
+  const isCurrentUserOwner = user._id === ownerId;
 
   const onDropdownDismiss = () => {
     console.log("dropdown dismiss");
@@ -33,7 +40,9 @@ export const FeedPostOptions = () => {
       }
     >
       {/* <Menu.Item onPress={() => {}} title="Edit" /> */}
-      <Menu.Item onPress={() => {}} title="Delete" />
+      {isCurrentUserOwner ? (
+        <Menu.Item onPress={() => {}} title="Delete" />
+      ) : null}
       {/* <Divider /> */}
       {/* <Menu.Item onPress={() => {}} title="Item 3" /> */}
     </Menu>

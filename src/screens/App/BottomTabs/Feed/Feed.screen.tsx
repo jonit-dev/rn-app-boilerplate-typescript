@@ -11,7 +11,7 @@ import { feedPostRead } from '../../../../store/actions/feedpost.action';
 
 export const FeedScreen = props => {
   const { feedPosts } = useSelector<any, any>(state => state.feedPostReducer);
-  const { user } = useSelector<any, any>(state => state.userReducer);
+  // const { user } = useSelector<any, any>(state => state.userReducer);
 
   const dispatch = useDispatch();
 
@@ -29,7 +29,6 @@ export const FeedScreen = props => {
       const postDatetime = moment(post.createdAt).format("ddd, DD MMM YY");
       return (
         <FeedPost
-          currentUserId={user._id}
           id={post._id}
           key={post._id}
           avatarUrl={post.image}
@@ -38,6 +37,7 @@ export const FeedScreen = props => {
           likesNumber={post.likes}
           usersWhoLiked={post.usersWhoLiked}
           postText={post.text}
+          ownerId={post.ownerId}
           navigation={props.navigation}
         />
       );

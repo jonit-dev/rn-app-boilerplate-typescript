@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Card, Divider } from 'react-native-paper';
+import { useSelector } from 'react-redux';
 
 import { colors } from '../../constants/UI/Colors.constant';
 import { defaultBoldFont, defaultFontSize } from '../../constants/UI/Typography.constant';
@@ -9,7 +10,6 @@ import { FeedPostLikes } from './FeedPostLikes';
 import { FeedPostOptions } from './FeedPostOptions';
 
 interface IProps {
-  currentUserId: string;
   id: string; // post id
   avatarUrl: string;
   avatarTitle: string;
@@ -17,12 +17,13 @@ interface IProps {
   postText: string;
   likesNumber: string;
   navigation: any;
+  ownerId: string;
   usersWhoLiked: string[];
 }
 
 export const FeedPost = ({
-  currentUserId,
-  id,
+  id, // post id
+  ownerId,
   avatarUrl,
   avatarTitle,
   postDatetime,
@@ -31,6 +32,8 @@ export const FeedPost = ({
   usersWhoLiked,
   navigation
 }: IProps) => {
+  const { user } = useSelector<any, any>(state => state.userReducer);
+
   const onFeedPostClick = () => {
     console.log("On feed post click!");
     navigation.navigate("IndividualFeed", {
@@ -66,9 +69,8 @@ export const FeedPost = ({
             likesNumber={likesNumber}
             usersWhoLiked={usersWhoLiked}
             postId={id}
-            currentUserId={currentUserId}
           />
-          <FeedPostOptions />
+          <FeedPostOptions ownerId={ownerId} user={user} />
         </View>
         <View style={styles.cardRow}>
           <Text style={styles.postText} numberOfLines={2}>

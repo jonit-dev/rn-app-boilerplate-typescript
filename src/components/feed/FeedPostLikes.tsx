@@ -1,13 +1,12 @@
 import { FontAwesome } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { colors } from '../../constants/UI/Colors.constant';
 import { feedPostLike } from '../../store/actions/feedpost.action';
 
 interface IProps {
-  currentUserId: string;
   likesNumber: string;
   postId: string;
   usersWhoLiked: string[];
@@ -16,10 +15,11 @@ interface IProps {
 export const FeedPostLikes = ({
   likesNumber,
   usersWhoLiked,
-  postId,
-  currentUserId
+  postId
 }: IProps) => {
-  const [isLiked, setIsLiked] = useState(usersWhoLiked.includes(currentUserId));
+  const { user } = useSelector<any, any>(state => state.userReducer);
+
+  const [isLiked, setIsLiked] = useState(usersWhoLiked.includes(user._id));
 
   const dispatch = useDispatch();
 
