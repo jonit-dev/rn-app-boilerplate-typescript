@@ -7,7 +7,7 @@ import { colors } from '../../constants/UI/Colors.constant';
 import { postLike } from '../../store/actions/post.action';
 
 interface IProps {
-  likesNumber: string;
+  likesNumber: number;
   postId: string;
   usersWhoLiked: string[];
   user: any;

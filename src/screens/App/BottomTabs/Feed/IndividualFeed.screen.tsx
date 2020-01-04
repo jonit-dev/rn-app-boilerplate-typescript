@@ -8,7 +8,7 @@ import { postStyles } from '../../../../components/feed/Post';
 export const IndividualPostScreen = ({ navigation }) => {
   const {
     avatarUrl,
-    avatarTitle,
+
     postDatetime,
     postText
   } = navigation.state.params;

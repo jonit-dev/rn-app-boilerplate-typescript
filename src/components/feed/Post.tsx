@@ -55,7 +55,7 @@ export const Post = (props: IProps) => {
 
   return (
     <View style={postStyles.container}>
-      <TouchableOpacity onPress={() => onPostClick()}>
+      <TouchableOpacity onPress={() => onPostClick()} delayPressIn={300}>
         <View style={postStyles.topRow}>
           <AvatarPicture
             imageSource={avatarUrl}
@@ -97,7 +97,8 @@ export const Post = (props: IProps) => {
 export const postStyles = StyleSheet.create({
   container: {
     width: "100%",
-    zIndex: 0
+    zIndex: 0,
+    flex: 1
   },
   cardRow: {
     width: "100%",
@@ -114,7 +115,8 @@ export const postStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingVertical: 10,
-    paddingHorizontal: 8
+    paddingHorizontal: 8,
+    flexBasis: 60
   },
   datetime: {
     flex: 1,
@@ -131,7 +133,6 @@ export const postStyles = StyleSheet.create({
     flex: 1,
     flexWrap: "wrap",
     width: "100%",
-    minHeight: "100%",
     padding: 8
   },
   postText: {

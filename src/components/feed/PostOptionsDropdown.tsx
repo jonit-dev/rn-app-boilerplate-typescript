@@ -28,8 +28,6 @@ export const PostOptionsDropdown = ({ postId, ownerId, user }: IProps) => {
     };
   }, []);
 
-  console.log(isCurrentUserOwner);
-
   const onDropdownDismiss = () => {
     console.log("dropdown dismiss");
     setVisible(false);
