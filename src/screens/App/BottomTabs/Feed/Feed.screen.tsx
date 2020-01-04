@@ -1,4 +1,3 @@
-import moment from 'moment';
 import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -9,7 +8,7 @@ import { DefaultScreen } from '../../../../components/navigator/DefaultScreen';
 import { AdMobHelper } from '../../../../helpers/AdMobHelper';
 import { postRead } from '../../../../store/actions/post.action';
 
-export const PostScreen = props => {
+export const PostScreen = ({ navigation }, props) => {
   const { posts } = useSelector<any, any>(state => state.postReducer);
   // const { user } = useSelector<any, any>(state => state.userReducer);
 
@@ -26,21 +25,7 @@ export const PostScreen = props => {
 
   const onRenderPosts = () => {
     return posts.map(post => {
-      const postDatetime = moment(post.createdAt).format("ddd, DD MMM YY");
-      return (
-        <Post
-          id={post._id}
-          key={post._id}
-          avatarUrl={post.image}
-          avatarTitle={post.title}
-          postDatetime={postDatetime}
-          likesNumber={post.likes}
-          usersWhoLiked={post.usersWhoLiked}
-          postText={post.text}
-          ownerId={post.ownerId}
-          navigation={props.navigation}
-        />
-      );
+      return <Post key={post._id} post={post} navigation={navigation} />;
     });
   };
 

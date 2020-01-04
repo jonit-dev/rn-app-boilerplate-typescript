@@ -7,6 +7,12 @@ export const postReducer = (state = INITIAL_STATE, action) => {
     case POST_READ:
       return { ...state, posts: action.payload };
 
+    case POST_DELETE:
+      return {
+        ...state,
+        posts: state.posts.filter((post: any) => post._id !== action.payload)
+      };
+
     case POST_UPDATE:
       const updatedPost = action.payload;
 

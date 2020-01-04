@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Card, Divider } from 'react-native-paper';
@@ -9,45 +10,53 @@ import { AvatarPicture } from '../avatar/AvatarPicture';
 import { PostLikes } from './PostLikes';
 import { PostOptionsDropdown } from './PostOptionsDropdown';
 
-interface IProps {
-  id: string; // post id
-  avatarUrl: string;
-  avatarTitle: string;
+interface IPost {
+  _id: string;
+  image: string;
+  title: string;
   postDatetime: string;
-  postText: string;
-  likesNumber: string;
-  navigation: any;
+  text: string;
+  likes: number;
   ownerId: string;
   usersWhoLiked: string[];
+  createdAt: string;
 }
 
-export const Post = ({
-  id, // post id
-  ownerId,
-  avatarUrl,
-  avatarTitle,
-  postDatetime,
-  postText,
-  likesNumber,
-  usersWhoLiked,
-  navigation
-}: IProps) => {
+interface IProps {
+  key?: string;
+  post: IPost;
+  navigation?: any;
+}
+
+export const Post = (props: IProps) => {
   const { user } = useSelector<any, any>(state => state.userReducer);
+
+  const postDatetime = moment(props.post.createdAt).format("ddd, DD MMM YY");
+
+  const {
+    _id,
+    image: avatarUrl,
+    title: avatarTitle,
+    text: postText,
+    likes: likesNumber,
+    ownerId,
+    usersWhoLiked
+  } = props.post;
 
   const onPostClick = () => {
     console.log("On post click!");
-    navigation.navigate("IndividualFeed", {
-      id
+    props.navigation.navigate("IndividualFeed", {
+      avatarUrl,
+      avatarTitle,
+      postDatetime,
+      postText
     });
   };
 
-  console.log(likesNumber);
-  console.log(usersWhoLiked);
-  console.log(id);
   return (
-    <View style={styles.container}>
+    <View style={postStyles.container}>
       <TouchableOpacity onPress={() => onPostClick()}>
-        <View style={styles.topRow}>
+        <View style={postStyles.topRow}>
           <AvatarPicture
             imageSource={avatarUrl}
             imageSize={40}
@@ -56,24 +65,26 @@ export const Post = ({
             titleSize={16}
           />
 
-          <View style={[styles.datetime]}>
-            <Text style={styles.dateTimeText}>{postDatetime}</Text>
+          <View style={[postStyles.datetime]}>
+            <Text style={postStyles.dateTimeText}>{postDatetime}</Text>
           </View>
         </View>
         <Card.Cover source={{ uri: avatarUrl }} />
       </TouchableOpacity>
 
-      <View style={styles.cardBody}>
-        <View style={styles.cardRow}>
+      <View style={postStyles.cardBody}>
+        <View style={postStyles.cardRow}>
           <PostLikes
             likesNumber={likesNumber}
             usersWhoLiked={usersWhoLiked}
-            postId={id}
+            postId={_id}
+            user={user}
           />
-          <PostOptionsDropdown ownerId={ownerId} user={user} />
+
+          <PostOptionsDropdown postId={_id} ownerId={ownerId} user={user} />
         </View>
-        <View style={styles.cardRow}>
-          <Text style={styles.postText} numberOfLines={2}>
+        <View style={postStyles.cardRow}>
+          <Text style={postStyles.postText} numberOfLines={2}>
             {postText}
           </Text>
         </View>
@@ -83,7 +94,7 @@ export const Post = ({
   );
 };
 
-const styles = StyleSheet.create({
+export const postStyles = StyleSheet.create({
   container: {
     width: "100%",
     zIndex: 0
@@ -120,7 +131,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: "wrap",
     width: "100%",
-    height: 90,
+    minHeight: "100%",
     padding: 8
   },
   postText: {

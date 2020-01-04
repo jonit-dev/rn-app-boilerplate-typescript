@@ -1,7 +1,7 @@
 import { FontAwesome } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { colors } from '../../constants/UI/Colors.constant';
 import { postLike } from '../../store/actions/post.action';
@@ -10,12 +10,18 @@ interface IProps {
   likesNumber: string;
   postId: string;
   usersWhoLiked: string[];
+  user: any;
 }
 
-export const PostLikes = ({ likesNumber, usersWhoLiked, postId }: IProps) => {
-  const { user } = useSelector<any, any>(state => state.userReducer);
-
-  const [isLiked, setIsLiked] = useState(usersWhoLiked.includes(user._id));
+export const PostLikes = ({
+  likesNumber,
+  usersWhoLiked,
+  postId,
+  user
+}: IProps) => {
+  const [isLiked, setIsLiked] = useState(
+    user ? usersWhoLiked.includes(user._id) : false
+  );
 
   const dispatch = useDispatch();
 
