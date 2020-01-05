@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
-import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Modal from 'react-native-modal';
 import { useDispatch } from 'react-redux';
 
@@ -34,18 +34,20 @@ export const CustomModal = (props: IProps) => {
         <View style={[styles.modalHeader, onSetHeaderColor()]}>
           <View style={styles.modalHeaderRow}>
             <View style={styles.modalHeaderIconTitle}>
-              <Ionicons name={props.iconName} size={24} color={colors.white} />
+              <Ionicons name={props.iconName} size={28} color={colors.white} />
               <Text style={[typography.textBold, styles.modalHeaderTitle]}>
                 {props.title}
               </Text>
             </View>
 
-            <Ionicons
-              name={"md-close"}
-              size={24}
-              color={colors.white}
-              onPress={() => dispatch(toggleModal(props.id))}
-            />
+            <TouchableOpacity onPress={() => dispatch(toggleModal(props.id))}>
+              <Ionicons
+                name={"md-close"}
+                size={28}
+                color={colors.white}
+                style={styles.iconClose}
+              />
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -96,7 +98,9 @@ const styles = StyleSheet.create({
   modalHeaderTitle: {
     color: colors.white,
     fontSize: 20,
-    marginLeft: 10,
-    marginTop: -2
+    marginLeft: 14
+  },
+  iconClose: {
+    marginTop: 4
   }
 });

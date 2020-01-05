@@ -2,18 +2,20 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
+import { colors } from '../../constants/UI/Colors.constant';
+
 interface IProps {
   label: string;
-
   mainColor: string;
   value: any;
-
   onChangeText: (text: string) => any;
 }
 
-export const ModalInput = (props: IProps) => {
+export const ModalTextArea = (props: IProps) => {
   return (
     <TextInput
+      multiline
+      mode="outlined"
       label={props.label}
       theme={{
         colors: {
@@ -21,17 +23,19 @@ export const ModalInput = (props: IProps) => {
         }
       }}
       selectionColor={props.mainColor}
-      numberOfLines={1}
+      underlineColor="transparent"
       value={props.value}
       onChangeText={props.onChangeText}
-      style={[styles.input]}
+      style={styles.input}
+      textAlignVertical={"top"}
     />
   );
 };
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: "transparent",
-    marginVertical: 10
+    marginVertical: 10,
+    backgroundColor: colors.white,
+    borderColor: "red"
   }
 });
