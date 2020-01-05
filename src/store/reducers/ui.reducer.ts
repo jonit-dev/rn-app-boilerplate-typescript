@@ -11,6 +11,11 @@ const INITIAL_STATE = {
     message: null,
     onPress: () => null,
     onDismiss: () => null
+  },
+  feed: {
+    openModals: {
+      post: false
+    }
   }
 };
 
@@ -37,6 +42,18 @@ export const uiReducer = (state = INITIAL_STATE, action) => {
         alert: INITIAL_STATE.alert
       };
 
+    case TOGGLE_MODAL:
+      return {
+        ...state,
+        feed: {
+          ...state.feed,
+          openModals: {
+            ...state.feed.openModals,
+            [action.payload]: !state.feed.openModals[action.payload]
+          }
+        }
+      };
+
     default:
       return state;
   }
@@ -47,3 +64,5 @@ export const uiReducer = (state = INITIAL_STATE, action) => {
 export const SET_LOADING = "SET_LOADING";
 export const SET_MESSAGE = "SET_ERROR";
 export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
+
+export const TOGGLE_MODAL = "TOGGLE_MODAL";

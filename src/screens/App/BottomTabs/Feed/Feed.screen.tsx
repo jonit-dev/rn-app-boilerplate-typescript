@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
 import React from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Post } from '../../../../components/feed/Post';
 import { PostActionsButton } from '../../../../components/feed/PostActionsButton';
-import { CustomModal } from '../../../../components/modal/CustomModal';
 import { DefaultScreen } from '../../../../components/navigator/DefaultScreen';
-import { colors } from '../../../../constants/UI/Colors.constant';
 import { AdMobHelper } from '../../../../helpers/AdMobHelper';
 import { postRead } from '../../../../store/actions/post.action';
+import { FeedPostModal } from './modals/FeedPost.modal';
 
 export const PostScreen = props => {
   const { posts } = useSelector<any, any>(state => state.postReducer);
@@ -54,19 +53,9 @@ export const PostScreen = props => {
         {posts && onRenderPosts()}
       </ScrollView>
 
-      <CustomModal
-        visible={true}
-        title="Test modal"
-        headerBackgroundColor={colors.accent}
-        iconName="ios-information-circle"
-      >
-        <Text>Hello world!</Text>
-        <Text>Hello world!</Text>
-        <Text>Hello world!</Text>
-        <Text>Hello world!</Text>
-      </CustomModal>
-
       <PostActionsButton visible={postActionsButtonVisible} />
+
+      <FeedPostModal />
     </DefaultScreen>
   );
 };

@@ -2,8 +2,10 @@ import * as React from 'react';
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { FAB, Portal } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
 
 import { colors } from '../../constants/UI/Colors.constant';
+import { toggleModal } from '../../store/actions/ui.actions';
 
 interface IProps {
   visible: boolean;
@@ -11,6 +13,8 @@ interface IProps {
 
 export const PostActionsButton = (props: IProps) => {
   const [actionMenuOpen, setActionMenuOpen] = useState(false);
+
+  const dispatch = useDispatch();
 
   return (
     <Portal>
@@ -33,10 +37,10 @@ export const PostActionsButton = (props: IProps) => {
           {
             icon: "camera",
             label: "Add a post",
-            onPress: () => console.log("Pressed notifications")
+            onPress: () => dispatch(toggleModal("post"))
           }
         ]}
-        onStateChange={({ open }) => console.log("state changed")}
+        onStateChange={({ open }) => setActionMenuOpen(!actionMenuOpen)}
         onPress={() => setActionMenuOpen(!actionMenuOpen)}
         fabStyle={styles.fabStyle}
         style={styles.fabBackgroundStyle}

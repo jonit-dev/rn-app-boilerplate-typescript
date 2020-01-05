@@ -2,11 +2,14 @@ import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Modal from 'react-native-modal';
+import { useDispatch } from 'react-redux';
 
 import { colors } from '../../constants/UI/Colors.constant';
 import { typography } from '../../constants/UI/Typography.constant';
+import { toggleModal } from '../../store/actions/ui.actions';
 
 interface IProps {
+  id: string;
   title: string;
   iconName: string;
   headerBackgroundColor?: string;
@@ -15,12 +18,6 @@ interface IProps {
 }
 
 export const CustomModal = (props: IProps) => {
-  const [modalOpen, setModalOpen] = useState(props.visible);
-
-  const onCloseModal = () => {
-    setModalOpen(false);
-  };
-
   const onSetHeaderColor = () => {
     return {
       backgroundColor: props.headerBackgroundColor
@@ -29,8 +26,10 @@ export const CustomModal = (props: IProps) => {
     };
   };
 
+  const dispatch = useDispatch();
+
   return (
-    <Modal isVisible={modalOpen} style={styles.modalContainer}>
+    <Modal isVisible={props.visible} style={styles.modalContainer}>
       <View style={styles.modal}>
         <View style={[styles.modalHeader, onSetHeaderColor()]}>
           <View style={styles.modalHeaderRow}>
@@ -45,7 +44,7 @@ export const CustomModal = (props: IProps) => {
               name={"md-close"}
               size={24}
               color={colors.white}
-              onPress={() => onCloseModal()}
+              onPress={() => dispatch(toggleModal(props.id))}
             />
           </View>
         </View>
