@@ -51,6 +51,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.accent
   },
   fabBackgroundStyle: {
-    paddingBottom: 35
+    paddingBottom: 40
   }
 });
