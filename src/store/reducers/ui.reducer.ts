@@ -16,6 +16,9 @@ const INITIAL_STATE = {
     openModals: {
       post: false
     }
+  },
+  loadedImages: {
+    post: []
   }
 };
 
@@ -54,6 +57,29 @@ export const uiReducer = (state = INITIAL_STATE, action) => {
         }
       };
 
+    case ADD_ATTACHED_IMAGE:
+      return {
+        ...state,
+        loadedImages: {
+          ...state.loadedImages,
+          [action.payload.formKey]: [
+            ...state.loadedImages[action.payload.formKey],
+            ...action.payload.imageURI
+          ]
+        }
+      };
+
+    case REMOVE_ATTACHED_IMAGE:
+      return {
+        ...state,
+        loadedImages: {
+          ...state.loadedImages,
+          [action.payload.formKey]: state.loadedImages[
+            action.payload.formKey
+          ].filter((uri: any) => uri !== action.payload.imageURI)
+        }
+      };
+
     default:
       return state;
   }
@@ -66,3 +92,6 @@ export const SET_MESSAGE = "SET_ERROR";
 export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
 
 export const TOGGLE_MODAL = "TOGGLE_MODAL";
+
+export const ADD_ATTACHED_IMAGE = "ADD_ATTACHED_IMAGE";
+export const REMOVE_ATTACHED_IMAGE = "REMOVE_ATTACHED_IMAGE";

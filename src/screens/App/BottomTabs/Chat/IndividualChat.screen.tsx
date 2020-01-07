@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { KeyboardAvoidingView, StyleSheet, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { KeyboardAvoidingView, ScrollView, StyleSheet, View } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';

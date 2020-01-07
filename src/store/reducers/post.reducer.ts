@@ -4,14 +4,14 @@ const INITIAL_STATE = {
 
 export const postReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case POST_READ:
-      return { ...state, posts: action.payload };
-
-    case POST_DELETE:
+    case POST_CREATE:
       return {
         ...state,
-        posts: state.posts.filter((post: any) => post._id !== action.payload)
+        posts: [...state.posts, ...action.payload]
       };
+
+    case POST_READ:
+      return { ...state, posts: action.payload };
 
     case POST_UPDATE:
       const updatedPost = action.payload;
@@ -26,6 +26,12 @@ export const postReducer = (state = INITIAL_STATE, action) => {
 
       // then update our state with our updated posts
       return { ...state, posts: updatedPosts };
+
+    case POST_DELETE:
+      return {
+        ...state,
+        posts: state.posts.filter((post: any) => post._id !== action.payload)
+      };
 
     default:
       return state;

@@ -1,6 +1,5 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import { DrawerItems } from 'react-navigation-drawer';
 
 import Logo from '../../../assets/images/logo.svg';

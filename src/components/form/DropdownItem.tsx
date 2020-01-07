@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { colors } from '../../constants/UI/Colors.constant';
 import { defaultFontSize } from '../../constants/UI/Typography.constant';
@@ -14,7 +13,7 @@ interface IProps {
 
 export const DropdownItem = ({ title, subtitle, onPress }: IProps) => {
   return (
-    <TouchableOpacity containerStyle={styles.container} onPress={onPress}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.dropdownListItem}>
         <STRONG style={styles.dropdownListItemTitle}>{title}: </STRONG>
         <Text style={styles.dropdownListItemSubtitle}>{subtitle}</Text>

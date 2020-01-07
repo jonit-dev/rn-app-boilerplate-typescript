@@ -29,18 +29,29 @@ export const CustomModal = (props: IProps) => {
   const dispatch = useDispatch();
 
   return (
-    <Modal isVisible={props.visible} style={styles.modalContainer}>
+    <Modal
+      isVisible={props.visible}
+      style={styles.modalContainer}
+      swipeDirection="left"
+      onSwipeComplete={() => dispatch(toggleModal(props.id))}
+    >
       <View style={styles.modal}>
         <View style={[styles.modalHeader, onSetHeaderColor()]}>
           <View style={styles.modalHeaderRow}>
             <View style={styles.modalHeaderIconTitle}>
-              <Ionicons name={props.iconName} size={28} color={colors.white} />
+              <Ionicons name={props.iconName} size={30} color={colors.white} />
               <Text style={[typography.textBold, styles.modalHeaderTitle]}>
                 {props.title}
               </Text>
             </View>
 
-            <TouchableOpacity onPress={() => dispatch(toggleModal(props.id))}>
+            <TouchableOpacity
+              onPress={() => {
+                console.log("closing modal");
+                dispatch(toggleModal(props.id));
+              }}
+              style={styles.iconContainer}
+            >
               <Ionicons
                 name={"md-close"}
                 size={28}
@@ -102,5 +113,12 @@ const styles = StyleSheet.create({
   },
   iconClose: {
     marginTop: 4
+  },
+  iconContainer: {
+    width: 50,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "transparent"
   }
 });

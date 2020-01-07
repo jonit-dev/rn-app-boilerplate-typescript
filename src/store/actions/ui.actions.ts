@@ -1,4 +1,4 @@
-import { SET_LOADING, SET_MESSAGE, TOGGLE_MODAL } from '../reducers/ui.reducer';
+import { ADD_ATTACHED_IMAGE, REMOVE_ATTACHED_IMAGE, SET_LOADING, SET_MESSAGE, TOGGLE_MODAL } from '../reducers/ui.reducer';
 
 export const setLoading = (
   status: boolean,
@@ -33,5 +33,25 @@ export const toggleModal = (modalKey: string) => dispatch => {
   dispatch({
     type: TOGGLE_MODAL,
     payload: modalKey
+  });
+};
+
+export const loadImagesURI = (formKey: string, imageURI) => dispatch => {
+  dispatch({
+    type: ADD_ATTACHED_IMAGE,
+    payload: {
+      formKey,
+      imageURI
+    }
+  });
+};
+
+export const removeAttachedImage = (formKey: string, imageURI) => dispatch => {
+  dispatch({
+    type: REMOVE_ATTACHED_IMAGE,
+    payload: {
+      formKey,
+      imageURI
+    }
   });
 };
