@@ -4,6 +4,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Card, Divider } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 
+import { appEnv } from '../../constants/Env.constant';
 import { colors } from '../../constants/UI/Colors.constant';
 import { defaultBoldFont, defaultFontSize } from '../../constants/UI/Typography.constant';
 import { AvatarPicture } from '../avatar/AvatarPicture';
@@ -13,6 +14,7 @@ import { PostOptionsDropdown } from './PostOptionsDropdown';
 interface IPost {
   _id: string;
   image: string;
+  images: string[];
   title: string;
   postDatetime: string;
   text: string;
@@ -40,7 +42,8 @@ export const Post = (props: IProps) => {
     text: postText,
     likes: likesNumber,
     ownerId,
-    usersWhoLiked
+    usersWhoLiked,
+    images
   } = props.post;
 
   const onPostClick = () => {
@@ -49,7 +52,8 @@ export const Post = (props: IProps) => {
       avatarUrl,
       avatarTitle,
       postDatetime,
-      postText
+      postText,
+      images
     });
   };
 
@@ -69,7 +73,8 @@ export const Post = (props: IProps) => {
             <Text style={postStyles.dateTimeText}>{postDatetime}</Text>
           </View>
         </View>
-        <Card.Cover source={{ uri: avatarUrl }} />
+        {/* For now, we're only loading one image */}
+        <Card.Cover source={{ uri: `${appEnv.serverUrl}/${images[0]}` }} />
       </TouchableOpacity>
 
       <View style={postStyles.cardBody}>

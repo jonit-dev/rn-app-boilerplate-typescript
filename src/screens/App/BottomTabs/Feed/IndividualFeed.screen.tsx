@@ -4,20 +4,16 @@ import { Card } from 'react-native-paper';
 
 import { AvatarPicture } from '../../../../components/avatar/AvatarPicture';
 import { postStyles } from '../../../../components/feed/Post';
+import { appEnv } from '../../../../constants/Env.constant';
 
 export const IndividualPostScreen = ({ navigation }) => {
-  const {
-    avatarUrl,
-
-    postDatetime,
-    postText
-  } = navigation.state.params;
+  const { images, postDatetime, postText } = navigation.state.params;
 
   console.log(navigation.state.params);
 
   return (
     <View style={postStyles.container}>
-      <Card.Cover source={{ uri: avatarUrl }} />
+      <Card.Cover source={{ uri: `${appEnv.serverUrl}/${images[0]}` }} />
 
       <View style={postStyles.cardBody}>
         <View style={postStyles.cardRow}>

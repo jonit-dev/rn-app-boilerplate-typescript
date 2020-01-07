@@ -1,5 +1,4 @@
 import { Ionicons } from '@expo/vector-icons';
-import * as FileSystem from 'expo-file-system';
 import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Button } from 'react-native-paper';
@@ -76,44 +75,14 @@ export const FeedPostModal = () => {
   }
 
   const onSubmitNewPost = async () => {
-    console.log("submiting new post...");
-
-    console.log("converting images...");
-
-    console.log(loadedPostImages);
-
-    let base64Images = [];
-
-    // convert images to base64, if some image is present
-
-    if (loadedPostImages) {
-      base64Images = loadedPostImages.map(async imageURI => {
-        console.log(`converting ${imageURI}`);
-
-        const base64Image: string = await FileSystem.readAsStringAsync(
-          imageURI,
-          {
-            encoding: FileSystem.EncodingType.Base64
-          }
-        );
-
-        return "data:image/png;base64," + base64Image;
-      });
-    }
-
-    // then submit new post
-
-    if (base64Images) {
-      console.log(base64Images);
-      await dispatch(
-        postCreate({
-          title: postTitle,
-          text: postTextContent,
-          base64Images,
-          category: "Post"
-        })
-      );
-    }
+    await dispatch(
+      postCreate({
+        title: postTitle,
+        text: postTextContent,
+        imageURIs: loadedPostImages,
+        category: "Post"
+      })
+    );
   };
 
   return (

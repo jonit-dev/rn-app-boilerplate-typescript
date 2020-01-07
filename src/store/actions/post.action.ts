@@ -2,31 +2,67 @@ import { Alert } from 'react-native';
 
 import { APIHelper } from '../../helpers/APIHelper';
 import { RequestTypes } from '../../typescript/Requests.types';
-import { POST_CREATE, POST_DELETE, POST_READ, POST_UPDATE } from '../reducers/post.reducer';
+import { POST_DELETE, POST_READ, POST_UPDATE } from '../reducers/post.reducer';
+import { toggleModal } from './ui.actions';
 
 export interface IPost {
   title: string;
   text: string;
-  base64Images: string[]; // this will be converted on serverside
+  imageURIs: string[]; // this will be converted on serverside
   category?: string;
 }
 
 export const postCreate = (newPost: IPost) => async dispatch => {
+  const bodyFormData = new FormData();
+
+  bodyFormData.append("title", newPost.title);
+  bodyFormData.append("text", newPost.text);
+  if (newPost.category) {
+    bodyFormData.append("category", newPost.category);
+  }
+
+  // append our imageURIs
+
+  newPost.imageURIs.forEach(uri => {
+    console.log(uri);
+
+    const filename = uri.split("/").pop();
+    // Infer the type of the image
+    // @ts-ignore
+    const match = /\.(\w+)$/.exec(filename);
+    const type = match ? `image/${match[1]}` : `image`;
+
+    bodyFormData.append("images[]", {
+      // @ts-ignore
+      uri,
+      name: uri,
+      type
+    });
+  });
+
   const response: any = await APIHelper.request(
     RequestTypes.POST,
     "/post",
-    newPost,
-    true
+    bodyFormData,
+    true,
+    {
+      "content-type": "multipart/form-data"
+    }
   );
 
   if (response) {
     if (response.status !== 200) {
-      console.log(response);
-      Alert.alert("Error", response.message);
+      console.log(response.data);
+      Alert.alert("Error", response.data.message);
       return;
+    } else {
+      Alert.alert("Success!", "Your post was created!");
     }
 
-    dispatch({ type: POST_CREATE, payload: newPost });
+    // refresh our posts
+    dispatch(postRead());
+
+    dispatch(toggleModal("post"));
   }
 };
 
@@ -40,7 +76,7 @@ export const postRead = () => async dispatch => {
 
   if (response) {
     if (response.status !== 200) {
-      Alert.alert("Error", response.message);
+      Alert.alert("Error", response.data.message);
       return;
     }
 
@@ -60,7 +96,7 @@ export const postDelete = postId => async dispatch => {
 
   if (response) {
     if (response.status !== 200) {
-      Alert.alert("Error", response.message);
+      Alert.alert("Error", response.data.message);
       return;
     }
 
@@ -79,7 +115,7 @@ export const postLike = (id: string) => async dispatch => {
   );
 
   if (response.status !== 200) {
-    Alert.alert("Error", response.message);
+    Alert.alert("Error", response.data.message);
     return false;
   }
 

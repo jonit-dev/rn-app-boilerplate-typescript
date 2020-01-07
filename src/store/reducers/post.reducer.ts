@@ -4,12 +4,6 @@ const INITIAL_STATE = {
 
 export const postReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case POST_CREATE:
-      return {
-        ...state,
-        posts: [...state.posts, ...action.payload]
-      };
-
     case POST_READ:
       return { ...state, posts: action.payload };
 
