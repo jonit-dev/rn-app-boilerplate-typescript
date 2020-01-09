@@ -25,9 +25,9 @@ export const DropdownItem = ({ title, subtitle, onPress }: IProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    minHeight: 55,
+
     width: "100%",
-    maxHeight: 55,
+
     justifyContent: "center",
     alignItems: "center"
   },
