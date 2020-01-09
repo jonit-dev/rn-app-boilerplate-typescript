@@ -60,11 +60,6 @@ export const ChatScreen = props => {
               title={dropdownUser.name}
               subtitle={dropdownUser.type}
               onPress={async () => {
-                console.log("dropdown item clicked");
-
-                const dropdownUserId = dropdownUser._id;
-
-                // if there're not conversations, just create a new one
                 await dispatch(
                   createConversation(dropdownUser._id, "Individual")
                 ); // TODO: change when introducing group conversation
