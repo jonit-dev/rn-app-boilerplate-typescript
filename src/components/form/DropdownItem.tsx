@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     width: "100%",
     maxHeight: 55,
     justifyContent: "center",
-    alignItems: "flex-start"
+    alignItems: "center"
   },
   dropdownListItem: {
     flex: 5,
@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
 
-    height: "100%"
+    height: "100%",
+    width: "100%"
   },
 
   dropdownListItemTitle: {

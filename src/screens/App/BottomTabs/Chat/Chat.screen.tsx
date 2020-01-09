@@ -9,12 +9,7 @@ import { IconInput, IconPackageTypes } from '../../../../components/form/IconInp
 import { DefaultScreen } from '../../../../components/navigator/DefaultScreen';
 import { colors } from '../../../../constants/UI/Colors.constant';
 import { TS } from '../../../../helpers/LanguageHelper';
-import {
-  clearSearchUsers,
-  createConversation,
-  getConversations,
-  searchUsers,
-} from '../../../../store/actions/chat.actions';
+import { clearSearchUsers, createConversation, getConversations, searchUsers } from '../../../../store/actions/chat.actions';
 
 export const ChatScreen = props => {
   const [searchUsername, setSearchUserName] = useState("");
@@ -43,36 +38,37 @@ export const ChatScreen = props => {
   };
 
   const renderUsersDropdown = () => {
-    if (!searchedUsers) {
-      return null;
-    }
-    if (searchedUsers.length === 0) {
-      return null;
-    }
-
     // lets remove our own from this dropdown, before rendering
 
     const filteredUsers = searchedUsers.filter(
       searchedUser => searchedUser._id !== ownUser._id
     );
 
+    if (!filteredUsers) {
+      return null;
+    }
+    if (filteredUsers.length === 0) {
+      return null;
+    }
+
     return (
       <Dropdown>
-        {filteredUsers.map(user => {
+        {filteredUsers.map(dropdownUser => {
           return (
             <DropdownItem
-              key={user._id}
-              title={user.name}
-              subtitle={user.type}
+              key={dropdownUser._id}
+              title={dropdownUser.name}
+              subtitle={dropdownUser.type}
               onPress={async () => {
-                if (
-                  !conversations.find(
-                    conversationUser => conversationUser._id === user._id
-                  )
-                ) {
-                  console.log(`adding ${user.name} to conversations list`);
-                  await dispatch(createConversation(user._id));
-                }
+                console.log("dropdown item clicked");
+
+                const dropdownUserId = dropdownUser._id;
+
+                // if there're not conversations, just create a new one
+                await dispatch(
+                  createConversation(dropdownUser._id, "Individual")
+                ); // TODO: change when introducing group conversation
+                await dispatch(clearSearchUsers());
               }}
             />
           );
@@ -119,7 +115,9 @@ export const ChatScreen = props => {
 
             chatSearchUsers();
           }}
-          onBlur={async () => await dispatch(clearSearchUsers())}
+          onBlur={() => {
+            setTimeout(async () => await dispatch(clearSearchUsers()), 10);
+          }}
           placeholder={TS.string("chat", "searchInputPlaceholder")}
         />
         {renderUsersDropdown()}

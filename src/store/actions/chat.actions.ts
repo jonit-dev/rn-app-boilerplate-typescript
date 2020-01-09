@@ -35,18 +35,19 @@ export const clearSearchUsers = () => dispatch => {
   dispatch({ type: CLEAR_SEARCH_USERS });
 };
 
-export const createConversation = userId => async dispatch => {
+export const createConversation = (userId, type) => async dispatch => {
   const response: any = await APIHelper.request(
     RequestTypes.POST,
     "/conversations",
     {
-      receiverId: userId
+      receiverId: userId,
+      type
     },
     true
   );
 
   if (response.status !== 200) {
-    Alert.alert("Error", response.data.message);
+    return false; // do nothing, just dont add a new conversation
   }
 
   dispatch({ type: ADD_CONVERSATION, payload: response.data });
