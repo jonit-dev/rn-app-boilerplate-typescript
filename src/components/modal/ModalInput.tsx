@@ -4,7 +4,6 @@ import { TextInput } from 'react-native-paper';
 
 interface IProps {
   label: string;
-
   mainColor: string;
   value: any;
 

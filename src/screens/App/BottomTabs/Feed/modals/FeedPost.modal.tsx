@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import React, { useEffect, useState } from 'react';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -10,6 +10,7 @@ import { CustomModal } from '../../../../../components/modal/CustomModal';
 import { ModalInput } from '../../../../../components/modal/ModalInput';
 import { ModalTextArea } from '../../../../../components/modal/ModalTextArea';
 import { colors } from '../../../../../constants/UI/Colors.constant';
+import { TS } from '../../../../../helpers/LanguageHelper';
 import { postCreate } from '../../../../../store/actions/post.action';
 import { removeAttachedImage, setLoading } from '../../../../../store/actions/ui.actions';
 
@@ -75,6 +76,29 @@ export const FeedPostModal = () => {
   }
 
   const onSubmitNewPost = async () => {
+    // check if modal inputs were filled properly
+
+    if (!postTitle) {
+      Alert.alert(
+        "Error",
+        TS.string("post", "errorModalInputNotFilled", {
+          inputName: "Title"
+        })
+      );
+
+      return false;
+    }
+
+    if (!postTextContent) {
+      Alert.alert(
+        "Error",
+        TS.string("post", "errorModalInputNotFilled", {
+          inputName: "Content"
+        })
+      );
+      return false;
+    }
+
     await dispatch(
       postCreate({
         title: postTitle,

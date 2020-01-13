@@ -3,7 +3,13 @@ import { KeyboardAvoidingView, StyleSheet } from 'react-native';
 
 export const Form = props => {
   return (
-    <KeyboardAvoidingView style={styles.form} behavior="padding" enabled>
+    <KeyboardAvoidingView
+      style={styles.form}
+      behavior={"height"}
+      key={"form"}
+      enabled
+      keyboardVerticalOffset={30}
+    >
       {props.children}
     </KeyboardAvoidingView>
   );
