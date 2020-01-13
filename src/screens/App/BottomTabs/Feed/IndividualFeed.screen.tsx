@@ -1,10 +1,12 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { Card } from 'react-native-paper';
+import { NavigationEvents } from 'react-navigation';
 
 import { AvatarPicture } from '../../../../components/avatar/AvatarPicture';
 import { postStyles } from '../../../../components/feed/Post';
 import { appEnv } from '../../../../constants/Env.constant';
+import { GAnalyticsHelper } from '../../../../helpers/GAnalyticsHelper';
 
 export const IndividualPostScreen = ({ navigation }) => {
   const { images, postDatetime, postText } = navigation.state.params;
@@ -25,6 +27,9 @@ export const IndividualPostScreen = ({ navigation }) => {
           </Text>
         </View>
       </View>
+      <NavigationEvents
+        onDidFocus={async () => GAnalyticsHelper.pageHit("Post_individual")}
+      />
     </View>
   );
 };

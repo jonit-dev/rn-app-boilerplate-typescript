@@ -10,6 +10,7 @@ import { ChatSendMessageBar } from '../../../../components/chat/ChatSendMessageB
 import { LoadingScreen } from '../../../../components/loading/LoadingScreen';
 import { appEnv } from '../../../../constants/Env.constant';
 import { colors } from '../../../../constants/UI/Colors.constant';
+import { GAnalyticsHelper } from '../../../../helpers/GAnalyticsHelper';
 import { getConversation, restartChatState } from '../../../../store/actions/chat.actions';
 import { setLoading } from '../../../../store/actions/ui.actions';
 
@@ -150,6 +151,9 @@ export const IndividualChatScreen = (props: IProps) => {
         onWillBlur={async event => {
           socketIOClear();
           await dispatch(restartChatState());
+        }}
+        onDidFocus={async () => {
+          GAnalyticsHelper.pageHit("Chat_individual");
         }}
       />
       {onLoadChatMessages()}

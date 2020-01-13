@@ -1,7 +1,9 @@
 import React from 'react';
 import { ScrollView, StyleSheet, ViewStyle } from 'react-native';
+import { NavigationEvents } from 'react-navigation';
 import { useSelector } from 'react-redux';
 
+import { GAnalyticsHelper } from '../../helpers/GAnalyticsHelper';
 import { LoadingScreen } from '../loading/LoadingScreen';
 import { DrawerHeader } from './DrawerHeader';
 
@@ -23,6 +25,11 @@ export const DefaultScreen = (props: IProps) => {
       <ScrollView contentContainerStyle={[styles.container, props.style]}>
         {props.children}
       </ScrollView>
+      <NavigationEvents
+        onDidFocus={async () => {
+          GAnalyticsHelper.pageHit(props.title);
+        }}
+      />
     </>
   );
 };

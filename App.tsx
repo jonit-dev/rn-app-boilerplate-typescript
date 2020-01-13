@@ -12,6 +12,7 @@ import { appEnv } from './src/constants/Env.constant';
 import { GlobalStylesHelper } from './src/constants/GlobalStylesHelper';
 import { fonts } from './src/constants/UI/Fonts.constant';
 import { theme } from './src/constants/UI/Theme.constant';
+import { GAnalyticsHelper } from './src/helpers/GAnalyticsHelper';
 import NavigationHelper from './src/helpers/NavigationHelper';
 import RootNavigator from './src/navigation/Root.navigator';
 import { persistor, store } from './src/store/persist.store';
@@ -25,6 +26,8 @@ export default class App extends Component {
   };
 
   public componentDidMount() {
+    // Initialize monitoring third party apps ========================================
+
     Sentry.init({
       dsn: appEnv.monitoring.sentry.dns,
       enableInExpoDevelopment: true,
@@ -35,6 +38,8 @@ export default class App extends Component {
       // @ts-ignore
       Sentry.setRelease(Constants.manifest.revisionId);
     }
+
+    GAnalyticsHelper.init(); // initialize GA
   }
 
   public fetchFonts() {
