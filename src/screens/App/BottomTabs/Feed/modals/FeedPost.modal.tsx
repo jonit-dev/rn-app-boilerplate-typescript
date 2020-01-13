@@ -139,7 +139,7 @@ export const FeedPostModal = () => {
           setCameraVisible(true);
         }}
       >
-        ATTACH A PICTURE
+        {TS.string("post", "postModalAttachAPicture")}
       </DefaultIconButton>
 
       {onLoadAttachedPictures()}
@@ -149,8 +149,9 @@ export const FeedPostModal = () => {
         onPress={() => onSubmitNewPost()}
         color={colors.accent}
         dark={true}
+        style={styles.button}
       >
-        SUBMIT
+        {TS.string("post", "postModalSubmitCTA")}
       </Button>
     </CustomModal>
   );
@@ -179,5 +180,8 @@ const styles = StyleSheet.create({
     top: 6,
     right: 8,
     backgroundColor: "transparent"
+  },
+  button: {
+    padding: 8
   }
 });

@@ -105,5 +105,14 @@ export const strings = {
   },
   loginWithFacebook: {
     eng: "Login with Facebook"
+  },
+  termsOfUsePart1: {
+    eng: "By signing in you agree with our"
+  },
+  termsOfUsePart2: {
+    eng: "terms of use"
+  },
+  loginOrSignInWithText: {
+    eng: "Or Sign in with"
   }
 };

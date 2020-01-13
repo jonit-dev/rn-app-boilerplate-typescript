@@ -151,7 +151,7 @@ export const LoginScreen = props => {
           {TS.string("account", "loginButtonText")}
         </BlockButton>
 
-        <Divisor>Or Sign in with</Divisor>
+        <Divisor>{TS.string("account", "loginOrSignInWithText")}</Divisor>
 
         <View style={styles.socialAuthRow}>
           <CircleButton
@@ -171,9 +171,9 @@ export const LoginScreen = props => {
 
         <TouchableOpacity onPress={() => termsOfUseClick()}>
           <SMALL center={true} textStyle={styles.termsOfUse}>
-            By signing in you agree with our{" "}
+            {TS.string("account", "termsOfUsePart1")}{" "}
             <Text style={[typography.small, styles.bold, styles.termsOfUse]}>
-              terms of use
+              {TS.string("account", "termsOfUsePart2")}
             </Text>
           </SMALL>
         </TouchableOpacity>

@@ -56,7 +56,7 @@ export const postCreate = (newPost: IPost) => async dispatch => {
       Alert.alert("Error", response.data.message);
       return;
     } else {
-      Alert.alert("Success!", "Your post was created!");
+      Alert.alert("Success!", "postCreationSuccess");
     }
 
     // refresh our posts
