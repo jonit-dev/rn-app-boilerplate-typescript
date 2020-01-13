@@ -55,6 +55,18 @@
     "notification": {
       "icon": "./src/assets/icon.png",
       "color": "#3ED400"
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "app-boilerplate",
+            "project": "app-boilerplate",
+            "authToken": "8944f7fece0c4b97b6d99d8c4d34d07621153c3380424cc8bcfc4ffb8ade73cf"
+          }
+        }
+      ]
     }
   }
 }

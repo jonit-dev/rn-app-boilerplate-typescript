@@ -41,6 +41,10 @@ You should do the following to customize your app to your needs:
   - Follow this approach: https://stackoverflow.com/questions/53946199/how-to-fix-expo-push-notifications-error-couldnt-get-gcm-token-for-device?rq=1
   - TDLR: Disconnect the device from USB, stop expo, login to expo, connect and try again.
 
+- Loading screen eternal loop: 
+  - yarn start
+  - then press shift + r to force a cache clear upon expo reload
+
 **Technology stack**:
 
 - React Native, Expo

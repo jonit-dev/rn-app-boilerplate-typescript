@@ -65,5 +65,12 @@ export const appEnv = {
   onboarding: {
     // * Configure it at Onboarding.screen.tsx
     enabled: false
+  },
+  monitoring: {
+    sentry: {
+      dns: "https://bbe35edb39c44e33b9f602e72d4ba860@sentry.io/1879084",
+      projectName: "app-boilerplate",
+      organizationName: "app-boilerplate"
+    }
   }
 };

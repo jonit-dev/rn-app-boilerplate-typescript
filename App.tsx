@@ -1,11 +1,14 @@
 import { AppLoading } from 'expo';
+import Constants from 'expo-constants';
 import * as Font from 'expo-font';
 import React, { Component } from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import * as Sentry from 'sentry-expo';
 
+import { appEnv } from './src/constants/Env.constant';
 import { GlobalStylesHelper } from './src/constants/GlobalStylesHelper';
 import { fonts } from './src/constants/UI/Fonts.constant';
 import { theme } from './src/constants/UI/Theme.constant';
@@ -20,6 +23,19 @@ export default class App extends Component {
   public state = {
     isDataLoaded: false
   };
+
+  public componentDidMount() {
+    Sentry.init({
+      dsn: appEnv.monitoring.sentry.dns,
+      enableInExpoDevelopment: true,
+      debug: true
+    });
+
+    if (Constants.manifest) {
+      // @ts-ignore
+      Sentry.setRelease(Constants.manifest.revisionId);
+    }
+  }
 
   public fetchFonts() {
     return Font.loadAsync(fonts);
