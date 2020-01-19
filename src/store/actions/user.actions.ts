@@ -75,15 +75,16 @@ export const userLogin = (
     }
 
     if (response) {
-      if (response.data.error) {
+      if (response.data.status !== 200) {
         dispatch(
           showMessage({
-            message: response.data.error
+            message: response.data.message
           })
         );
 
         return;
       }
+
       if (response.data.token) {
         // refresh push token
 
