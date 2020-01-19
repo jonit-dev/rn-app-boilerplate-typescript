@@ -75,14 +75,14 @@ export const userLogin = (
     }
 
     if (response) {
-      if (response.data.status !== 200) {
+      if (response.status === 400) {
         dispatch(
           showMessage({
             message: response.data.message
           })
         );
 
-        return;
+        return false;
       }
 
       if (response.data.token) {
